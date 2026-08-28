@@ -1,0 +1,82 @@
+[
+  {
+    "query": "What does NIST AC-2 require for account management?",
+    "expected_answer": "NIST SP 800-53 AC-2 (Account Management) requires organizations to define and document the types of accounts allowed and prohibited, assign account managers, create/enable/modify/disable/remove accounts per approval, monitor account use, review accounts for compliance, and align account management with personnel termination and transfer processes.",
+    "expected_citations": ["AC-2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "How does GDPR data minimization (Article 5(1)(c)) relate to NIST AC-6 Least Privilege?",
+    "expected_answer": "Both express the same principle in different domains: GDPR Article 5(1)(c) requires personal data to be adequate, relevant, and limited to what is necessary for the processing purpose, while NIST AC-6 requires allowing only the accesses needed to accomplish assigned tasks. Together they mandate minimizing both data and privileges to the minimum necessary.",
+    "expected_citations": ["Article 5", "AC-6"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "What GDPR article addresses the right to erasure, and how does it interact with NIST account management requirements?",
+    "expected_answer": "GDPR Article 17 establishes the right to erasure (right to be forgotten), requiring controllers to erase personal data without undue delay where grounds such as the data no longer being necessary apply. It relates to NIST AC-2 account management in that removing accounts and associated personal data supports both security hygiene and GDPR compliance, and AC-2(3) (Disable Accounts) covers removing access for accounts no longer associated with a user.",
+    "expected_citations": ["Article 17", "AC-2(3)", "AC-2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "What does NIST SP 800-53 say about quantum computing?",
+    "expected_answer": "This is outside the covered corpus. The NIST subset in this corpus covers only AC-2 (Account Management) and AC-6 (Least Privilege); quantum computing is not addressed.",
+    "expected_citations": [],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "What does ASVS require for how OAuth access tokens should be handled?",
+    "expected_answer": "ASVS requires that access and refresh tokens be sent only to components that strictly need them, such as a backend in a backend-for-frontend pattern (V10.1.1). It also requires that the client only accept values from the authorization server (e.g., the authorization code or ID token) when they result from an authorization flow initiated by the same user-agent session — using non-guessable, transaction-specific secrets such as the PKCE code_verifier, the state parameter, or the OIDC nonce, securely bound to both client and session (V10.1.2).",
+    "expected_citations": ["V10.1.1", "V10.1.2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "What does NIST require for handling accounts that have expired or gone inactive?",
+    "expected_answer": "NIST control AC-2(3) (Disable Accounts) requires disabling accounts within a defined time period when the accounts have expired, are no longer associated with a user or individual, are in violation of organizational policy, or have been inactive for a defined period. Disabling these accounts supports least privilege and least functionality, which reduce the system's attack surface.",
+    "expected_citations": ["AC-2(3)"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "How do GDPR security-of-processing obligations translate into engineering requirements for an application?",
+    "expected_answer": "GDPR Article 32 (Security of processing) requires controllers and processors to implement appropriate technical and organizational measures scaled to risk — including pseudonymisation and encryption, ongoing confidentiality/integrity/availability and resilience, timely restoration after incidents, and regular testing and assessment of the measures. ASVS operationalizes this at the engineering level: for example, V11.1.1 requires a documented cryptographic key-management policy and lifecycle following a recognized standard such as NIST SP 800-57, including ensuring that keys are not overshared.",
+    "expected_citations": ["Article 32", "V11.1.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "How should an application keep non-privileged users from reaching privileged capabilities or secrets?",
+    "expected_answer": "Two complementary requirements apply. NIST AC-6(10) (Prohibit Non-privileged Users from Executing Privileged Functions) requires preventing users without appropriate authorizations from executing privileged functions — such as disabling or circumventing security or privacy controls, establishing system accounts, or administering cryptographic key-management activities. ASVS V13.3.2 extends the same principle to data, requiring that access to secret assets adhere to the principle of least privilege.",
+    "expected_citations": ["AC-6(10)", "V13.3.2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "What do NIST and GDPR require about keeping accounts and personal data that are no longer needed?",
+    "expected_answer": "Both sources require retiring what is no longer needed. NIST AC-2(3) requires disabling accounts that have expired, are no longer associated with a user, or have gone inactive within a defined period. GDPR Article 5(1)(e) (storage limitation) requires personal data to be kept in a form that permits identification of data subjects for no longer than is necessary for the purposes of processing. Together: when a purpose ends or an account is abandoned, either the account privilege produced data that must not outlive its purpose.",
+    "expected_citations": ["AC-2(3)", "Article 5"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "query": "What does this corpus require for security awareness and social engineering training?",
+    "expected_answer": "Not covered. The corpus covers a NIST SP 800-53 access-control subset (AC-2 Account Management, AC-6 Least Privilege), OWASP ASVS application-security requirements, and GDPR data-protection obligations — none of which address awareness or social-engineering training programs.",
+    "expected_citations": [],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  }
+]

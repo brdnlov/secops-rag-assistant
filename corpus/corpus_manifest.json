@@ -1,0 +1,18 @@
+{
+  "corpus_version": "0.1.0",
+  "corpus_content_hash": "c7d85b8b489194319d1331d168fc56a54ce076be7d8849ba43a4df45d5ed43f2",
+  "generated_by": "corpus/scripts/build_corpus.py",
+  "num_chunks": 376,
+  "chunks_by_source": {
+    "gdpr": 99,
+    "nist_sp800_53": 24,
+    "owasp_asvs": 253
+  },
+  "source_file_hashes": {
+    "gdpr_chunks.json": "397a136c9444090c7dcc373fb4f04ffe4dfaf1c23392cb9486574ee3241b0a70",
+    "nist_sp800_53_chunks.json": "38220ca3a4459caececbc56249c9b78911ebece3fc89e5c52e6e28c9c8340eda",
+    "owasp_asvs_chunks.json": "e4569d3343fda50d712755578c720d6670e8e3a2d2d72e91fecbafa7d842491e"
+  },
+  "chunking_config_hash": null,
+  "embedding_model_version": null
+}
