@@ -14,3 +14,7 @@ Thumbs.db
 # Secrets (never commit)
 .env
 *.env
+
+# Local agent/session working files (not part of the project)
+AGENTS.md
+session-summaries/
