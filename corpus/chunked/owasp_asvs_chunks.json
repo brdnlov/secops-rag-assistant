@@ -1,0 +1,3797 @@
+[
+  {
+    "id": "asvs_v10_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > Generic OAuth and OIDC Security",
+    "text": "Verify that tokens are only sent to components that strictly need them. For example, when using a backend-for-frontend pattern for browser-based JavaScript applications, access and refresh tokens shall only be accessible for the backend.",
+    "chunk_content_hash": "c54bed3b875d6752cca7c19a614ed7bcade7ce33d22db2ed8fff77bbeacf20ff",
+    "metadata": {
+      "req_id": "V10.1.1",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.1",
+      "section_name": "Generic OAuth and OIDC Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > Generic OAuth and OIDC Security",
+    "text": "Verify that the client only accepts values from the authorization server (such as the authorization code or ID Token) if these values result from an authorization flow that was initiated by the same user agent session and transaction. This requires that client-generated secrets, such as the proof key for code exchange (PKCE) 'code_verifier', 'state' or OIDC 'nonce', are not guessable, are specific to the transaction, and are securely bound to both the client and the user agent session in which the transaction was started.",
+    "chunk_content_hash": "6ffc0fe5652d7d2fdc726a388d392e76abe7b9b7797f98fbbf183a1300aec57d",
+    "metadata": {
+      "req_id": "V10.1.2",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.1",
+      "section_name": "Generic OAuth and OIDC Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Client",
+    "text": "Verify that, if the code flow is used, the OAuth client has protection against browser-based request forgery attacks, commonly known as cross-site request forgery (CSRF), which trigger token requests, either by using proof key for code exchange (PKCE) functionality or checking the 'state' parameter that was sent in the authorization request.",
+    "chunk_content_hash": "120736c90855754d5ecdb79c5914bbd2ecdb65a256e6438872cbc0b547304df6",
+    "metadata": {
+      "req_id": "V10.2.1",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.2",
+      "section_name": "OAuth Client",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Client",
+    "text": "Verify that, if the OAuth client can interact with more than one authorization server, it has a defense against mix-up attacks. For example, it could require that the authorization server return the 'iss' parameter value and validate it in the authorization response and the token response.",
+    "chunk_content_hash": "28d8471397bdafffb65a335a0ec4cea6d4cb0fc60e7e075b84103cda5ec33f58",
+    "metadata": {
+      "req_id": "V10.2.2",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.2",
+      "section_name": "OAuth Client",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Resource Server",
+    "text": "Verify that the resource server only accepts access tokens that are intended for use with that service (audience). The audience may be included in a structured access token (such as the 'aud' claim in JWT), or it can be checked using the token introspection endpoint.",
+    "chunk_content_hash": "a6c502ed55078cc7f0d7f648c3c4988cd95f8456c674146b1f903a8315805b81",
+    "metadata": {
+      "req_id": "V10.3.1",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.3",
+      "section_name": "OAuth Resource Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Resource Server",
+    "text": "Verify that the resource server enforces authorization decisions based on claims from the access token that define delegated authorization. If claims such as 'sub', 'scope', and 'authorization_details' are present, they must be part of the decision.",
+    "chunk_content_hash": "6e3b9df0e02ea90842ea4ac7c77810cfe38e44d86b124f0ed1e03bc6a5cb0acd",
+    "metadata": {
+      "req_id": "V10.3.2",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.3",
+      "section_name": "OAuth Resource Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Resource Server",
+    "text": "Verify that if an access control decision requires identifying a unique user from an access token (JWT or related token introspection response), the resource server identifies the user from claims that cannot be reassigned to other users. Typically, it means using a combination of 'iss' and 'sub' claims.",
+    "chunk_content_hash": "6cc3a48959e728c213c49923302fd411261f9bedc76907898ef886022a641884",
+    "metadata": {
+      "req_id": "V10.3.3",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.3",
+      "section_name": "OAuth Resource Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_3_4",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Resource Server",
+    "text": "Verify that, if the resource server requires specific authentication strength, methods, or recentness, it verifies that the presented access token satisfies these constraints. For example, if present, using the OIDC 'acr', 'amr' and 'auth_time' claims respectively.",
+    "chunk_content_hash": "957799f1d1fe05ce5a629aeb96e5e8898d4a81773f5c04472754b87d54208b2b",
+    "metadata": {
+      "req_id": "V10.3.4",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.3",
+      "section_name": "OAuth Resource Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that the authorization server validates redirect URIs based on a client-specific allowlist of pre-registered URIs using exact string comparison.",
+    "chunk_content_hash": "141117585de7c211d1a9356ea95d87ddeb2f21dac02d6212da3101647034d284",
+    "metadata": {
+      "req_id": "V10.4.1",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v10_4_10",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that confidential client is authenticated for client-to-authorized server backchannel requests such as token requests, pushed authorization requests (PAR), and token revocation requests.",
+    "chunk_content_hash": "7a5fed35c30eaf4d211e2716d61b93a6a9970093b22fdddb6b4b6d570cdf4da5",
+    "metadata": {
+      "req_id": "V10.4.10",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_4_11",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that the authorization server configuration only assigns the required scopes to the OAuth client.",
+    "chunk_content_hash": "24a617068d648c4e16d18ad4992e210e96490fee6734dbb14e54852e9055dbaf",
+    "metadata": {
+      "req_id": "V10.4.11",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that, if the authorization server returns the authorization code in the authorization response, it can be used only once for a token request. For the second valid request with an authorization code that has already been used to issue an access token, the authorization server must reject a token request and revoke any issued tokens related to the authorization code.",
+    "chunk_content_hash": "0fe41a875fd793285c9e70e86c060b14b608d7698b6f7d6504662277b8c29aac",
+    "metadata": {
+      "req_id": "V10.4.2",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v10_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that the authorization code is short-lived. The maximum lifetime can be up to 10 minutes for L1 and L2 applications and up to 1 minute for L3 applications.",
+    "chunk_content_hash": "1bafd9fb54cc6a75cf28d5440495e269582453789caec56465e5193f31657923",
+    "metadata": {
+      "req_id": "V10.4.3",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v10_4_4",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that for a given client, the authorization server only allows the usage of grants that this client needs to use. Note that the grants 'token' (Implicit flow) and 'password' (Resource Owner Password Credentials flow) must no longer be used.",
+    "chunk_content_hash": "98b065379f2d9d7c5fea2a7207ea02252ea1591a57c4abe27c92b39aaa445414",
+    "metadata": {
+      "req_id": "V10.4.4",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v10_4_5",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that the authorization server mitigates refresh token replay attacks for public clients, preferably using sender-constrained refresh tokens, i.e., Demonstrating Proof of Possession (DPoP) or Certificate-Bound Access Tokens using mutual TLS (mTLS). For L1 and L2 applications, refresh token rotation may be used. If refresh token rotation is used, the authorization server must invalidate the refresh token after usage, and revoke all refresh tokens for that authorization if an already used and invalidated refresh token is provided.",
+    "chunk_content_hash": "7181927b980505d3a54073000971b1c529dc293c065abc37faa8f98afd0b0167",
+    "metadata": {
+      "req_id": "V10.4.5",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v10_4_6",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that, if the code grant is used, the authorization server mitigates authorization code interception attacks by requiring proof key for code exchange (PKCE). For authorization requests, the authorization server must require a valid 'code_challenge' value and must not accept a 'code_challenge_method' value of 'plain'. For a token request, it must require validation of the 'code_verifier' parameter.",
+    "chunk_content_hash": "d9dabf47dd44fd8869ed309200421f365f2e6cee2de34e843b0da3249c6044af",
+    "metadata": {
+      "req_id": "V10.4.6",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_4_7",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that if the authorization server supports unauthenticated dynamic client registration, it mitigates the risk of malicious client applications. It must validate client metadata such as any registered URIs, ensure the user's consent, and warn the user before processing an authorization request with an untrusted client application.",
+    "chunk_content_hash": "de870d51c55a685b7e19a9a6778943f75f9f87d2def039cac41c52f7a0e68257",
+    "metadata": {
+      "req_id": "V10.4.7",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_4_8",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that refresh tokens have an absolute expiration, including if sliding refresh token expiration is applied.",
+    "chunk_content_hash": "0199a3ee74aea31c79f7dcc8f340903ce34b5e0f0c5060cf2b65ab39708732ff",
+    "metadata": {
+      "req_id": "V10.4.8",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_4_9",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OAuth Authorization Server",
+    "text": "Verify that refresh tokens and reference access tokens can be revoked by an authorized user using the authorization server user interface, to mitigate the risk of malicious clients or stolen tokens.",
+    "chunk_content_hash": "1ea1e64b7cb69989c3a67f7d33181ea5cde55fb7ceee83e1c263472eeacb663e",
+    "metadata": {
+      "req_id": "V10.4.9",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.4",
+      "section_name": "OAuth Authorization Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_5_1",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OIDC Client",
+    "text": "Verify that the client (as the relying party) mitigates ID Token replay attacks. For example, by ensuring that the 'nonce' claim in the ID Token matches the 'nonce' value sent in the authentication request to the OpenID Provider (in OAuth2 refereed to as the authorization request sent to the authorization server).",
+    "chunk_content_hash": "e6d7396a00d1b081cfb9057321ad8183d67ea586c2a1aee870b9e7b729a5918c",
+    "metadata": {
+      "req_id": "V10.5.1",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.5",
+      "section_name": "OIDC Client",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_5_2",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OIDC Client",
+    "text": "Verify that the client uniquely identifies the user from ID Token claims, usually the 'sub' claim, which cannot be reassigned to other users (for the scope of an identity provider).",
+    "chunk_content_hash": "fdf42c72d06990595c4efc9e9257b77068129ffb0718cf76169b26b3d30f1085",
+    "metadata": {
+      "req_id": "V10.5.2",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.5",
+      "section_name": "OIDC Client",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_5_3",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OIDC Client",
+    "text": "Verify that the client rejects attempts by a malicious authorization server to impersonate another authorization server through authorization server metadata. The client must reject authorization server metadata if the issuer URL in the authorization server metadata does not exactly match the pre-configured issuer URL expected by the client.",
+    "chunk_content_hash": "1827811679f70933268804a56b30d6cb24d3acbb24ba30b36fc25f6b0f9ab248",
+    "metadata": {
+      "req_id": "V10.5.3",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.5",
+      "section_name": "OIDC Client",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_5_4",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OIDC Client",
+    "text": "Verify that the client validates that the ID Token is intended to be used for that client (audience) by checking that the 'aud' claim from the token is equal to the 'client_id' value for the client.",
+    "chunk_content_hash": "fe07e9935d8f01d0eaa8e62dd6d5c1cd77d20517b7670862d173ce53f6110c81",
+    "metadata": {
+      "req_id": "V10.5.4",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.5",
+      "section_name": "OIDC Client",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_5_5",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OIDC Client",
+    "text": "Verify that, when using OIDC back-channel logout, the relying party mitigates denial of service through forced logout and cross-JWT confusion in the logout flow. The client must verify that the logout token is correctly typed with a value of 'logout+jwt', contains the 'event' claim with the correct member name, and does not contain a 'nonce' claim. Note that it is also recommended to have a short expiration (e.g., 2 minutes).",
+    "chunk_content_hash": "52fa7d3a3a35f60df094ac01a45ce5f0c9d9d3ad0e954d395b044be01b02ed5b",
+    "metadata": {
+      "req_id": "V10.5.5",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.5",
+      "section_name": "OIDC Client",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_6_1",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OpenID Provider",
+    "text": "Verify that the OpenID Provider only allows values 'code', 'ciba', 'id_token', or 'id_token code' for response mode. Note that 'code' is preferred over 'id_token code' (the OIDC Hybrid flow), and 'token' (any Implicit flow) must not be used.",
+    "chunk_content_hash": "7a75394b5a5128522fc2142720cc8f0cca875b1ded76bc415e9d39a32450bf3d",
+    "metadata": {
+      "req_id": "V10.6.1",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.6",
+      "section_name": "OpenID Provider",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_6_2",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > OpenID Provider",
+    "text": "Verify that the OpenID Provider mitigates denial of service through forced logout. By obtaining explicit confirmation from the end-user or, if present, validating parameters in the logout request (initiated by the relying party), such as the 'id_token_hint'.",
+    "chunk_content_hash": "4e0e96cbb838d7af746e2fa24a728ebae8fd413323db2924b48ad713c9f8a814",
+    "metadata": {
+      "req_id": "V10.6.2",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.6",
+      "section_name": "OpenID Provider",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_7_1",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > Consent Management",
+    "text": "Verify that the authorization server ensures that the user consents to each authorization request. If the identity of the client cannot be assured, the authorization server must always explicitly prompt the user for consent.",
+    "chunk_content_hash": "eab8d4176c151f49375661b3172ee2bc480f72c693631d46b3b88dbaef284726",
+    "metadata": {
+      "req_id": "V10.7.1",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.7",
+      "section_name": "Consent Management",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_7_2",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > Consent Management",
+    "text": "Verify that when the authorization server prompts for user consent, it presents sufficient and clear information about what is being consented to. When applicable, this should include the nature of the requested authorizations (typically based on scope, resource server, Rich Authorization Requests (RAR) authorization details), the identity of the authorized application, and the lifetime of these authorizations.",
+    "chunk_content_hash": "c07ad9e805f6b0da248b4c75b0b1d51b8b9b4ed3988bcbcdec421ce3db6e62a8",
+    "metadata": {
+      "req_id": "V10.7.2",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.7",
+      "section_name": "Consent Management",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v10_7_3",
+    "source": "owasp_asvs",
+    "heading_path": "OAuth and OIDC > Consent Management",
+    "text": "Verify that the user can review, modify, and revoke consents which the user has granted through the authorization server.",
+    "chunk_content_hash": "2cfa36531ccae6ca390f843c7904b4e2cc5287074239e6fcdf6f1fc80e5569b2",
+    "metadata": {
+      "req_id": "V10.7.3",
+      "chapter_id": "V10",
+      "chapter_name": "OAuth and OIDC",
+      "section_id": "V10.7",
+      "section_name": "Consent Management",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Cryptographic Inventory and Documentation",
+    "text": "Verify that there is a documented policy for management of cryptographic keys and a cryptographic key lifecycle that follows a key management standard such as NIST SP 800-57. This should include ensuring that keys are not overshared (for example, with more than two entities for shared secrets and more than one entity for private keys).",
+    "chunk_content_hash": "865ba95556e5e819ee199cf2adbe3a90d55dca371e9be6ad787c51efe3a02f8b",
+    "metadata": {
+      "req_id": "V11.1.1",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.1",
+      "section_name": "Cryptographic Inventory and Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Cryptographic Inventory and Documentation",
+    "text": "Verify that a cryptographic inventory is performed, maintained, regularly updated, and includes all cryptographic keys, algorithms, and certificates used by the application. It must also document where keys can and cannot be used in the system, and the types of data that can and cannot be protected using the keys.",
+    "chunk_content_hash": "dc4a8c4857819ae0ff6c888f31f6110de9112ca5b377f90ec6c68a5e6c86a27e",
+    "metadata": {
+      "req_id": "V11.1.2",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.1",
+      "section_name": "Cryptographic Inventory and Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Secure Cryptography Implementation",
+    "text": "Verify that industry-validated implementations (including libraries and hardware-accelerated implementations) are used for cryptographic operations.",
+    "chunk_content_hash": "0fdbe426363be80702027bb24e715481c1fe15e31ab13743212652664f34cc77",
+    "metadata": {
+      "req_id": "V11.2.1",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.2",
+      "section_name": "Secure Cryptography Implementation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Secure Cryptography Implementation",
+    "text": "Verify that the application is designed with crypto agility such that random number, authenticated encryption, MAC, or hashing algorithms, key lengths, rounds, ciphers and modes can be reconfigured, upgraded, or swapped at any time, to protect against cryptographic breaks. Similarly, it must also be possible to replace keys and passwords and re-encrypt data. This will allow for seamless upgrades to post-quantum cryptography (PQC), once high-assurance implementations of approved PQC schemes or standards are widely available.",
+    "chunk_content_hash": "43d5f35103cf73f1e417d8fc3c8bdfbc9865f65610cf3d6db1ce276535e65426",
+    "metadata": {
+      "req_id": "V11.2.2",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.2",
+      "section_name": "Secure Cryptography Implementation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Secure Cryptography Implementation",
+    "text": "Verify that all cryptographic primitives utilize a minimum of 128-bits of security based on the algorithm, key size, and configuration. For example, a 256-bit ECC key provides roughly 128 bits of security where RSA requires a 3072-bit key to achieve 128 bits of security.",
+    "chunk_content_hash": "c5cb2e3d397af72cb962edfbd9fffddf4d2cdcb45dda926316f96d9cf581a00b",
+    "metadata": {
+      "req_id": "V11.2.3",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.2",
+      "section_name": "Secure Cryptography Implementation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Encryption Algorithms",
+    "text": "Verify that insecure block modes (e.g., ECB) and weak padding schemes (e.g., PKCS#1 v1.5) are not used.",
+    "chunk_content_hash": "ee505be9e7d8aa2c6704c1b09e0dc94821af93a5d8de03481a8f850823baa0e8",
+    "metadata": {
+      "req_id": "V11.3.1",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.3",
+      "section_name": "Encryption Algorithms",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v11_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Encryption Algorithms",
+    "text": "Verify that only approved ciphers and modes such as AES with GCM are used.",
+    "chunk_content_hash": "7c6aea0af8d9b3e4afd63fbfb8be977648d3f51d2e0fab1cd881179a53599104",
+    "metadata": {
+      "req_id": "V11.3.2",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.3",
+      "section_name": "Encryption Algorithms",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v11_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Encryption Algorithms",
+    "text": "Verify that encrypted data is protected against unauthorized modification preferably by using an approved authenticated encryption method or by combining an approved encryption method with an approved MAC algorithm.",
+    "chunk_content_hash": "7f9a969ab956b79ee65aff824d53f54bc33cbbed61ee255907e0c6823e060fc5",
+    "metadata": {
+      "req_id": "V11.3.3",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.3",
+      "section_name": "Encryption Algorithms",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Hashing and Hash-based Functions",
+    "text": "Verify that only approved hash functions are used for general cryptographic use cases, including digital signatures, HMAC, KDF, and random bit generation. Disallowed hash functions, such as MD5, must not be used for any cryptographic purpose.",
+    "chunk_content_hash": "4c9a84edb9a81b0c27b7bf892763141763d9ff90f8e195833935c5467628281b",
+    "metadata": {
+      "req_id": "V11.4.1",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.4",
+      "section_name": "Hashing and Hash-based Functions",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v11_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Hashing and Hash-based Functions",
+    "text": "Verify that passwords are stored using an approved, computationally intensive, key derivation function (also known as a \"password hashing function\"), with parameter settings configured based on current guidance. The settings should balance security and performance to make brute-force attacks sufficiently challenging for the required level of security.",
+    "chunk_content_hash": "9bad8acb105dd349400a006e6b50f846fdbdac15461a9402d8d7043642de78c2",
+    "metadata": {
+      "req_id": "V11.4.2",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.4",
+      "section_name": "Hashing and Hash-based Functions",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Hashing and Hash-based Functions",
+    "text": "Verify that hash functions used in digital signatures, as part of data authentication or data integrity are collision resistant and have appropriate bit-lengths. If collision resistance is required, the output length must be at least 256 bits. If only resistance to second pre-image attacks is required, the output length must be at least 128 bits.",
+    "chunk_content_hash": "25f31c4b23a985c11b6333584d7b5a181ea5599ee28b9ffb7c66542ecc9a5053",
+    "metadata": {
+      "req_id": "V11.4.3",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.4",
+      "section_name": "Hashing and Hash-based Functions",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_4_4",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Hashing and Hash-based Functions",
+    "text": "Verify that the application uses approved key derivation functions with key stretching parameters when deriving secret keys from passwords. The parameters in use must balance security and performance to prevent brute-force attacks from compromising the resulting cryptographic key.",
+    "chunk_content_hash": "8f485c0761ff1370e89cd2b7476dd747e1022d72018780075b214a5b932c1fd8",
+    "metadata": {
+      "req_id": "V11.4.4",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.4",
+      "section_name": "Hashing and Hash-based Functions",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_5_1",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Random Values",
+    "text": "Verify that all random numbers and strings which are intended to be non-guessable must be generated using a cryptographically secure pseudo-random number generator (CSPRNG) and have at least 128 bits of entropy. Note that UUIDs do not respect this condition.",
+    "chunk_content_hash": "4a57f48b548745ff22670f16f0dcb4bde21381be034c80e5b2468832ac70d706",
+    "metadata": {
+      "req_id": "V11.5.1",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.5",
+      "section_name": "Random Values",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v11_6_1",
+    "source": "owasp_asvs",
+    "heading_path": "Cryptography > Public Key Cryptography",
+    "text": "Verify that only approved cryptographic algorithms and modes of operation are used for key generation and seeding, and digital signature generation and verification. Key generation algorithms must not generate insecure keys vulnerable to known attacks, for example, RSA keys which are vulnerable to Fermat factorization.",
+    "chunk_content_hash": "a2d1f0ea4a95c0a5e679da7e742cc84fb47c6caf744732445a851a84a7c72efc",
+    "metadata": {
+      "req_id": "V11.6.1",
+      "chapter_id": "V11",
+      "chapter_name": "Cryptography",
+      "section_id": "V11.6",
+      "section_name": "Public Key Cryptography",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v12_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > General TLS Security Guidance",
+    "text": "Verify that only the latest recommended versions of the TLS protocol are enabled, such as TLS 1.2 and TLS 1.3. The latest version of the TLS protocol must be the preferred option.",
+    "chunk_content_hash": "d908eeec050e4c69b7c785911e51f44448642bf42099548ff08fb8e97e58cfac",
+    "metadata": {
+      "req_id": "V12.1.1",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.1",
+      "section_name": "General TLS Security Guidance",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v12_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > General TLS Security Guidance",
+    "text": "Verify that only recommended cipher suites are enabled, with the strongest cipher suites set as preferred. L3 applications must only support cipher suites which provide forward secrecy.",
+    "chunk_content_hash": "9697c2b91f76cf98e57bf662ff0dbba0590e3fe121017212fc0c57755c4b9ced",
+    "metadata": {
+      "req_id": "V12.1.2",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.1",
+      "section_name": "General TLS Security Guidance",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v12_1_3",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > General TLS Security Guidance",
+    "text": "Verify that the application validates that mTLS client certificates are trusted before using the certificate identity for authentication or authorization.",
+    "chunk_content_hash": "a051a9aef0fb4c74b307e694cd8ab086c0e25defc6c9a0ccbc2fb43b1165d6b0",
+    "metadata": {
+      "req_id": "V12.1.3",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.1",
+      "section_name": "General TLS Security Guidance",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v12_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > HTTPS Communication with External Facing Services",
+    "text": "Verify that TLS is used for all connectivity between a client and external facing, HTTP-based services, and does not fall back to insecure or unencrypted communications.",
+    "chunk_content_hash": "bd4681b55ea1a5e66335eb23fe89c620d266299141b0aa73e3cf4fcae605215a",
+    "metadata": {
+      "req_id": "V12.2.1",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.2",
+      "section_name": "HTTPS Communication with External Facing Services",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v12_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > HTTPS Communication with External Facing Services",
+    "text": "Verify that external facing services use publicly trusted TLS certificates.",
+    "chunk_content_hash": "1fd4a0aae821fff56cf012c13c20ad4bb92d52d46430714a1e2517fa086f8939",
+    "metadata": {
+      "req_id": "V12.2.2",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.2",
+      "section_name": "HTTPS Communication with External Facing Services",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v12_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > General Service to Service Communication Security",
+    "text": "Verify that an encrypted protocol such as TLS is used for all inbound and outbound connections to and from the application, including monitoring systems, management tools, remote access and SSH, middleware, databases, mainframes, partner systems, or external APIs. The server must not fall back to insecure or unencrypted protocols.",
+    "chunk_content_hash": "0eb35073d962650ce931175f74d2256b9497104324eefe0d91b26d81a2bf37f7",
+    "metadata": {
+      "req_id": "V12.3.1",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.3",
+      "section_name": "General Service to Service Communication Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v12_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > General Service to Service Communication Security",
+    "text": "Verify that TLS clients validate certificates received before communicating with a TLS server.",
+    "chunk_content_hash": "8d7d812283464854a073fca626dd56208dfb93c7a19a38e8b2dacb4988d692cd",
+    "metadata": {
+      "req_id": "V12.3.2",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.3",
+      "section_name": "General Service to Service Communication Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v12_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > General Service to Service Communication Security",
+    "text": "Verify that TLS or another appropriate transport encryption mechanism used for all connectivity between internal, HTTP-based services within the application, and does not fall back to insecure or unencrypted communications.",
+    "chunk_content_hash": "b763ac690e0eb341335ac00187364d25dd0e1028d655b95c9da20459640c80a2",
+    "metadata": {
+      "req_id": "V12.3.3",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.3",
+      "section_name": "General Service to Service Communication Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v12_3_4",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Communication > General Service to Service Communication Security",
+    "text": "Verify that TLS connections between internal services use trusted certificates. Where internally generated or self-signed certificates are used, the consuming service must be configured to only trust specific internal CAs and specific self-signed certificates.",
+    "chunk_content_hash": "ab37e85d0abb71d613bb8a261146eee3852cd8ffc37eb83fb2ddec0122733cdd",
+    "metadata": {
+      "req_id": "V12.3.4",
+      "chapter_id": "V12",
+      "chapter_name": "Secure Communication",
+      "section_id": "V12.3",
+      "section_name": "General Service to Service Communication Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Configuration Documentation",
+    "text": "Verify that all communication needs for the application are documented. This must include external services which the application relies upon and cases where an end user might be able to provide an external location to which the application will then connect.",
+    "chunk_content_hash": "956cf2b756aca8cf5f76ead1d6fab278b33f663a28ec6a99b05677307c6d4ccb",
+    "metadata": {
+      "req_id": "V13.1.1",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.1",
+      "section_name": "Configuration Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Backend Communication Configuration",
+    "text": "Verify that communications between backend application components that don't support the application's standard user session mechanism, including APIs, middleware, and data layers, are authenticated. Authentication must use individual service accounts, short-term tokens, or certificate-based authentication and not unchanging credentials such as passwords, API keys, or shared accounts with privileged access.",
+    "chunk_content_hash": "4b804e9819a559fcae6d86fd759177f999b33220ee1a61bcb4203e08720930e1",
+    "metadata": {
+      "req_id": "V13.2.1",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.2",
+      "section_name": "Backend Communication Configuration",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Backend Communication Configuration",
+    "text": "Verify that communications between backend application components, including local or operating system services, APIs, middleware, and data layers, are performed with accounts assigned the least necessary privileges.",
+    "chunk_content_hash": "09b2edb9b023915f263fad7b6f60035460ca902d742fdc2cfb5b725205709e42",
+    "metadata": {
+      "req_id": "V13.2.2",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.2",
+      "section_name": "Backend Communication Configuration",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Backend Communication Configuration",
+    "text": "Verify that if a credential has to be used for service authentication, the credential being used by the consumer is not a default credential (e.g., root/root or admin/admin).",
+    "chunk_content_hash": "1265518218be53161dcde492b9b84d9a177866b2a5c096dbae9c53a48180852b",
+    "metadata": {
+      "req_id": "V13.2.3",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.2",
+      "section_name": "Backend Communication Configuration",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_2_4",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Backend Communication Configuration",
+    "text": "Verify that an allowlist is used to define the external resources or systems with which the application is permitted to communicate (e.g., for outbound requests, data loads, or file access). This allowlist can be implemented at the application layer, web server, firewall, or a combination of different layers.",
+    "chunk_content_hash": "1375dceb77596c16befd48199bb653c1b14d743f03191d784939b1ff4d1e4ed1",
+    "metadata": {
+      "req_id": "V13.2.4",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.2",
+      "section_name": "Backend Communication Configuration",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_2_5",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Backend Communication Configuration",
+    "text": "Verify that the web or application server is configured with an allowlist of resources or systems to which the server can send requests or load data or files from.",
+    "chunk_content_hash": "c8e3d7cdc5a7332d12576093dfee9b3b24b406aa5bee2ba8229ba6a2546b3e63",
+    "metadata": {
+      "req_id": "V13.2.5",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.2",
+      "section_name": "Backend Communication Configuration",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Secret Management",
+    "text": "Verify that a secrets management solution, such as a key vault, is used to securely create, store, control access to, and destroy backend secrets. These could include passwords, key material, integrations with databases and third-party systems, keys and seeds for time-based tokens, other internal secrets, and API keys. Secrets must not be included in application source code or included in build artifacts. For an L3 application, this must involve a hardware-backed solution such as an HSM.",
+    "chunk_content_hash": "19504c19f3b9dbf014d36f35e8a5ac751078e833d4bb4c15be5d796dabaaa7f0",
+    "metadata": {
+      "req_id": "V13.3.1",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.3",
+      "section_name": "Secret Management",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Secret Management",
+    "text": "Verify that access to secret assets adheres to the principle of least privilege.",
+    "chunk_content_hash": "b26aa6cdb26c30ed90a30d74f36f9adf370b2b9fe2522c7d1662f6fcd496a9e0",
+    "metadata": {
+      "req_id": "V13.3.2",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.3",
+      "section_name": "Secret Management",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Unintended Information Leakage",
+    "text": "Verify that the application is deployed either without any source control metadata, including the .git or .svn folders, or in a way that these folders are inaccessible both externally and to the application itself.",
+    "chunk_content_hash": "349bd76551a5f930d9b1bf1ccb133376f98694fd2e3aff50002606a4a0482b3c",
+    "metadata": {
+      "req_id": "V13.4.1",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.4",
+      "section_name": "Unintended Information Leakage",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v13_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Unintended Information Leakage",
+    "text": "Verify that debug modes are disabled for all components in production environments to prevent exposure of debugging features and information leakage.",
+    "chunk_content_hash": "e8660b4ae5cb0d248c83ef21c76c97fde022709699ce64c702b061b4de50358c",
+    "metadata": {
+      "req_id": "V13.4.2",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.4",
+      "section_name": "Unintended Information Leakage",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Unintended Information Leakage",
+    "text": "Verify that web servers do not expose directory listings to clients unless explicitly intended.",
+    "chunk_content_hash": "0543286e61f28dcb3e01333539d926477bab74e45ea9884acfa933981ba5696b",
+    "metadata": {
+      "req_id": "V13.4.3",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.4",
+      "section_name": "Unintended Information Leakage",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_4_4",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Unintended Information Leakage",
+    "text": "Verify that using the HTTP TRACE method is not supported in production environments, to avoid potential information leakage.",
+    "chunk_content_hash": "ac207dbd4b6c9fc1ba4263c5966a4f86b5122c46a3002ce85bfd69050c1f4185",
+    "metadata": {
+      "req_id": "V13.4.4",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.4",
+      "section_name": "Unintended Information Leakage",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v13_4_5",
+    "source": "owasp_asvs",
+    "heading_path": "Configuration > Unintended Information Leakage",
+    "text": "Verify that documentation (such as for internal APIs) and monitoring endpoints are not exposed unless explicitly intended.",
+    "chunk_content_hash": "de6efea55d7357347310b36b41c22517777705e8ef54a3bf59180bd9ef94d189",
+    "metadata": {
+      "req_id": "V13.4.5",
+      "chapter_id": "V13",
+      "chapter_name": "Configuration",
+      "section_id": "V13.4",
+      "section_name": "Unintended Information Leakage",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v14_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > Data Protection Documentation",
+    "text": "Verify that all sensitive data created and processed by the application has been identified and classified into protection levels. This includes data that is only encoded and therefore easily decoded, such as Base64 strings or the plaintext payload inside a JWT. Protection levels need to take into account any data protection and privacy regulations and standards which the application is required to comply with.",
+    "chunk_content_hash": "e350a1babef2635883a1526669fb7012f49f31c1471d0549fddd86ea09961fd9",
+    "metadata": {
+      "req_id": "V14.1.1",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.1",
+      "section_name": "Data Protection Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v14_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > Data Protection Documentation",
+    "text": "Verify that all sensitive data protection levels have a documented set of protection requirements. This must include (but not be limited to) requirements related to general encryption, integrity verification, retention, how the data is to be logged, access controls around sensitive data in logs, database-level encryption, privacy and privacy-enhancing technologies to be used, and other confidentiality requirements.",
+    "chunk_content_hash": "89f9005ccdeb3b7fe579112b9e2b6fdc01a9cfdb4909bbd0d7663b449871997e",
+    "metadata": {
+      "req_id": "V14.1.2",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.1",
+      "section_name": "Data Protection Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v14_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > General Data Protection",
+    "text": "Verify that sensitive data is only sent to the server in the HTTP message body or header fields, and that the URL and query string do not contain sensitive information, such as an API key or session token.",
+    "chunk_content_hash": "2983ba3228b0011dcc4d8859e8f19bc490e04c38171fa252c12a9db4c1cbfc6e",
+    "metadata": {
+      "req_id": "V14.2.1",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.2",
+      "section_name": "General Data Protection",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v14_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > General Data Protection",
+    "text": "Verify that the application prevents sensitive data from being cached in server components, such as load balancers and application caches, or ensures that the data is securely purged after use.",
+    "chunk_content_hash": "ac4323e0916f7732e1150c2d6b9c0171f6e708815d04e68d87365cb03fbc6127",
+    "metadata": {
+      "req_id": "V14.2.2",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.2",
+      "section_name": "General Data Protection",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v14_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > General Data Protection",
+    "text": "Verify that defined sensitive data is not sent to untrusted parties (e.g., user trackers) to prevent unwanted collection of data outside of the application's control.",
+    "chunk_content_hash": "f13ea75fd22ed9a29b10686acba80fd4349ac5d0fbb8627f0a571ca92ce34409",
+    "metadata": {
+      "req_id": "V14.2.3",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.2",
+      "section_name": "General Data Protection",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v14_2_4",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > General Data Protection",
+    "text": "Verify that controls around sensitive data related to encryption, integrity verification, retention, how the data is to be logged, access controls around sensitive data in logs, privacy and privacy-enhancing technologies, are implemented as defined in the documentation for the specific data's protection level.",
+    "chunk_content_hash": "5a8ea508cb30bdec5b508dd57896e304bb29c400595749b1f090d8197aba3dd2",
+    "metadata": {
+      "req_id": "V14.2.4",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.2",
+      "section_name": "General Data Protection",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v14_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > Client-side Data Protection",
+    "text": "Verify that authenticated data is cleared from client storage, such as the browser DOM, after the client or session is terminated. The 'Clear-Site-Data' HTTP response header field may be able to help with this but the client-side should also be able to clear up if the server connection is not available when the session is terminated.",
+    "chunk_content_hash": "8c1239eaede761d3126b0427a04e401bdebb5f87d431a8b32ab00c2e2380465a",
+    "metadata": {
+      "req_id": "V14.3.1",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.3",
+      "section_name": "Client-side Data Protection",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v14_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > Client-side Data Protection",
+    "text": "Verify that the application sets sufficient anti-caching HTTP response header fields (i.e., Cache-Control: no-store) so that sensitive data is not cached in browsers.",
+    "chunk_content_hash": "41fc0098db312ac61f0049fd647549919c1adb7c4ccdc2acde15debe1d97bf06",
+    "metadata": {
+      "req_id": "V14.3.2",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.3",
+      "section_name": "Client-side Data Protection",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v14_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Data Protection > Client-side Data Protection",
+    "text": "Verify that data stored in browser storage (such as localStorage, sessionStorage, IndexedDB, or cookies) does not contain sensitive data, with the exception of session tokens.",
+    "chunk_content_hash": "f1d183dcb32e805364538222d14cf4177782c333100ae700e1b35b6aaa615fff",
+    "metadata": {
+      "req_id": "V14.3.3",
+      "chapter_id": "V14",
+      "chapter_name": "Data Protection",
+      "section_id": "V14.3",
+      "section_name": "Client-side Data Protection",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Secure Coding and Architecture Documentation",
+    "text": "Verify that application documentation defines risk based remediation time frames for 3rd party component versions with vulnerabilities and for updating libraries in general, to minimize the risk from these components.",
+    "chunk_content_hash": "ea6402cfa6ad926580eec1851a9ee82b66ee0a7d32d08eb92b723fb559de94d1",
+    "metadata": {
+      "req_id": "V15.1.1",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.1",
+      "section_name": "Secure Coding and Architecture Documentation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v15_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Secure Coding and Architecture Documentation",
+    "text": "Verify that an inventory catalog, such as software bill of materials (SBOM), is maintained of all third-party libraries in use, including verifying that components come from pre-defined, trusted, and continually maintained repositories.",
+    "chunk_content_hash": "a5300ffb35f2095b7aa2359e4293401abedc59c97dd3f91b422e6b5bd2b5f915",
+    "metadata": {
+      "req_id": "V15.1.2",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.1",
+      "section_name": "Secure Coding and Architecture Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_1_3",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Secure Coding and Architecture Documentation",
+    "text": "Verify that the application documentation identifies functionality which is time-consuming or resource-demanding. This must include how to prevent a loss of availability due to overusing this functionality and how to avoid a situation where building a response takes longer than the consumer's timeout. Potential defenses may include asynchronous processing, using queues, and limiting parallel processes per user and per application.",
+    "chunk_content_hash": "8753b412c1ec2a70c316b901c60bf55128b18478c37522bb111ff08e44eba26a",
+    "metadata": {
+      "req_id": "V15.1.3",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.1",
+      "section_name": "Secure Coding and Architecture Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Security Architecture and Dependencies",
+    "text": "Verify that the application only contains components which have not breached the documented update and remediation time frames.",
+    "chunk_content_hash": "83a76f8ee9295fab33e591434bd0af240260f2fcafef345ca997d07eeaae8b74",
+    "metadata": {
+      "req_id": "V15.2.1",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.2",
+      "section_name": "Security Architecture and Dependencies",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v15_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Security Architecture and Dependencies",
+    "text": "Verify that the application has implemented defenses against loss of availability due to functionality which is time-consuming or resource-demanding, based on the documented security decisions and strategies for this.",
+    "chunk_content_hash": "b89e5daec799e66c163fd9d637372387e273dab9ad25a67dd2d80c72f1f1d8e2",
+    "metadata": {
+      "req_id": "V15.2.2",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.2",
+      "section_name": "Security Architecture and Dependencies",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Security Architecture and Dependencies",
+    "text": "Verify that the production environment only includes functionality that is required for the application to function, and does not expose extraneous functionality such as test code, sample snippets, and development functionality.",
+    "chunk_content_hash": "f1bd4f49d2b6a4c898f27036f6ce4faa1de8091f006967b61ceae56002437866",
+    "metadata": {
+      "req_id": "V15.2.3",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.2",
+      "section_name": "Security Architecture and Dependencies",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Defensive Coding",
+    "text": "Verify that the application only returns the required subset of fields from a data object. For example, it should not return an entire data object, as some individual fields should not be accessible to users.",
+    "chunk_content_hash": "bd412d1b9fb75aa18f766bb00efa64e84d6a9bc461e83ecb90b7b067a02a0526",
+    "metadata": {
+      "req_id": "V15.3.1",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.3",
+      "section_name": "Defensive Coding",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v15_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Defensive Coding",
+    "text": "Verify that where the application backend makes calls to external URLs, it is configured to not follow redirects unless it is intended functionality.",
+    "chunk_content_hash": "002aaaea89789d1e9add79de1f94f4e0b4a478a95230b14d47ef4ce6a8b4f1c6",
+    "metadata": {
+      "req_id": "V15.3.2",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.3",
+      "section_name": "Defensive Coding",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Defensive Coding",
+    "text": "Verify that the application has countermeasures to protect against mass assignment attacks by limiting allowed fields per controller and action, e.g., it is not possible to insert or update a field value when it was not intended to be part of that action.",
+    "chunk_content_hash": "d97d0128fe39310044bb12385f6d416aac6781b49859f965b1f2d0124fc99e74",
+    "metadata": {
+      "req_id": "V15.3.3",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.3",
+      "section_name": "Defensive Coding",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_3_4",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Defensive Coding",
+    "text": "Verify that all proxying and middleware components transfer the user's original IP address correctly using trusted data fields that cannot be manipulated by the end user, and the application and web server use this correct value for logging and security decisions such as rate limiting, taking into account that even the original IP address may not be reliable due to dynamic IPs, VPNs, or corporate firewalls.",
+    "chunk_content_hash": "df546cb9d36146313cc36f6e688274ed490060400c8575e9a1a858487544ff60",
+    "metadata": {
+      "req_id": "V15.3.4",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.3",
+      "section_name": "Defensive Coding",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_3_5",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Defensive Coding",
+    "text": "Verify that the application explicitly ensures that variables are of the correct type and performs strict equality and comparator operations. This is to avoid type juggling or type confusion vulnerabilities caused by the application code making an assumption about a variable type.",
+    "chunk_content_hash": "32818fcd3b0e6f67ec031444f1b64a560cd03317b7c4acc51ad78d1956d70374",
+    "metadata": {
+      "req_id": "V15.3.5",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.3",
+      "section_name": "Defensive Coding",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_3_6",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Defensive Coding",
+    "text": "Verify that JavaScript code is written in a way that prevents prototype pollution, for example, by using Set() or Map() instead of object literals.",
+    "chunk_content_hash": "999a47b787bbc3da5969218be559917839a90bd2923a41803141e1a05652716f",
+    "metadata": {
+      "req_id": "V15.3.6",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.3",
+      "section_name": "Defensive Coding",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v15_3_7",
+    "source": "owasp_asvs",
+    "heading_path": "Secure Coding and Architecture > Defensive Coding",
+    "text": "Verify that the application has defenses against HTTP parameter pollution attacks, particularly if the application framework makes no distinction about the source of request parameters (query string, body parameters, cookies, or header fields).",
+    "chunk_content_hash": "16eb705e8f207b7e03dde0e88fca17980fc425658417ae634aabb7c348aa8b5e",
+    "metadata": {
+      "req_id": "V15.3.7",
+      "chapter_id": "V15",
+      "chapter_name": "Secure Coding and Architecture",
+      "section_id": "V15.3",
+      "section_name": "Defensive Coding",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Security Logging Documentation",
+    "text": "Verify that an inventory exists documenting the logging performed at each layer of the application's technology stack, what events are being logged, log formats, where that logging is stored, how it is used, how access to it is controlled, and for how long logs are kept.",
+    "chunk_content_hash": "501b5c54566882c439c0bf19161837cea5205c3f3c9ce51983490075b04e83a6",
+    "metadata": {
+      "req_id": "V16.1.1",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.1",
+      "section_name": "Security Logging Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > General Logging",
+    "text": "Verify that each log entry includes necessary metadata (such as when, where, who, what) that would allow for a detailed investigation of the timeline when an event happens.",
+    "chunk_content_hash": "96d2ee366b92c090f5f9eeaf27b6d1d51cbaee151c67933b449bcc28fd8269f0",
+    "metadata": {
+      "req_id": "V16.2.1",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.2",
+      "section_name": "General Logging",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > General Logging",
+    "text": "Verify that time sources for all logging components are synchronized, and that timestamps in security event metadata use UTC or include an explicit time zone offset. UTC is recommended to ensure consistency across distributed systems and to prevent confusion during daylight saving time transitions.",
+    "chunk_content_hash": "a34a96d378e732d2b8aaf97085f293c21bcf91df5537844fa38e3b23b58709f1",
+    "metadata": {
+      "req_id": "V16.2.2",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.2",
+      "section_name": "General Logging",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > General Logging",
+    "text": "Verify that the application only stores or broadcasts logs to the files and services that are documented in the log inventory.",
+    "chunk_content_hash": "7e0a0ad78f320147329d874a1455314d5e6681b042930eb737688817269d6763",
+    "metadata": {
+      "req_id": "V16.2.3",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.2",
+      "section_name": "General Logging",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_2_4",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > General Logging",
+    "text": "Verify that logs can be read and correlated by the log processor that is in use, preferably by using a common logging format.",
+    "chunk_content_hash": "38330de83cb457fbdadae949dd88a55b8ea6fb022fdd4b0010da8637c21b7d45",
+    "metadata": {
+      "req_id": "V16.2.4",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.2",
+      "section_name": "General Logging",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_2_5",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > General Logging",
+    "text": "Verify that when logging sensitive data, the application enforces logging based on the data's protection level. For example, it may not be allowed to log certain data, such as credentials or payment details. Other data, such as session tokens, may only be logged by being hashed or masked, either in full or partially.",
+    "chunk_content_hash": "a511c2b2069530236c26bc9b3113f0aeda4a11e299ddc38688b98fce84ef5682",
+    "metadata": {
+      "req_id": "V16.2.5",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.2",
+      "section_name": "General Logging",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Security Events",
+    "text": "Verify that all authentication operations are logged, including successful and unsuccessful attempts. Additional metadata, such as the type of authentication or factors used, should also be collected.",
+    "chunk_content_hash": "be2b76cfd66f4f86eca2eea6f4b5cccedecbc72c2fb175dcef2b0802e26c2f0d",
+    "metadata": {
+      "req_id": "V16.3.1",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.3",
+      "section_name": "Security Events",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Security Events",
+    "text": "Verify that failed authorization attempts are logged. For L3, this must include logging all authorization decisions, including logging when sensitive data is accessed (without logging the sensitive data itself).",
+    "chunk_content_hash": "538fd14baf4305fbf2eb58d818d3b8f2953cfe2708135c3f4715e63e409a1ef8",
+    "metadata": {
+      "req_id": "V16.3.2",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.3",
+      "section_name": "Security Events",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Security Events",
+    "text": "Verify that the application logs the security events that are defined in the documentation and also logs attempts to bypass the security controls, such as input validation, business logic, and anti-automation.",
+    "chunk_content_hash": "1ca4ae106b1c9ebc8533f0e5de7d7c611bc70282ea93ef05c66beb1d6a185698",
+    "metadata": {
+      "req_id": "V16.3.3",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.3",
+      "section_name": "Security Events",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_3_4",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Security Events",
+    "text": "Verify that the application logs unexpected errors and security control failures such as backend TLS failures.",
+    "chunk_content_hash": "8acbd60cc0305f0869b92bf21b60a89d7a6b0617d4ef8d0b6b95a5312f2039ce",
+    "metadata": {
+      "req_id": "V16.3.4",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.3",
+      "section_name": "Security Events",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Log Protection",
+    "text": "Verify that all logging components appropriately encode data to prevent log injection.",
+    "chunk_content_hash": "ed30322a77927f865b28f3635d6b7734ee9c2d65d2187782e685541a9658609e",
+    "metadata": {
+      "req_id": "V16.4.1",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.4",
+      "section_name": "Log Protection",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Log Protection",
+    "text": "Verify that logs are protected from unauthorized access and cannot be modified.",
+    "chunk_content_hash": "eebf7c40a8970bd6ed075d598837e19b11ef600a7ac398fa00989e9fa55a536d",
+    "metadata": {
+      "req_id": "V16.4.2",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.4",
+      "section_name": "Log Protection",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Log Protection",
+    "text": "Verify that logs are securely transmitted to a logically separate system for analysis, detection, alerting, and escalation. The aim is to ensure that if the application is breached, the logs are not compromised.",
+    "chunk_content_hash": "1fe6cf6160567b2437d44a5ef74518ecb98d992b0bed1fd1966786fa63854141",
+    "metadata": {
+      "req_id": "V16.4.3",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.4",
+      "section_name": "Log Protection",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_5_1",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Error Handling",
+    "text": "Verify that a generic message is returned to the consumer when an unexpected or security-sensitive error occurs, ensuring no exposure of sensitive internal system data such as stack traces, queries, secret keys, and tokens.",
+    "chunk_content_hash": "2f877146266d0c1bab5e689b53807bb5168d53587eef281326f3b71e35987565",
+    "metadata": {
+      "req_id": "V16.5.1",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.5",
+      "section_name": "Error Handling",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_5_2",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Error Handling",
+    "text": "Verify that the application continues to operate securely when external resource access fails, for example, by using patterns such as circuit breakers or graceful degradation.",
+    "chunk_content_hash": "0505d011b9f2b0a33806934b3dc2e4790a347a94dbb5b67c5251a51ed32ae73d",
+    "metadata": {
+      "req_id": "V16.5.2",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.5",
+      "section_name": "Error Handling",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v16_5_3",
+    "source": "owasp_asvs",
+    "heading_path": "Security Logging and Error Handling > Error Handling",
+    "text": "Verify that the application fails gracefully and securely, including when an exception occurs, preventing fail-open conditions such as processing a transaction despite errors resulting from validation logic.",
+    "chunk_content_hash": "9b82ac1eabf9d72ca530d1d63698cb6d81ea33f8aae4b88836cbe9911cb307ee",
+    "metadata": {
+      "req_id": "V16.5.3",
+      "chapter_id": "V16",
+      "chapter_name": "Security Logging and Error Handling",
+      "section_id": "V16.5",
+      "section_name": "Error Handling",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v17_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "WebRTC > TURN Server",
+    "text": "Verify that the Traversal Using Relays around NAT (TURN) service only allows access to IP addresses that are not reserved for special purposes (e.g., internal networks, broadcast, loopback). Note that this applies to both IPv4 and IPv6 addresses.",
+    "chunk_content_hash": "2a3e2938a84dbd82dd5fe718320ed70d5717c1949fb0022b6c8844fed7d9378f",
+    "metadata": {
+      "req_id": "V17.1.1",
+      "chapter_id": "V17",
+      "chapter_name": "WebRTC",
+      "section_id": "V17.1",
+      "section_name": "TURN Server",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v17_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "WebRTC > Media",
+    "text": "Verify that the key for the Datagram Transport Layer Security (DTLS) certificate is managed and protected based on the documented policy for management of cryptographic keys.",
+    "chunk_content_hash": "10a31a401354d727ac107a44a74ae76560d589f0290069c132657cac383f6340",
+    "metadata": {
+      "req_id": "V17.2.1",
+      "chapter_id": "V17",
+      "chapter_name": "WebRTC",
+      "section_id": "V17.2",
+      "section_name": "Media",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v17_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "WebRTC > Media",
+    "text": "Verify that the media server is configured to use and support approved Datagram Transport Layer Security (DTLS) cipher suites and a secure protection profile for the DTLS Extension for establishing keys for the Secure Real-time Transport Protocol (DTLS-SRTP).",
+    "chunk_content_hash": "20d58c434ce6ba0036c2b51b6aad4f47a511cef0ac628e855de0c070f21be9b2",
+    "metadata": {
+      "req_id": "V17.2.2",
+      "chapter_id": "V17",
+      "chapter_name": "WebRTC",
+      "section_id": "V17.2",
+      "section_name": "Media",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v17_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "WebRTC > Media",
+    "text": "Verify that Secure Real-time Transport Protocol (SRTP) authentication is checked at the media server to prevent Real-time Transport Protocol (RTP) injection attacks from leading to either a Denial of Service condition or audio or video media insertion into media streams.",
+    "chunk_content_hash": "9d4672799b65bafa09daea4a1ce3500ad022af197ded82a7d79b9d06e4b859f2",
+    "metadata": {
+      "req_id": "V17.2.3",
+      "chapter_id": "V17",
+      "chapter_name": "WebRTC",
+      "section_id": "V17.2",
+      "section_name": "Media",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v17_2_4",
+    "source": "owasp_asvs",
+    "heading_path": "WebRTC > Media",
+    "text": "Verify that the media server is able to continue processing incoming media traffic when encountering malformed Secure Real-time Transport Protocol (SRTP) packets.",
+    "chunk_content_hash": "c1be2d8fda96bb824f18d85250daacce6ce64c7df741c30180828a55831e1320",
+    "metadata": {
+      "req_id": "V17.2.4",
+      "chapter_id": "V17",
+      "chapter_name": "WebRTC",
+      "section_id": "V17.2",
+      "section_name": "Media",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v17_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "WebRTC > Signaling",
+    "text": "Verify that the signaling server is able to continue processing legitimate incoming signaling messages during a flood attack. This should be achieved by implementing rate limiting at the signaling level.",
+    "chunk_content_hash": "e14ad8a243a77fc49084fa1742545614e58dad0f7c4277d68f95149beeeaa117",
+    "metadata": {
+      "req_id": "V17.3.1",
+      "chapter_id": "V17",
+      "chapter_name": "WebRTC",
+      "section_id": "V17.3",
+      "section_name": "Signaling",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v17_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "WebRTC > Signaling",
+    "text": "Verify that the signaling server is able to continue processing legitimate signaling messages when encountering malformed signaling message that could cause a denial of service condition. This could include implementing input validation, safely handling integer overflows, preventing buffer overflows, and employing other robust error-handling techniques.",
+    "chunk_content_hash": "7e5d1f536ad76ed80fdf78158e028aa7c647e27cfac55b61b50915f21aa6202f",
+    "metadata": {
+      "req_id": "V17.3.2",
+      "chapter_id": "V17",
+      "chapter_name": "WebRTC",
+      "section_id": "V17.3",
+      "section_name": "Signaling",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Encoding and Sanitization Architecture",
+    "text": "Verify that input is decoded or unescaped into a canonical form only once, it is only decoded when encoded data in that form is expected, and that this is done before processing the input further, for example it is not performed after input validation or sanitization.",
+    "chunk_content_hash": "c58121e2f333835a069a600ea179c4d826f43efb021f3a98034d5068d224d331",
+    "metadata": {
+      "req_id": "V1.1.1",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.1",
+      "section_name": "Encoding and Sanitization Architecture",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Encoding and Sanitization Architecture",
+    "text": "Verify that the application performs output encoding and escaping either as a final step before being used by the interpreter for which it is intended or by the interpreter itself.",
+    "chunk_content_hash": "3d96473ca1850e80e08f8f6946bd82ada8928061b5d73cfad6a35e4a2b106021",
+    "metadata": {
+      "req_id": "V1.1.2",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.1",
+      "section_name": "Encoding and Sanitization Architecture",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that output encoding for an HTTP response, HTML document, or XML document is relevant for the context required, such as encoding the relevant characters for HTML elements, HTML attributes, HTML comments, CSS, or HTTP header fields, to avoid changing the message or document structure.",
+    "chunk_content_hash": "0f9eec1cbc630a3b4cad2151c932b18c6163e0b1382be3193653109ae635aacd",
+    "metadata": {
+      "req_id": "V1.2.1",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v1_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that when dynamically building URLs, untrusted data is encoded according to its context (e.g., URL encoding or base64url encoding for query or path parameters). Ensure that only safe URL protocols are permitted (e.g., disallow javascript: or data:).",
+    "chunk_content_hash": "1f1e7752b3d78af08f892f312248f0690557ca540aba4dee21345deaea9c17a2",
+    "metadata": {
+      "req_id": "V1.2.2",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v1_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that output encoding or escaping is used when dynamically building JavaScript content (including JSON), to avoid changing the message or document structure (to avoid JavaScript and JSON injection).",
+    "chunk_content_hash": "c9afea554852ca62387ccc9914865f8f9e2155f6007d0822196f1741f3b9b17c",
+    "metadata": {
+      "req_id": "V1.2.3",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v1_2_4",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that data selection or database queries (e.g., SQL, HQL, NoSQL, Cypher) use parameterized queries, ORMs, entity frameworks, or are otherwise protected from SQL Injection and other database injection attacks. This is also relevant when writing stored procedures.",
+    "chunk_content_hash": "fc275fa4067c2d62d625c1de033d7f3759d9f860742331bca73d189c8c5a1420",
+    "metadata": {
+      "req_id": "V1.2.4",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v1_2_5",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that the application protects against OS command injection and that operating system calls use parameterized OS queries or use contextual command line output encoding.",
+    "chunk_content_hash": "bae0e744ae9744005ce181ec18e38d4c1e651efdb4e5eb3415f259931580d3ef",
+    "metadata": {
+      "req_id": "V1.2.5",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v1_2_6",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that the application protects against LDAP injection vulnerabilities, or that specific security controls to prevent LDAP injection have been implemented.",
+    "chunk_content_hash": "41de2938229ca679847075dda712c7714823adc0c2bbf2d99acecfae7c6f47cb",
+    "metadata": {
+      "req_id": "V1.2.6",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_2_7",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that the application is protected against XPath injection attacks by using query parameterization or precompiled queries.",
+    "chunk_content_hash": "19fee91c0962204b7f635bb2e1732465168b0d8aee787e028a177366c53a6b28",
+    "metadata": {
+      "req_id": "V1.2.7",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_2_8",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that LaTeX processors are configured securely (such as not using the \"--shell-escape\" flag) and an allowlist of commands is used to prevent LaTeX injection attacks.",
+    "chunk_content_hash": "a625c72a88949737cdb437b2225d8d0a99f823c5a3184540cfb03193782f481b",
+    "metadata": {
+      "req_id": "V1.2.8",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_2_9",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Injection Prevention",
+    "text": "Verify that the application escapes special characters in regular expressions (typically using a backslash) to prevent them from being misinterpreted as metacharacters.",
+    "chunk_content_hash": "803fe2f65c82169df8a57f0b93051e7753883c19b528397e09e8240c51a9bdf3",
+    "metadata": {
+      "req_id": "V1.2.9",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.2",
+      "section_name": "Injection Prevention",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that all untrusted HTML input from WYSIWYG editors or similar is sanitized using a well-known and secure HTML sanitization library or framework feature.",
+    "chunk_content_hash": "2ba8e5b865c17e46a9120cfe3dadb48a760aa273ebacdca86ff5fa91173c0343",
+    "metadata": {
+      "req_id": "V1.3.1",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v1_3_10",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that format strings which might resolve in an unexpected or malicious way when used are sanitized before being processed.",
+    "chunk_content_hash": "0a60b313dff5e5b0c46fa42d058d6e0949ac499a226a15a9cc182a9bbaa11349",
+    "metadata": {
+      "req_id": "V1.3.10",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_11",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that the application sanitizes user input before passing to mail systems to protect against SMTP or IMAP injection.",
+    "chunk_content_hash": "970201fb7a98ae90068cb87206db705ec20cf78bd819acd6f336c7f83aaefa47",
+    "metadata": {
+      "req_id": "V1.3.11",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that the application avoids the use of eval() or other dynamic code execution features such as Spring Expression Language (SpEL). Where there is no alternative, any user input being included must be sanitized before being executed.",
+    "chunk_content_hash": "8464c40f1fd925859114b6a12e53a362534503831e9873dd3cd2c817a2d14cfe",
+    "metadata": {
+      "req_id": "V1.3.2",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v1_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that data being passed to a potentially dangerous context is sanitized beforehand to enforce safety measures, such as only allowing characters which are safe for this context and trimming input which is too long.",
+    "chunk_content_hash": "ee02d1a17c1f9684ed73b36eab028baeb4f03518549600faa83ca61421c60578",
+    "metadata": {
+      "req_id": "V1.3.3",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_4",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that user-supplied Scalable Vector Graphics (SVG) scriptable content is validated or sanitized to contain only tags and attributes (such as draw graphics) that are safe for the application, e.g., do not contain scripts and foreignObject.",
+    "chunk_content_hash": "82edbbdaf45d8bbe299accc6258d39830e22a6ef250943a4394a3fd7c2227ac4",
+    "metadata": {
+      "req_id": "V1.3.4",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_5",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that the application sanitizes or disables user-supplied scriptable or expression template language content, such as Markdown, CSS or XSL stylesheets, BBCode, or similar.",
+    "chunk_content_hash": "25377c028956a9e27198e8522013ab78315c63b8782070fe8e97d2b5fb0b55bd",
+    "metadata": {
+      "req_id": "V1.3.5",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_6",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that the application protects against Server-side Request Forgery (SSRF) attacks, by validating untrusted data against an allowlist of protocols, domains, paths and ports and sanitizing potentially dangerous characters before using the data to call another service.",
+    "chunk_content_hash": "9c7d2d40c9117f4017694aea8722ed2c3000b7db4ada18bcaabb09a94a8a0723",
+    "metadata": {
+      "req_id": "V1.3.6",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_7",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that the application protects against template injection attacks by not allowing templates to be built based on untrusted input. Where there is no alternative, any untrusted input being included dynamically during template creation must be sanitized or strictly validated.",
+    "chunk_content_hash": "2d1614dcdc36ad30aa544470d06f7dc3e9727c0c768c48030c2c129d0f46cef0",
+    "metadata": {
+      "req_id": "V1.3.7",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_8",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that the application appropriately sanitizes untrusted input before use in Java Naming and Directory Interface (JNDI) queries and that JNDI is configured securely to prevent JNDI injection attacks.",
+    "chunk_content_hash": "a3e1786d32c2d2d7939ebe8bc2601fbd8caf14f16839d950108a829f74af2044",
+    "metadata": {
+      "req_id": "V1.3.8",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_3_9",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Sanitization",
+    "text": "Verify that the application sanitizes content before it is sent to memcache to prevent injection attacks.",
+    "chunk_content_hash": "b484b63a8852b8a3b00eefc89fb64c920b5d1028609c963871c7240907d24aab",
+    "metadata": {
+      "req_id": "V1.3.9",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.3",
+      "section_name": "Sanitization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Memory, String, and Unmanaged Code",
+    "text": "Verify that the application uses memory-safe string, safer memory copy and pointer arithmetic to detect or prevent stack, buffer, or heap overflows.",
+    "chunk_content_hash": "f80adef7cf5ce5bb75a3debb59e0d30434a0b42472ac4455a3c93fff669b35e4",
+    "metadata": {
+      "req_id": "V1.4.1",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.4",
+      "section_name": "Memory, String, and Unmanaged Code",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Memory, String, and Unmanaged Code",
+    "text": "Verify that sign, range, and input validation techniques are used to prevent integer overflows.",
+    "chunk_content_hash": "0b74530c0ba4dbb5718a4848c138154fc05eb66cf42d8bf098ac27cff6fd6592",
+    "metadata": {
+      "req_id": "V1.4.2",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.4",
+      "section_name": "Memory, String, and Unmanaged Code",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Memory, String, and Unmanaged Code",
+    "text": "Verify that dynamically allocated memory and resources are released, and that references or pointers to freed memory are removed or set to null to prevent dangling pointers and use-after-free vulnerabilities.",
+    "chunk_content_hash": "24efa266aa596dd9c9b8999981b12a35a849b9c7cf7aff1299ed89e02194d989",
+    "metadata": {
+      "req_id": "V1.4.3",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.4",
+      "section_name": "Memory, String, and Unmanaged Code",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v1_5_1",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Safe Deserialization",
+    "text": "Verify that the application configures XML parsers to use a restrictive configuration and that unsafe features such as resolving external entities are disabled to prevent XML eXternal Entity (XXE) attacks.",
+    "chunk_content_hash": "db003aab9bc75852287c584abaf88847b93d2ff421d58d11e1c6cee8bd2b70af",
+    "metadata": {
+      "req_id": "V1.5.1",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.5",
+      "section_name": "Safe Deserialization",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v1_5_2",
+    "source": "owasp_asvs",
+    "heading_path": "Encoding and Sanitization > Safe Deserialization",
+    "text": "Verify that deserialization of untrusted data enforces safe input handling, such as using an allowlist of object types or restricting client-defined object types, to prevent deserialization attacks. Deserialization mechanisms that are explicitly defined as insecure must not be used with untrusted input.",
+    "chunk_content_hash": "da4e09284babacf35cac2f9dcf79cf25d85a63281268fbd7ff5925f795ea7305",
+    "metadata": {
+      "req_id": "V1.5.2",
+      "chapter_id": "V1",
+      "chapter_name": "Encoding and Sanitization",
+      "section_id": "V1.5",
+      "section_name": "Safe Deserialization",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v2_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Validation and Business Logic Documentation",
+    "text": "Verify that the application's documentation defines input validation rules for how to check the validity of data items against an expected structure. This could be common data formats such as credit card numbers, email addresses, telephone numbers, or it could be an internal data format.",
+    "chunk_content_hash": "0a0b87e9d83323086bd6548e151910fd5874aa739440800964ab3d3187cca58e",
+    "metadata": {
+      "req_id": "V2.1.1",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.1",
+      "section_name": "Validation and Business Logic Documentation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v2_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Validation and Business Logic Documentation",
+    "text": "Verify that the application's documentation defines how to validate the logical and contextual consistency of combined data items, such as checking that suburb and ZIP code match.",
+    "chunk_content_hash": "0444707d195769639119e86ebc9a7a1fe85982e4e344e644e98b291f469fd22d",
+    "metadata": {
+      "req_id": "V2.1.2",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.1",
+      "section_name": "Validation and Business Logic Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v2_1_3",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Validation and Business Logic Documentation",
+    "text": "Verify that expectations for business logic limits and validations are documented, including both per-user and globally across the application.",
+    "chunk_content_hash": "bdb24065c06355e67cb3a0b53ef3d8ba9bbfa5241d62d7d2b449593835765cb1",
+    "metadata": {
+      "req_id": "V2.1.3",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.1",
+      "section_name": "Validation and Business Logic Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v2_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Input Validation",
+    "text": "Verify that input is validated to enforce business or functional expectations for that input. This should either use positive validation against an allow list of values, patterns, and ranges, or be based on comparing the input to an expected structure and logical limits according to predefined rules. For L1, this can focus on input which is used to make specific business or security decisions. For L2 and up, this should apply to all input.",
+    "chunk_content_hash": "2276841ed9fd6d11b731cd1f9a2fb3ac0b205077bb6ffbf8c40ab5f6471d8cd0",
+    "metadata": {
+      "req_id": "V2.2.1",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.2",
+      "section_name": "Input Validation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v2_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Input Validation",
+    "text": "Verify that the application is designed to enforce input validation at a trusted service layer. While client-side validation improves usability and should be encouraged, it must not be relied upon as a security control.",
+    "chunk_content_hash": "cdb05a8c5b7913f2f004053d6d8560d515ae502a2d4953e28e709015f49cb29d",
+    "metadata": {
+      "req_id": "V2.2.2",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.2",
+      "section_name": "Input Validation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v2_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Input Validation",
+    "text": "Verify that the application ensures that combinations of related data items are reasonable according to the pre-defined rules.",
+    "chunk_content_hash": "d746a9768e612f9ff24272abbc0a8becd85e7e9b84ce1d4dc201d7f49968d914",
+    "metadata": {
+      "req_id": "V2.2.3",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.2",
+      "section_name": "Input Validation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v2_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Business Logic Security",
+    "text": "Verify that the application will only process business logic flows for the same user in the expected sequential step order and without skipping steps.",
+    "chunk_content_hash": "7e1938ef2a7e44be64cd0f9b0ab11604ac348d3956448e7986354f26fa7fd620",
+    "metadata": {
+      "req_id": "V2.3.1",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.3",
+      "section_name": "Business Logic Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v2_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Business Logic Security",
+    "text": "Verify that business logic limits are implemented per the application's documentation to avoid business logic flaws being exploited.",
+    "chunk_content_hash": "50deb73759dbff515737533be1492c8ec067a7177496cb870edb7722de537fbf",
+    "metadata": {
+      "req_id": "V2.3.2",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.3",
+      "section_name": "Business Logic Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v2_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Business Logic Security",
+    "text": "Verify that transactions are being used at the business logic level such that either a business logic operation succeeds in its entirety or it is rolled back to the previous correct state.",
+    "chunk_content_hash": "87130a0295423a10adbc2c81338b8d32264829b776eba0bb3c1d6c05d6986076",
+    "metadata": {
+      "req_id": "V2.3.3",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.3",
+      "section_name": "Business Logic Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v2_3_4",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Business Logic Security",
+    "text": "Verify that business logic level locking mechanisms are used to ensure that limited quantity resources (such as theater seats or delivery slots) cannot be double-booked by manipulating the application's logic.",
+    "chunk_content_hash": "db25b00c1955a09c5eca3a5193f9a4bc1ba4a6a407836c9d560f11c421cdb506",
+    "metadata": {
+      "req_id": "V2.3.4",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.3",
+      "section_name": "Business Logic Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v2_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Validation and Business Logic > Anti-automation",
+    "text": "Verify that anti-automation controls are in place to protect against excessive calls to application functions that could lead to data exfiltration, garbage-data creation, quota exhaustion, rate-limit breaches, denial-of-service, or overuse of costly resources.",
+    "chunk_content_hash": "ad6f67b25d4558fe160b8068be94389bd40a17adef720e39376b93be60ee68ad",
+    "metadata": {
+      "req_id": "V2.4.1",
+      "chapter_id": "V2",
+      "chapter_name": "Validation and Business Logic",
+      "section_id": "V2.4",
+      "section_name": "Anti-automation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Unintended Content Interpretation",
+    "text": "Verify that security controls are in place to prevent browsers from rendering content or functionality in HTTP responses in an incorrect context (e.g., when an API, a user-uploaded file or other resource is requested directly). Possible controls could include: not serving the content unless HTTP request header fields (such as Sec-Fetch-\\*) indicate it is the correct context, using the sandbox directive of the Content-Security-Policy header field or using the attachment disposition type in the Content-Disposition header field.",
+    "chunk_content_hash": "5c0cc1d80b5eb022eaeaabd447e8ad8e8bf768acbc7ab108bcdd387179884a0f",
+    "metadata": {
+      "req_id": "V3.2.1",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.2",
+      "section_name": "Unintended Content Interpretation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v3_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Unintended Content Interpretation",
+    "text": "Verify that content intended to be displayed as text, rather than rendered as HTML, is handled using safe rendering functions (such as createTextNode or textContent) to prevent unintended execution of content such as HTML or JavaScript.",
+    "chunk_content_hash": "90eb8d6f84f5afea4a215f0af0f701456d242012f3c9a9d5a6fa8299b538d655",
+    "metadata": {
+      "req_id": "V3.2.2",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.2",
+      "section_name": "Unintended Content Interpretation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v3_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Cookie Setup",
+    "text": "Verify that cookies have the 'Secure' attribute set, and if the '\\__Host-' prefix is not used for the cookie name, the '__Secure-' prefix must be used for the cookie name.",
+    "chunk_content_hash": "12b4a4ad1a5122bcbd2c2e1465e5667753307d322290e27161e50e21359e1ac7",
+    "metadata": {
+      "req_id": "V3.3.1",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.3",
+      "section_name": "Cookie Setup",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v3_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Cookie Setup",
+    "text": "Verify that each cookie's 'SameSite' attribute value is set according to the purpose of the cookie, to limit exposure to user interface redress attacks and browser-based request forgery attacks, commonly known as cross-site request forgery (CSRF).",
+    "chunk_content_hash": "051adcb67aabf4169ed1803d7f769147572d8ebbe6997232050f6949b5f9230f",
+    "metadata": {
+      "req_id": "V3.3.2",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.3",
+      "section_name": "Cookie Setup",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Cookie Setup",
+    "text": "Verify that cookies have the '__Host-' prefix for the cookie name unless they are explicitly designed to be shared with other hosts.",
+    "chunk_content_hash": "63d2ead1fca6801496a47b503f14fc17aaa996b84b59105ce1f616853ee17ed1",
+    "metadata": {
+      "req_id": "V3.3.3",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.3",
+      "section_name": "Cookie Setup",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_3_4",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Cookie Setup",
+    "text": "Verify that if the value of a cookie is not meant to be accessible to client-side scripts (such as a session token), the cookie must have the 'HttpOnly' attribute set and the same value (e. g. session token) must only be transferred to the client via the 'Set-Cookie' header field.",
+    "chunk_content_hash": "48e30576bb03490b79f328df6d09a45cb7a446ef781cca7621b1d9eae2b08cfd",
+    "metadata": {
+      "req_id": "V3.3.4",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.3",
+      "section_name": "Cookie Setup",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Security Mechanism Headers",
+    "text": "Verify that a Strict-Transport-Security header field is included on all responses to enforce an HTTP Strict Transport Security (HSTS) policy. A maximum age of at least 1 year must be defined, and for L2 and up, the policy must apply to all subdomains as well.",
+    "chunk_content_hash": "3c6807b0017a5be256984c5dbcfd28481c9b83f0a5031c7b2284caa58b5e0b4c",
+    "metadata": {
+      "req_id": "V3.4.1",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.4",
+      "section_name": "Browser Security Mechanism Headers",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v3_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Security Mechanism Headers",
+    "text": "Verify that the Cross-Origin Resource Sharing (CORS) Access-Control-Allow-Origin header field is a fixed value by the application, or if the Origin HTTP request header field value is used, it is validated against an allowlist of trusted origins. When 'Access-Control-Allow-Origin: *' needs to be used, verify that the response does not include any sensitive information.",
+    "chunk_content_hash": "1f85ed153b1f62ac22b657562cde809c5c5de19c59e85a53de2cb496e3d9dccb",
+    "metadata": {
+      "req_id": "V3.4.2",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.4",
+      "section_name": "Browser Security Mechanism Headers",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v3_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Security Mechanism Headers",
+    "text": "Verify that HTTP responses include a Content-Security-Policy response header field which defines directives to ensure the browser only loads and executes trusted content or resources, in order to limit execution of malicious JavaScript. As a minimum, a global policy must be used which includes the directives object-src 'none' and base-uri 'none' and defines either an allowlist or uses nonces or hashes. For an L3 application, a per-response policy with nonces or hashes must be defined.",
+    "chunk_content_hash": "2285874aa3cbdbd826b1b4eb5e550d3601ad28766efc96879f0b6e42de01cd6e",
+    "metadata": {
+      "req_id": "V3.4.3",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.4",
+      "section_name": "Browser Security Mechanism Headers",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_4_4",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Security Mechanism Headers",
+    "text": "Verify that all HTTP responses contain an 'X-Content-Type-Options: nosniff' header field. This instructs browsers not to use content sniffing and MIME type guessing for the given response, and to require the response's Content-Type header field value to match the destination resource. For example, the response to a request for a style is only accepted if the response's Content-Type is 'text/css'. This also enables the use of the Cross-Origin Read Blocking (CORB) functionality by the browser.",
+    "chunk_content_hash": "54fdb9df811f5eb5c8cd951cb9e6e48ee22597dc2c84ff90078e3243f4cd900e",
+    "metadata": {
+      "req_id": "V3.4.4",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.4",
+      "section_name": "Browser Security Mechanism Headers",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_4_5",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Security Mechanism Headers",
+    "text": "Verify that the application sets a referrer policy to prevent leakage of technically sensitive data to third-party services via the 'Referer' HTTP request header field. This can be done using the Referrer-Policy HTTP response header field or via HTML element attributes. Sensitive data could include path and query data in the URL, and for internal non-public applications also the hostname.",
+    "chunk_content_hash": "3c4b86f83fe4f24ebf378b0be8bca79c09a37d0afbef6fbed7d067f78d9f4090",
+    "metadata": {
+      "req_id": "V3.4.5",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.4",
+      "section_name": "Browser Security Mechanism Headers",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_4_6",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Security Mechanism Headers",
+    "text": "Verify that the web application uses the frame-ancestors directive of the Content-Security-Policy header field for every HTTP response to ensure that it cannot be embedded by default and that embedding of specific resources is allowed only when necessary. Note that the X-Frame-Options header field, although supported by browsers, is obsolete and may not be relied upon.",
+    "chunk_content_hash": "fb4f7b612530013072fee8f68917bb0b9798d53ba47fa2ab88598b809b72cf64",
+    "metadata": {
+      "req_id": "V3.4.6",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.4",
+      "section_name": "Browser Security Mechanism Headers",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_5_1",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Origin Separation",
+    "text": "Verify that, if the application does not rely on the CORS preflight mechanism to prevent disallowed cross-origin requests to use sensitive functionality, these requests are validated to ensure they originate from the application itself. This may be done by using and validating anti-forgery tokens or requiring extra HTTP header fields that are not CORS-safelisted request-header fields. This is to defend against browser-based request forgery attacks, commonly known as cross-site request forgery (CSRF).",
+    "chunk_content_hash": "43bd37553456ad03f614c02d833c0c2a6608d07dd1493bdbc32f48c7c6936964",
+    "metadata": {
+      "req_id": "V3.5.1",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.5",
+      "section_name": "Browser Origin Separation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v3_5_2",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Origin Separation",
+    "text": "Verify that, if the application relies on the CORS preflight mechanism to prevent disallowed cross-origin use of sensitive functionality, it is not possible to call the functionality with a request which does not trigger a CORS-preflight request. This may require checking the values of the 'Origin' and 'Content-Type' request header fields or using an extra header field that is not a CORS-safelisted header-field.",
+    "chunk_content_hash": "9d188557dc379be4f08ff9a8ee2ea0f6e5da5402fb5a4ae8e142d243dfe91168",
+    "metadata": {
+      "req_id": "V3.5.2",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.5",
+      "section_name": "Browser Origin Separation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v3_5_3",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Origin Separation",
+    "text": "Verify that HTTP requests to sensitive functionality use appropriate HTTP methods such as POST, PUT, PATCH, or DELETE, and not methods defined by the HTTP specification as \"safe\" such as HEAD, OPTIONS, or GET. Alternatively, strict validation of the Sec-Fetch-* request header fields can be used to ensure that the request did not originate from an inappropriate cross-origin call, a navigation request, or a resource load (such as an image source) where this is not expected.",
+    "chunk_content_hash": "d94b40e1e6af0dad81b29d7ddf094a629c2482db3b66ca290080894119ab56b5",
+    "metadata": {
+      "req_id": "V3.5.3",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.5",
+      "section_name": "Browser Origin Separation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v3_5_4",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Origin Separation",
+    "text": "Verify that separate applications are hosted on different hostnames to leverage the restrictions provided by same-origin policy, including how documents or scripts loaded by one origin can interact with resources from another origin and hostname-based restrictions on cookies.",
+    "chunk_content_hash": "5d074a0a203c789d47d513e98626ea206f8231b7c4734d775796514895694320",
+    "metadata": {
+      "req_id": "V3.5.4",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.5",
+      "section_name": "Browser Origin Separation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_5_5",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Browser Origin Separation",
+    "text": "Verify that messages received by the postMessage interface are discarded if the origin of the message is not trusted, or if the syntax of the message is invalid.",
+    "chunk_content_hash": "748b74e8ffaad286250ecf7b3eca6f5ba4382376cd570acd13dd1e00f7cc6e35",
+    "metadata": {
+      "req_id": "V3.5.5",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.5",
+      "section_name": "Browser Origin Separation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_7_1",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Other Browser Security Considerations",
+    "text": "Verify that the application only uses client-side technologies which are still supported and considered secure. Examples of technologies which do not meet this requirement include NSAPI plugins, Flash, Shockwave, ActiveX, Silverlight, NACL, or client-side Java applets.",
+    "chunk_content_hash": "a64e6a4d75e6e490310001d45d80985e465c0fdf5d26ee1bbe86844f9afff44f",
+    "metadata": {
+      "req_id": "V3.7.1",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.7",
+      "section_name": "Other Browser Security Considerations",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v3_7_2",
+    "source": "owasp_asvs",
+    "heading_path": "Web Frontend Security > Other Browser Security Considerations",
+    "text": "Verify that the application will only automatically redirect the user to a different hostname or domain (which is not controlled by the application) where the destination appears on an allowlist.",
+    "chunk_content_hash": "6e1cd628a7225f31523be139d8da4305ea5deb6cb81b7e412e76531dd3780479",
+    "metadata": {
+      "req_id": "V3.7.2",
+      "chapter_id": "V3",
+      "chapter_name": "Web Frontend Security",
+      "section_id": "V3.7",
+      "section_name": "Other Browser Security Considerations",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v4_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > Generic Web Service Security",
+    "text": "Verify that every HTTP response with a message body contains a Content-Type header field that matches the actual content of the response, including the charset parameter to specify safe character encoding (e.g., UTF-8, ISO-8859-1) according to IANA Media Types, such as \"text/\", \"/+xml\" and \"/xml\".",
+    "chunk_content_hash": "558699c6dd0f3df4dde39c45b6c9f90dd3079442beb64b5ed865f8ebda02a790",
+    "metadata": {
+      "req_id": "V4.1.1",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.1",
+      "section_name": "Generic Web Service Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v4_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > Generic Web Service Security",
+    "text": "Verify that only user-facing endpoints (intended for manual web-browser access) automatically redirect from HTTP to HTTPS, while other services or endpoints do not implement transparent redirects. This is to avoid a situation where a client is erroneously sending unencrypted HTTP requests, but since the requests are being automatically redirected to HTTPS, the leakage of sensitive data goes undiscovered.",
+    "chunk_content_hash": "a00004674f51b48b733d8a1518919dfdd80a9dfa2ddf1880a22ba81a2a614d44",
+    "metadata": {
+      "req_id": "V4.1.2",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.1",
+      "section_name": "Generic Web Service Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v4_1_3",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > Generic Web Service Security",
+    "text": "Verify that any HTTP header field used by the application and set by an intermediary layer, such as a load balancer, a web proxy, or a backend-for-frontend service, cannot be overridden by the end-user. Example headers might include X-Real-IP, X-Forwarded-*, or X-User-ID.",
+    "chunk_content_hash": "9a317e1db516ab973db1d232649ae3d04368331550dbb4c41605019b9ee7dfc3",
+    "metadata": {
+      "req_id": "V4.1.3",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.1",
+      "section_name": "Generic Web Service Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v4_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > HTTP Message Structure Validation",
+    "text": "Verify that all application components (including load balancers, firewalls, and application servers) determine boundaries of incoming HTTP messages using the appropriate mechanism for the HTTP version to prevent HTTP request smuggling. In HTTP/1.x, if a Transfer-Encoding header field is present, the Content-Length header must be ignored per RFC 2616. When using HTTP/2 or HTTP/3, if a Content-Length header field is present, the receiver must ensure that it is consistent with the length of the DATA frames.",
+    "chunk_content_hash": "f15925e85deef50a9fc410fa43396dc026846e6e4c02aef6db23a2b5be2df226",
+    "metadata": {
+      "req_id": "V4.2.1",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.2",
+      "section_name": "HTTP Message Structure Validation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v4_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > GraphQL",
+    "text": "Verify that a query allowlist, depth limiting, amount limiting, or query cost analysis is used to prevent GraphQL or data layer expression Denial of Service (DoS) as a result of expensive, nested queries.",
+    "chunk_content_hash": "6abf5ceff8892b2fafa6c1b170183ebd6e7dc8cb8d49776273386ab82a46d7d6",
+    "metadata": {
+      "req_id": "V4.3.1",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.3",
+      "section_name": "GraphQL",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v4_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > GraphQL",
+    "text": "Verify that GraphQL introspection queries are disabled in the production environment unless the GraphQL API is meant to be used by other parties.",
+    "chunk_content_hash": "4c794a17652fdcddff4ae99af06f3309926cce18ceb2bf7f2955114b9e810682",
+    "metadata": {
+      "req_id": "V4.3.2",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.3",
+      "section_name": "GraphQL",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v4_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > WebSocket",
+    "text": "Verify that WebSocket over TLS (WSS) is used for all WebSocket connections.",
+    "chunk_content_hash": "1d1920ea67560b2c06781e2d4346a292cda7bcef696ae7d710bf5ef77d4ee27b",
+    "metadata": {
+      "req_id": "V4.4.1",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.4",
+      "section_name": "WebSocket",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v4_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > WebSocket",
+    "text": "Verify that, during the initial HTTP WebSocket handshake, the Origin header field is checked against a list of origins allowed for the application.",
+    "chunk_content_hash": "ff35d44d999f230bf7f0eadbe5dc88389a6f8b74cce0faf645749894ac03eb98",
+    "metadata": {
+      "req_id": "V4.4.2",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.4",
+      "section_name": "WebSocket",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v4_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > WebSocket",
+    "text": "Verify that, if the application's standard session management cannot be used, dedicated tokens are being used for this, which comply with the relevant Session Management security requirements.",
+    "chunk_content_hash": "fdc34cd6b25d068be886bbe146da7bb9170eb60024bbe334c89f51715ee0e10c",
+    "metadata": {
+      "req_id": "V4.4.3",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.4",
+      "section_name": "WebSocket",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v4_4_4",
+    "source": "owasp_asvs",
+    "heading_path": "API and Web Service > WebSocket",
+    "text": "Verify that dedicated WebSocket session management tokens are initially obtained or validated through the previously authenticated HTTPS session when transitioning an existing HTTPS session to a WebSocket channel.",
+    "chunk_content_hash": "4db2de0d1332b30490851649e3bc47d043245184fbad72f41fb5e5b73388d735",
+    "metadata": {
+      "req_id": "V4.4.4",
+      "chapter_id": "V4",
+      "chapter_name": "API and Web Service",
+      "section_id": "V4.4",
+      "section_name": "WebSocket",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v5_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Handling Documentation",
+    "text": "Verify that the documentation defines the permitted file types, expected file extensions, and maximum size (including unpacked size) for each upload feature. Additionally, ensure that the documentation specifies how files are made safe for end-users to download and process, such as how the application behaves when a malicious file is detected.",
+    "chunk_content_hash": "5e96efb03d3d00ce7d0df97e9dd6aaba1f3acaa13d6a0cf874e3bd51a46c97a3",
+    "metadata": {
+      "req_id": "V5.1.1",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.1",
+      "section_name": "File Handling Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v5_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Upload and Content",
+    "text": "Verify that the application will only accept files of a size which it can process without causing a loss of performance or a denial of service attack.",
+    "chunk_content_hash": "27436ff515d21adba2f6a6712b6a55aad8da95c9e4d10f489a938463173d7c44",
+    "metadata": {
+      "req_id": "V5.2.1",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.2",
+      "section_name": "File Upload and Content",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v5_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Upload and Content",
+    "text": "Verify that when the application accepts a file, either on its own or within an archive such as a zip file, it checks if the file extension matches an expected file extension and validates that the contents correspond to the type represented by the extension. This includes, but is not limited to, checking the initial 'magic bytes', performing image re-writing, and using specialized libraries for file content validation. For L1, this can focus just on files which are used to make specific business or security decisions. For L2 and up, this must apply to all files being accepted.",
+    "chunk_content_hash": "7c9735d7958b27555c1cd96906c1c36048669f23f85d7512572c6c11df2f34a3",
+    "metadata": {
+      "req_id": "V5.2.2",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.2",
+      "section_name": "File Upload and Content",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v5_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Upload and Content",
+    "text": "Verify that the application checks compressed files (e.g., zip, gz, docx, odt) against maximum allowed uncompressed size and against maximum number of files before uncompressing the file.",
+    "chunk_content_hash": "7b1ad71d675290942f90d036bfed2ec2683d0cca15e82e9af6961bd956fe2def",
+    "metadata": {
+      "req_id": "V5.2.3",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.2",
+      "section_name": "File Upload and Content",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v5_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Storage",
+    "text": "Verify that files uploaded or generated by untrusted input and stored in a public folder, are not executed as server-side program code when accessed directly with an HTTP request.",
+    "chunk_content_hash": "252e8eecd7790c2a144ef68fc80af6419497ec52bda8a20694ff7ab5c67746fe",
+    "metadata": {
+      "req_id": "V5.3.1",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.3",
+      "section_name": "File Storage",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v5_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Storage",
+    "text": "Verify that when the application creates file paths for file operations, instead of user-submitted filenames, it uses internally generated or trusted data, or if user-submitted filenames or file metadata must be used, strict validation and sanitization must be applied. This is to protect against path traversal, local or remote file inclusion (LFI, RFI), and server-side request forgery (SSRF) attacks.",
+    "chunk_content_hash": "6d70e4a2e2aaa0278fb470dc01953f394e70e360aa908afa9e068fd61914c8d3",
+    "metadata": {
+      "req_id": "V5.3.2",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.3",
+      "section_name": "File Storage",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v5_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Download",
+    "text": "Verify that the application validates or ignores user-submitted filenames, including in a JSON, JSONP, or URL parameter and specifies a filename in the Content-Disposition header field in the response.",
+    "chunk_content_hash": "cd2efab34c3db555fc02180143a68f64e740f6f73d7b46b130f395553866a742",
+    "metadata": {
+      "req_id": "V5.4.1",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.4",
+      "section_name": "File Download",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v5_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Download",
+    "text": "Verify that file names served (e.g., in HTTP response header fields or email attachments) are encoded or sanitized (e.g., following RFC 6266) to preserve document structure and prevent injection attacks.",
+    "chunk_content_hash": "311e695c1fa6fca3c2a57edc0629259a5adaef54ffe1b184a6b2685cae7a660a",
+    "metadata": {
+      "req_id": "V5.4.2",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.4",
+      "section_name": "File Download",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v5_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "File Handling > File Download",
+    "text": "Verify that files obtained from untrusted sources are scanned by antivirus scanners to prevent serving of known malicious content.",
+    "chunk_content_hash": "e9d235f0215d9678d8b8af520ec8485eeca77f2ca398ec65d1fb4a74521cf0d4",
+    "metadata": {
+      "req_id": "V5.4.3",
+      "chapter_id": "V5",
+      "chapter_name": "File Handling",
+      "section_id": "V5.4",
+      "section_name": "File Download",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication Documentation",
+    "text": "Verify that application documentation defines how controls such as rate limiting, anti-automation, and adaptive response, are used to defend against attacks such as credential stuffing and password brute force. The documentation must make clear how these controls are configured and prevent malicious account lockout.",
+    "chunk_content_hash": "30e39fb88828424885c9ca501708f789a64b491aa30ac6fe48321076ba3ebccb",
+    "metadata": {
+      "req_id": "V6.1.1",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.1",
+      "section_name": "Authentication Documentation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication Documentation",
+    "text": "Verify that a list of context-specific words is documented in order to prevent their use in passwords. The list could include permutations of organization names, product names, system identifiers, project codenames, department or role names, and similar.",
+    "chunk_content_hash": "3616378e4fb27475420939cdacd49b03932abf825b21946a221bdedffdc8660c",
+    "metadata": {
+      "req_id": "V6.1.2",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.1",
+      "section_name": "Authentication Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_1_3",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication Documentation",
+    "text": "Verify that, if the application includes multiple authentication pathways, these are all documented together with the security controls and authentication strength which must be consistently enforced across them.",
+    "chunk_content_hash": "adba48c57e9e1749e00c2426ba4b921b293f0b54ce32c1df72777841a8365915",
+    "metadata": {
+      "req_id": "V6.1.3",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.1",
+      "section_name": "Authentication Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that user set passwords are at least 8 characters in length although a minimum of 15 characters is strongly recommended.",
+    "chunk_content_hash": "7e1ccfb2f166c0bcc7cafa68539414da3eec86c59df9929ef90afe00732b760d",
+    "metadata": {
+      "req_id": "V6.2.1",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_2_10",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that a user's password stays valid until it is discovered to be compromised or the user rotates it. The application must not require periodic credential rotation.",
+    "chunk_content_hash": "2e5de9d858667778792f67fb3fa6a3c92c44f3f7043a7e4c17c16c23c7d5a467",
+    "metadata": {
+      "req_id": "V6.2.10",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_2_11",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that the documented list of context specific words is used to prevent easy to guess passwords being created.",
+    "chunk_content_hash": "c3b324a70450c1bb035a21d8006ca35380a4418a67512a36e8e32a9725a679cf",
+    "metadata": {
+      "req_id": "V6.2.11",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_2_12",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that passwords submitted during account registration or password changes are checked against a set of breached passwords.",
+    "chunk_content_hash": "f8db37515807626917201331aa7a85807b411b5f570e3c346770de83ced255fd",
+    "metadata": {
+      "req_id": "V6.2.12",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that users can change their password.",
+    "chunk_content_hash": "81b22c3dbda5942c4cc0577ced851fc0c1dbf3fddfaa53fa2a44436c2ad05cc7",
+    "metadata": {
+      "req_id": "V6.2.2",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that password change functionality requires the user's current and new password.",
+    "chunk_content_hash": "f6828f6799d167880467624dacf55539ae09211dad21b1b4b4c410391031f57f",
+    "metadata": {
+      "req_id": "V6.2.3",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_2_4",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that passwords submitted during account registration or password change are checked against an available set of, at least, the top 3000 passwords which match the application's password policy, e.g. minimum length.",
+    "chunk_content_hash": "e97c37b35402ae91f6c52347999c9964464006c6e4ee6fb891da5534a05fc7eb",
+    "metadata": {
+      "req_id": "V6.2.4",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_2_5",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that passwords of any composition can be used, without rules limiting the type of characters permitted. There must be no requirement for a minimum number of upper or lower case characters, numbers, or special characters.",
+    "chunk_content_hash": "c721b9c3691d09a0df5a9337e5658c26532ab52f3681fd86e428f1a80ed45e60",
+    "metadata": {
+      "req_id": "V6.2.5",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_2_6",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that password input fields use type=password to mask the entry. Applications may allow the user to temporarily view the entire masked password, or the last typed character of the password.",
+    "chunk_content_hash": "3ace564917641ac78060c0dac0f3d623627a0071976038b58b50cbb4b2890d59",
+    "metadata": {
+      "req_id": "V6.2.6",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_2_7",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that \"paste\" functionality, browser password helpers, and external password managers are permitted.",
+    "chunk_content_hash": "396d2b317067e7403b10dcf811443b7606be21645c1233da1b3bc1257f9aac26",
+    "metadata": {
+      "req_id": "V6.2.7",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_2_8",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that the application verifies the user's password exactly as received from the user, without any modifications such as truncation or case transformation.",
+    "chunk_content_hash": "878bd3caa751a45f795e138e38f728344f0791b1b2fa796986ca62259a2eaa18",
+    "metadata": {
+      "req_id": "V6.2.8",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_2_9",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Password Security",
+    "text": "Verify that passwords of at least 64 characters are permitted.",
+    "chunk_content_hash": "393328867c82fa07cc452aff51e1f05a891479a0d79170d1527882c27fc6fffa",
+    "metadata": {
+      "req_id": "V6.2.9",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.2",
+      "section_name": "Password Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Authentication Security",
+    "text": "Verify that controls to prevent attacks such as credential stuffing and password brute force are implemented according to the application's security documentation.",
+    "chunk_content_hash": "f50bacf3816ae80d625b8eb68e4b309bf2d505323465c8a5a533776304560ce1",
+    "metadata": {
+      "req_id": "V6.3.1",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.3",
+      "section_name": "General Authentication Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Authentication Security",
+    "text": "Verify that default user accounts (e.g., \"root\", \"admin\", or \"sa\") are not present in the application or are disabled.",
+    "chunk_content_hash": "6ff34b253f16627815426f83c0153a672059600887020be150c26f691b842519",
+    "metadata": {
+      "req_id": "V6.3.2",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.3",
+      "section_name": "General Authentication Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_3_3",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Authentication Security",
+    "text": "Verify that either a multi-factor authentication mechanism or a combination of single-factor authentication mechanisms, must be used in order to access the application. For L3, one of the factors must be a hardware-based authentication mechanism which provides compromise and impersonation resistance against phishing attacks while verifying the intent to authenticate by requiring a user-initiated action (such as a button press on a FIDO hardware key or a mobile phone). Relaxing any of the considerations in this requirement requires a fully documented rationale and a comprehensive set of mitigating controls.",
+    "chunk_content_hash": "e52d0b9f5cfe7b8d5d7672b790efe4c86ce6aad42e89faf6fe1ccefd35fb04a2",
+    "metadata": {
+      "req_id": "V6.3.3",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.3",
+      "section_name": "General Authentication Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_3_4",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Authentication Security",
+    "text": "Verify that, if the application includes multiple authentication pathways, there are no undocumented pathways and that security controls and authentication strength are enforced consistently.",
+    "chunk_content_hash": "db932832dab3724f5d35d0c89876fa6dbb95ec6128ce6cca2fe1107d43db0748",
+    "metadata": {
+      "req_id": "V6.3.4",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.3",
+      "section_name": "General Authentication Security",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication Factor Lifecycle and Recovery",
+    "text": "Verify that system generated initial passwords or activation codes are securely randomly generated, follow the existing password policy, and expire after a short period of time or after they are initially used. These initial secrets must not be permitted to become the long term password.",
+    "chunk_content_hash": "f516e2eeac328f5ee8c4e0d4cff34d29e53700c9db715b52ccf78fc627e3eeb2",
+    "metadata": {
+      "req_id": "V6.4.1",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.4",
+      "section_name": "Authentication Factor Lifecycle and Recovery",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication Factor Lifecycle and Recovery",
+    "text": "Verify that password hints or knowledge-based authentication (so-called \"secret questions\") are not present.",
+    "chunk_content_hash": "9e43c5b79c61a5658750ea744c5e6d32eb1c2042bd62e3e5dbd4556bbb311c28",
+    "metadata": {
+      "req_id": "V6.4.2",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.4",
+      "section_name": "Authentication Factor Lifecycle and Recovery",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v6_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication Factor Lifecycle and Recovery",
+    "text": "Verify that a secure process for resetting a forgotten password is implemented, that does not bypass any enabled multi-factor authentication mechanisms.",
+    "chunk_content_hash": "1ecd6b9885c12717e53797d60b05c7a9f0838b41d70db8ee1b62698be659f210",
+    "metadata": {
+      "req_id": "V6.4.3",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.4",
+      "section_name": "Authentication Factor Lifecycle and Recovery",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_4_4",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication Factor Lifecycle and Recovery",
+    "text": "Verify that if a multi-factor authentication factor is lost, evidence of identity proofing is performed at the same level as during enrollment.",
+    "chunk_content_hash": "ed6605709f0423e03721fb981a02f21268787cd314f8cb1d5281aea89b5aa467",
+    "metadata": {
+      "req_id": "V6.4.4",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.4",
+      "section_name": "Authentication Factor Lifecycle and Recovery",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_5_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Multi-factor authentication requirements",
+    "text": "Verify that lookup secrets, out-of-band authentication requests or codes, and time-based one-time passwords (TOTPs) are only successfully usable once.",
+    "chunk_content_hash": "e1cfb439058f8ed958a0cf375588dabd6247849a02f9c7f8251fe651e2cbc31c",
+    "metadata": {
+      "req_id": "V6.5.1",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.5",
+      "section_name": "General Multi-factor authentication requirements",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_5_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Multi-factor authentication requirements",
+    "text": "Verify that, when being stored in the application's backend, lookup secrets with less than 112 bits of entropy (19 random alphanumeric characters or 34 random digits) are hashed with an approved password storage hashing algorithm that incorporates a 32-bit random salt. A standard hash function can be used if the secret has 112 bits of entropy or more.",
+    "chunk_content_hash": "c65d036016bad9fd6c2d282af684b1b35f538e858e2910254c1938967583abd7",
+    "metadata": {
+      "req_id": "V6.5.2",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.5",
+      "section_name": "General Multi-factor authentication requirements",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_5_3",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Multi-factor authentication requirements",
+    "text": "Verify that lookup secrets, out-of-band authentication code, and time-based one-time password seeds, are generated using a Cryptographically Secure Pseudorandom Number Generator (CSPRNG) to avoid predictable values.",
+    "chunk_content_hash": "6838c64c8445c588d9cb8df4368cb15894530356311feddb82d2f22b4b986482",
+    "metadata": {
+      "req_id": "V6.5.3",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.5",
+      "section_name": "General Multi-factor authentication requirements",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_5_4",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Multi-factor authentication requirements",
+    "text": "Verify that lookup secrets and out-of-band authentication codes have a minimum of 20 bits of entropy (typically 4 random alphanumeric characters or 6 random digits is sufficient).",
+    "chunk_content_hash": "ebe943dd83500f1f1b4f0a4c0ca9b508783355e5beae5752da980afc038d40b8",
+    "metadata": {
+      "req_id": "V6.5.4",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.5",
+      "section_name": "General Multi-factor authentication requirements",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_5_5",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > General Multi-factor authentication requirements",
+    "text": "Verify that out-of-band authentication requests, codes, or tokens, as well as time-based one-time passwords (TOTPs) have a defined lifetime. Out of band requests must have a maximum lifetime of 10 minutes and for TOTP a maximum lifetime of 30 seconds.",
+    "chunk_content_hash": "426555f613dbbc1cd15fe87fa0da4596c22bead6d4f0f6d8dc3a5b39548a50c5",
+    "metadata": {
+      "req_id": "V6.5.5",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.5",
+      "section_name": "General Multi-factor authentication requirements",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_6_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Out-of-Band authentication mechanisms",
+    "text": "Verify that authentication mechanisms using the Public Switched Telephone Network (PSTN) to deliver One-time Passwords (OTPs) via phone or SMS are offered only when the phone number has previously been validated, alternate stronger methods (such as Time based One-time Passwords) are also offered, and the service provides information on their security risks to users. For L3 applications, phone and SMS must not be available as options.",
+    "chunk_content_hash": "b85f0c47b7d5289bd47924c55e20cff7e788cdab36b821beb28b9702e98c1bc2",
+    "metadata": {
+      "req_id": "V6.6.1",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.6",
+      "section_name": "Out-of-Band authentication mechanisms",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_6_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Out-of-Band authentication mechanisms",
+    "text": "Verify that out-of-band authentication requests, codes, or tokens are bound to the original authentication request for which they were generated and are not usable for a previous or subsequent one.",
+    "chunk_content_hash": "468398b90c908679541074b49343350f884263dfca1fa8d4ac6026cb130e3831",
+    "metadata": {
+      "req_id": "V6.6.2",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.6",
+      "section_name": "Out-of-Band authentication mechanisms",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_6_3",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Out-of-Band authentication mechanisms",
+    "text": "Verify that a code based out-of-band authentication mechanism is protected against brute force attacks by using rate limiting. Consider also using a code with at least 64 bits of entropy.",
+    "chunk_content_hash": "a7065018ff371f65c21e308dfb786917a078aa7be72a637ad8e2076e639ea826",
+    "metadata": {
+      "req_id": "V6.6.3",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.6",
+      "section_name": "Out-of-Band authentication mechanisms",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_8_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication with an Identity Provider",
+    "text": "Verify that, if the application supports multiple identity providers (IdPs), the user's identity cannot be spoofed via another supported identity provider (eg. by using the same user identifier). The standard mitigation would be for the application to register and identify the user using a combination of the IdP ID (serving as a namespace) and the user's ID in the IdP.",
+    "chunk_content_hash": "692813dbed42d2251bb15cffe93a06a4a68ade99a8795ce3a066770e69900250",
+    "metadata": {
+      "req_id": "V6.8.1",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.8",
+      "section_name": "Authentication with an Identity Provider",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_8_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication with an Identity Provider",
+    "text": "Verify that the presence and integrity of digital signatures on authentication assertions (for example on JWTs or SAML assertions) are always validated, rejecting any assertions that are unsigned or have invalid signatures.",
+    "chunk_content_hash": "cb5fc2c61dd90b97dd351341abf986d35a2ec0deeda36ac5e1634865b2aad132",
+    "metadata": {
+      "req_id": "V6.8.2",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.8",
+      "section_name": "Authentication with an Identity Provider",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_8_3",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication with an Identity Provider",
+    "text": "Verify that SAML assertions are uniquely processed and used only once within the validity period to prevent replay attacks.",
+    "chunk_content_hash": "6b01559dc12e22e0b93413e48a53ff5c8a9377bf299d578b08288ff72a25281f",
+    "metadata": {
+      "req_id": "V6.8.3",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.8",
+      "section_name": "Authentication with an Identity Provider",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v6_8_4",
+    "source": "owasp_asvs",
+    "heading_path": "Authentication > Authentication with an Identity Provider",
+    "text": "Verify that, if an application uses a separate Identity Provider (IdP) and expects specific authentication strength, methods, or recentness for specific functions, the application verifies this using the information returned by the IdP. For example, if OIDC is used, this might be achieved by validating ID Token claims such as 'acr', 'amr', and 'auth_time' (if present). If the IdP does not provide this information, the application must have a documented fallback approach that assumes that the minimum strength authentication mechanism was used (for example, single-factor authentication using username and password).",
+    "chunk_content_hash": "9023885444887881a404dcf8a751f185afc24e9b283f2bd9224434cd99eaddb2",
+    "metadata": {
+      "req_id": "V6.8.4",
+      "chapter_id": "V6",
+      "chapter_name": "Authentication",
+      "section_id": "V6.8",
+      "section_name": "Authentication with an Identity Provider",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Management Documentation",
+    "text": "Verify that the user's session inactivity timeout and absolute maximum session lifetime are documented, are appropriate in combination with other controls, and that the documentation includes justification for any deviations from NIST SP 800-63B re-authentication requirements.",
+    "chunk_content_hash": "a2574f6b602e44ae5b35acb34582d55b84a62b5897e82cbb0de27c2ed9369837",
+    "metadata": {
+      "req_id": "V7.1.1",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.1",
+      "section_name": "Session Management Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Management Documentation",
+    "text": "Verify that the documentation defines how many concurrent (parallel) sessions are allowed for one account as well as the intended behaviors and actions to be taken when the maximum number of active sessions is reached.",
+    "chunk_content_hash": "94bc64d790db29c09b358f8cdaab765e2d64b6987b6c84e5dfbf3b0dcc417d66",
+    "metadata": {
+      "req_id": "V7.1.2",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.1",
+      "section_name": "Session Management Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_1_3",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Management Documentation",
+    "text": "Verify that all systems that create and manage user sessions as part of a federated identity management ecosystem (such as SSO systems) are documented along with controls to coordinate session lifetimes, termination, and any other conditions that require re-authentication.",
+    "chunk_content_hash": "93a3162a01171c50913276f6d595fbea11a0bea3803804a467909b45f9c2a08a",
+    "metadata": {
+      "req_id": "V7.1.3",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.1",
+      "section_name": "Session Management Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Fundamental Session Management Security",
+    "text": "Verify that the application performs all session token verification using a trusted, backend service.",
+    "chunk_content_hash": "7bfcdeea8f1576b153cc1a46971a3556b5531b4dc763e6554e800ab86e2db6cd",
+    "metadata": {
+      "req_id": "V7.2.1",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.2",
+      "section_name": "Fundamental Session Management Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v7_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Fundamental Session Management Security",
+    "text": "Verify that the application uses either self-contained or reference tokens that are dynamically generated for session management, i.e. not using static API secrets and keys.",
+    "chunk_content_hash": "b029bea600414f6aceff7a7df71a6b294f44118285321a7a9a8a7b0ed74c4c8d",
+    "metadata": {
+      "req_id": "V7.2.2",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.2",
+      "section_name": "Fundamental Session Management Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v7_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Fundamental Session Management Security",
+    "text": "Verify that if reference tokens are used to represent user sessions, they are unique and generated using a cryptographically secure pseudo-random number generator (CSPRNG) and possess at least 128 bits of entropy.",
+    "chunk_content_hash": "c11244d1d647f8de5b094ad9c17639fd697b79d41e5143c74ae2a805ef15ac3d",
+    "metadata": {
+      "req_id": "V7.2.3",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.2",
+      "section_name": "Fundamental Session Management Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v7_2_4",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Fundamental Session Management Security",
+    "text": "Verify that the application generates a new session token on user authentication, including re-authentication, and terminates the current session token.",
+    "chunk_content_hash": "da00f439c25ec72c12d0bbaecd3d14d5100d60cec834f043baea1c94b293ef6c",
+    "metadata": {
+      "req_id": "V7.2.4",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.2",
+      "section_name": "Fundamental Session Management Security",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v7_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Timeout",
+    "text": "Verify that there is an inactivity timeout such that re-authentication is enforced according to risk analysis and documented security decisions.",
+    "chunk_content_hash": "799af40680949a448059ffe19781440e509f7d0dbae0d633aabdcd9f8e4af6e6",
+    "metadata": {
+      "req_id": "V7.3.1",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.3",
+      "section_name": "Session Timeout",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_3_2",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Timeout",
+    "text": "Verify that there is an absolute maximum session lifetime such that re-authentication is enforced according to risk analysis and documented security decisions.",
+    "chunk_content_hash": "effc0e5597ec7c43aab2eec6dfb443f8cbe4c51f3a587dc1bb56e8af6d5b42cf",
+    "metadata": {
+      "req_id": "V7.3.2",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.3",
+      "section_name": "Session Timeout",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Termination",
+    "text": "Verify that when session termination is triggered (such as logout or expiration), the application disallows any further use of the session. For reference tokens or stateful sessions, this means invalidating the session data at the application backend. Applications using self-contained tokens will need a solution such as maintaining a list of terminated tokens, disallowing tokens produced before a per-user date and time or rotating a per-user signing key.",
+    "chunk_content_hash": "f931fd1db20ad5c91a82c590d6c8bc1aeb98f8e447ee2c8a764ddc81a217290b",
+    "metadata": {
+      "req_id": "V7.4.1",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.4",
+      "section_name": "Session Termination",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v7_4_2",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Termination",
+    "text": "Verify that the application terminates all active sessions when a user account is disabled or deleted (such as an employee leaving the company).",
+    "chunk_content_hash": "969453f3198b934b88df95a0297f474d9e771bc3e32955122da4e60f9d505f77",
+    "metadata": {
+      "req_id": "V7.4.2",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.4",
+      "section_name": "Session Termination",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v7_4_3",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Termination",
+    "text": "Verify that the application gives the option to terminate all other active sessions after a successful change or removal of any authentication factor (including password change via reset or recovery and, if present, an MFA settings update).",
+    "chunk_content_hash": "fa58e10891be0968095c053ff7424563e43963abc6cfb78255460b389d704804",
+    "metadata": {
+      "req_id": "V7.4.3",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.4",
+      "section_name": "Session Termination",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_4_4",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Termination",
+    "text": "Verify that all pages that require authentication have easy and visible access to logout functionality.",
+    "chunk_content_hash": "d1516980a6b31f981edebb99c272a80c0438af31ac92067fb08664fab4d50581",
+    "metadata": {
+      "req_id": "V7.4.4",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.4",
+      "section_name": "Session Termination",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_4_5",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Session Termination",
+    "text": "Verify that application administrators are able to terminate active sessions for an individual user or for all users.",
+    "chunk_content_hash": "85eae75dec587b715bdb290dde8fbc576d9536e707bac15a0ceac6ed9b0ad7e6",
+    "metadata": {
+      "req_id": "V7.4.5",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.4",
+      "section_name": "Session Termination",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_5_1",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Defenses Against Session Abuse",
+    "text": "Verify that the application requires full re-authentication before allowing modifications to sensitive account attributes which may affect authentication such as email address, phone number, MFA configuration, or other information used in account recovery.",
+    "chunk_content_hash": "c9f7aeae899269a1826388806a6f48e68f6936f9d362d0d0d08db9f1f6fccc0c",
+    "metadata": {
+      "req_id": "V7.5.1",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.5",
+      "section_name": "Defenses Against Session Abuse",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_5_2",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Defenses Against Session Abuse",
+    "text": "Verify that users are able to view and (having authenticated again with at least one factor) terminate any or all currently active sessions.",
+    "chunk_content_hash": "496674150e8260ef56a1cfab53050f6311c13ba5c78fc155e780d7461c0ebf5f",
+    "metadata": {
+      "req_id": "V7.5.2",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.5",
+      "section_name": "Defenses Against Session Abuse",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_6_1",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Federated Re-authentication",
+    "text": "Verify that session lifetime and termination between Relying Parties (RPs) and Identity Providers (IdPs) behave as documented, requiring re-authentication as necessary such as when the maximum time between IdP authentication events is reached.",
+    "chunk_content_hash": "7914e8c426064a94fae1eba5fc7662bf4a46afe44a3a543d4cd641208d4c24fd",
+    "metadata": {
+      "req_id": "V7.6.1",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.6",
+      "section_name": "Federated Re-authentication",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v7_6_2",
+    "source": "owasp_asvs",
+    "heading_path": "Session Management > Federated Re-authentication",
+    "text": "Verify that creation of a session requires either the user's consent or an explicit action, preventing the creation of new application sessions without user interaction.",
+    "chunk_content_hash": "fffb65f16b4399988249749b50ca6980f590044354dface03cab5de29ccb3255",
+    "metadata": {
+      "req_id": "V7.6.2",
+      "chapter_id": "V7",
+      "chapter_name": "Session Management",
+      "section_id": "V7.6",
+      "section_name": "Federated Re-authentication",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v8_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authorization > Authorization Documentation",
+    "text": "Verify that authorization documentation defines rules for restricting function-level and data-specific access based on consumer permissions and resource attributes.",
+    "chunk_content_hash": "003e748fcbacf8149318eceef32befe67da1f211f9afd8d97d3ad24d7d1a1481",
+    "metadata": {
+      "req_id": "V8.1.1",
+      "chapter_id": "V8",
+      "chapter_name": "Authorization",
+      "section_id": "V8.1",
+      "section_name": "Authorization Documentation",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v8_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authorization > Authorization Documentation",
+    "text": "Verify that authorization documentation defines rules for field-level access restrictions (both read and write) based on consumer permissions and resource attributes. Note that these rules might depend on other attribute values of the relevant data object, such as state or status.",
+    "chunk_content_hash": "be3be7e4c1922523db17670134d04739c6ddbe64670e6f63d1f990e6ddb4ca46",
+    "metadata": {
+      "req_id": "V8.1.2",
+      "chapter_id": "V8",
+      "chapter_name": "Authorization",
+      "section_id": "V8.1",
+      "section_name": "Authorization Documentation",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v8_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authorization > General Authorization Design",
+    "text": "Verify that the application ensures that function-level access is restricted to consumers with explicit permissions.",
+    "chunk_content_hash": "bc70d385fc9d02dec59b069752ccaa82cb79322d8bc0855699a0609eca020c47",
+    "metadata": {
+      "req_id": "V8.2.1",
+      "chapter_id": "V8",
+      "chapter_name": "Authorization",
+      "section_id": "V8.2",
+      "section_name": "General Authorization Design",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v8_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Authorization > General Authorization Design",
+    "text": "Verify that the application ensures that data-specific access is restricted to consumers with explicit permissions to specific data items to mitigate insecure direct object reference (IDOR) and broken object level authorization (BOLA).",
+    "chunk_content_hash": "6658978be1e44089f659d78db99fb6b29c71d4062e2dd7b4eac3b07761cc97a7",
+    "metadata": {
+      "req_id": "V8.2.2",
+      "chapter_id": "V8",
+      "chapter_name": "Authorization",
+      "section_id": "V8.2",
+      "section_name": "General Authorization Design",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v8_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Authorization > General Authorization Design",
+    "text": "Verify that the application ensures that field-level access is restricted to consumers with explicit permissions to specific fields to mitigate broken object property level authorization (BOPLA).",
+    "chunk_content_hash": "49ad72022d9bfea4f33906744104abccffe928c3c759598d856af7a598681ef8",
+    "metadata": {
+      "req_id": "V8.2.3",
+      "chapter_id": "V8",
+      "chapter_name": "Authorization",
+      "section_id": "V8.2",
+      "section_name": "General Authorization Design",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v8_3_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authorization > Operation Level Authorization",
+    "text": "Verify that the application enforces authorization rules at a trusted service layer and doesn't rely on controls that an untrusted consumer could manipulate, such as client-side JavaScript.",
+    "chunk_content_hash": "f43c2c3b4233d81b1a5b6d21087737c75b32804f8c0b2be80bcc8cb3b24da0a4",
+    "metadata": {
+      "req_id": "V8.3.1",
+      "chapter_id": "V8",
+      "chapter_name": "Authorization",
+      "section_id": "V8.3",
+      "section_name": "Operation Level Authorization",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v8_4_1",
+    "source": "owasp_asvs",
+    "heading_path": "Authorization > Other Authorization Considerations",
+    "text": "Verify that multi-tenant applications use cross-tenant controls to ensure consumer operations will never affect tenants with which they do not have permissions to interact.",
+    "chunk_content_hash": "1bcafb23e1197f7dd63df8943f151c10000f735fb1c4e9a9bc95c15a360d9564",
+    "metadata": {
+      "req_id": "V8.4.1",
+      "chapter_id": "V8",
+      "chapter_name": "Authorization",
+      "section_id": "V8.4",
+      "section_name": "Other Authorization Considerations",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v9_1_1",
+    "source": "owasp_asvs",
+    "heading_path": "Self-contained Tokens > Token source and integrity",
+    "text": "Verify that self-contained tokens are validated using their digital signature or MAC to protect against tampering before accepting the token's contents.",
+    "chunk_content_hash": "4be74958297101b0fbd24df97497bd04a92a67dbf9c0aeacf2c66ed7875da289",
+    "metadata": {
+      "req_id": "V9.1.1",
+      "chapter_id": "V9",
+      "chapter_name": "Self-contained Tokens",
+      "section_id": "V9.1",
+      "section_name": "Token source and integrity",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v9_1_2",
+    "source": "owasp_asvs",
+    "heading_path": "Self-contained Tokens > Token source and integrity",
+    "text": "Verify that only algorithms on an allowlist can be used to create and verify self-contained tokens, for a given context. The allowlist must include the permitted algorithms, ideally only either symmetric or asymmetric algorithms, and must not include the 'None' algorithm. If both symmetric and asymmetric must be supported, additional controls will be needed to prevent key confusion.",
+    "chunk_content_hash": "560e295547fbb4faa6e241a3a1d58bb28e833ee330277abac7fb4f4c5378dcbe",
+    "metadata": {
+      "req_id": "V9.1.2",
+      "chapter_id": "V9",
+      "chapter_name": "Self-contained Tokens",
+      "section_id": "V9.1",
+      "section_name": "Token source and integrity",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v9_1_3",
+    "source": "owasp_asvs",
+    "heading_path": "Self-contained Tokens > Token source and integrity",
+    "text": "Verify that key material that is used to validate self-contained tokens is from trusted pre-configured sources for the token issuer, preventing attackers from specifying untrusted sources and keys. For JWTs and other JWS structures, headers such as 'jku', 'x5u', and 'jwk' must be validated against an allowlist of trusted sources.",
+    "chunk_content_hash": "49df7619a7146501b0cde2919aee3d9317fedd0e73d0f11313650fc3ad8d9589",
+    "metadata": {
+      "req_id": "V9.1.3",
+      "chapter_id": "V9",
+      "chapter_name": "Self-contained Tokens",
+      "section_id": "V9.1",
+      "section_name": "Token source and integrity",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v9_2_1",
+    "source": "owasp_asvs",
+    "heading_path": "Self-contained Tokens > Token content",
+    "text": "Verify that, if a validity time span is present in the token data, the token and its content are accepted only if the verification time is within this validity time span. For example, for JWTs, the claims 'nbf' and 'exp' must be verified.",
+    "chunk_content_hash": "4960c5fb7103b8bd975b6c2fe58331c2fe9a6999bc40e47c8d40f951f9188c14",
+    "metadata": {
+      "req_id": "V9.2.1",
+      "chapter_id": "V9",
+      "chapter_name": "Self-contained Tokens",
+      "section_id": "V9.2",
+      "section_name": "Token content",
+      "level": 1
+    }
+  },
+  {
+    "id": "asvs_v9_2_2",
+    "source": "owasp_asvs",
+    "heading_path": "Self-contained Tokens > Token content",
+    "text": "Verify that the service receiving a token validates the token to be the correct type and is meant for the intended purpose before accepting the token's contents. For example, only access tokens can be accepted for authorization decisions and only ID Tokens can be used for proving user authentication.",
+    "chunk_content_hash": "990dee9bea856947b56ed0238e94d0d411af5f03985c964b3cc21aa80c28a6b4",
+    "metadata": {
+      "req_id": "V9.2.2",
+      "chapter_id": "V9",
+      "chapter_name": "Self-contained Tokens",
+      "section_id": "V9.2",
+      "section_name": "Token content",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v9_2_3",
+    "source": "owasp_asvs",
+    "heading_path": "Self-contained Tokens > Token content",
+    "text": "Verify that the service only accepts tokens which are intended for use with that service (audience). For JWTs, this can be achieved by validating the 'aud' claim against an allowlist defined in the service.",
+    "chunk_content_hash": "061d61af2d71939e9cceddd3b0a31db9a2f88e6c1cdcd3ebeec1797ce2ef96a6",
+    "metadata": {
+      "req_id": "V9.2.3",
+      "chapter_id": "V9",
+      "chapter_name": "Self-contained Tokens",
+      "section_id": "V9.2",
+      "section_name": "Token content",
+      "level": 2
+    }
+  },
+  {
+    "id": "asvs_v9_2_4",
+    "source": "owasp_asvs",
+    "heading_path": "Self-contained Tokens > Token content",
+    "text": "Verify that, if a token issuer uses the same private key for issuing tokens to different audiences, the issued tokens contain an audience restriction that uniquely identifies the intended audiences. This will prevent a token from being reused with an unintended audience. If the audience identifier is dynamically provisioned, the token issuer must validate these audiences in order to make sure that they do not result in audience impersonation.",
+    "chunk_content_hash": "f96ed42bc9516ecff57ab5b327f70a553f2ea8ae8c2a0572aacec68d91abc722",
+    "metadata": {
+      "req_id": "V9.2.4",
+      "chapter_id": "V9",
+      "chapter_name": "Self-contained Tokens",
+      "section_id": "V9.2",
+      "section_name": "Token content",
+      "level": 2
+    }
+  }
+]

@@ -23,19 +23,30 @@ ASVS = re.compile(r"V\d+(?:\.\d+)+$")
 
 
 def citation_to_chunk_ids(cit):
-    """Map a citation idiom (AC-2(3), Article 17, V10.1.2) to chunk id(s)."""
+    """Map a citation idiom (AC-2(3), Article 17, V10.1.2) to base chunk id."""
     cit = cit.strip()
     m = NIST_ENH.match(cit)
     if m:
-        return [f"nist_ac{m.group(1)}_{m.group(2)}"]
+        return f"nist_ac{m.group(1)}_{m.group(2)}"
     if NIST_BASE.match(cit):
-        return [f"nist_ac{NIST_BASE.match(cit).group(1)}"]
+        return f"nist_ac{NIST_BASE.match(cit).group(1)}"
     if cit.startswith("Article"):
         n = cit.split()[1]
-        return [f"gdpr_art_{n}"]
+        return f"gdpr_art_{n}"
     if ASVS.match(cit):
-        return [f"asvs_{cit.lower().replace('.', '_')}"]
-    return []
+        return f"asvs_{cit.lower().replace('.', '_')}"
+    return None
+
+
+def resolve(base_id, ids):
+    """Resolve a base chunk id to actual ids — handles post-chunking splits.
+
+    A split unit like gdpr_art_4 becomes gdpr_art_4_01..: the citation is
+    satisfied by any of its parts, so we accept a zero-padded suffix match.
+    """
+    if base_id in ids:
+        return [base_id]
+    return sorted(i for i in ids if i.startswith(base_id + "_"))
 
 
 def main():
@@ -58,9 +69,9 @@ def main():
             if not mapped:
                 errors.append(f"{label} citation {cit!r} unrecognised idiom")
                 continue
-            for mid in mapped:
-                if mid not in ids:
-                    errors.append(f"{label} citation {cit!r} -> {mid} not in corpus")
+            resolved = resolve(mapped, ids)
+            if not resolved:
+                errors.append(f"{label} citation {cit!r} -> no chunk for {mapped}")
 
     if errors:
         print(f"FALSE ({len(errors)} errors):")

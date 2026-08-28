@@ -1,0 +1,312 @@
+[
+  {
+    "id": "nist_ac2",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management",
+    "text": "Define and document the types of accounts allowed and specifically prohibited for use within the system;\nAssign account managers;\nRequire [prerequisites and criteria] for group and role membership;\nSpecify:\nAuthorized users of the system;\nGroup and role membership; and\nAccess authorizations (i.e., privileges) and [attributes (as required)] for each account;\nRequire approvals by [personnel or roles] for requests to create accounts;\nCreate, enable, modify, disable, and remove accounts in accordance with [policy, procedures, prerequisites, and criteria];\nMonitor the use of accounts;\nNotify account managers and [personnel or roles] within:\n[time period] when accounts are no longer required;\n[time period] when users are terminated or transferred; and\n[time period] when system usage or need-to-know changes for an individual;\nAuthorize access to the system based on:\nA valid access authorization;\nIntended system usage; and\n[attributes (as required)];\nReview accounts for compliance with account management requirements [frequency];\nEstablish and implement a process for changing shared or group account authenticators (if deployed) when individuals are removed from the group; and\nAlign account management processes with personnel termination and transfer processes.\n\nExamples of system account types include individual, shared, group, system, guest, anonymous, emergency, developer, temporary, and service. Identification of authorized system users and the specification of access privileges reflect the requirements in other controls in the security plan. Users requiring administrative privileges on system accounts receive additional scrutiny by organizational personnel responsible for approving such accounts and privileged access, including system owner, mission or business owner, senior agency information security officer, or senior agency official for privacy. Types of accounts that organizations may wish to prohibit due to increased risk include shared, group, emergency, anonymous, temporary, and guest accounts.\n\nWhere access involves personally identifiable information, security programs collaborate with the senior agency official for privacy to establish the specific conditions for group and role membership; specify authorized users, group and role membership, and access authorizations for each account; and create, adjust, or remove system accounts in accordance with organizational policies. Policies can include such information as account expiration dates or other factors that trigger the disabling of accounts. Organizations may choose to define access privileges or other attributes by account, type of account, or a combination of the two. Examples of other attributes required for authorizing access include restrictions on time of day, day of week, and point of origin. In defining other system account attributes, organizations consider system-related requirements and mission/business requirements. Failure to consider these factors could affect system availability.\n\nTemporary and emergency accounts are intended for short-term use. Organizations establish temporary accounts as part of normal account activation procedures when there is a need for short-term accounts without the demand for immediacy in account activation. Organizations establish emergency accounts in response to crisis situations and with the need for rapid account activation. Therefore, emergency account activation may bypass normal account authorization processes. Emergency and temporary accounts are not to be confused with infrequently used accounts, including local logon accounts used for special tasks or when network resources are unavailable (may also be known as accounts of last resort). Such accounts remain available and are not subject to automatic disabling or removal dates. Conditions for disabling or deactivating accounts include when shared/group, emergency, or temporary accounts are no longer required and when individuals are transferred or terminated. Changing shared/group authenticators when members leave the group is intended to ensure that former group members do not retain access to the shared or group account. Some types of system accounts may require specialized training.",
+    "chunk_content_hash": "509fe0b6646e32bbd0a42bc6c40e3d5117a750654e68608f262149e5c42674d8",
+    "metadata": {
+      "control_id": "AC-2",
+      "title": "Account Management",
+      "family": "Access Control"
+    }
+  },
+  {
+    "id": "nist_ac2_1",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(1): Automated System Account Management",
+    "text": "Support the management of system accounts using [automated mechanisms].\n\nAutomated system account management includes using automated mechanisms to create, enable, modify, disable, and remove accounts; notify account managers when an account is created, enabled, modified, disabled, or removed, or when users are terminated or transferred; monitor system account usage; and report atypical system account usage. Automated mechanisms can include internal system functions and email, telephonic, and text messaging notifications.",
+    "chunk_content_hash": "6af1d1c00572eac2117bf1daa9f8f371ed8f6f4fb5f4a0fa6b962044cdc53cb5",
+    "metadata": {
+      "control_id": "AC-2.1",
+      "title": "Automated System Account Management",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_11",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(11): Usage Conditions",
+    "text": "Enforce [circumstances and/or usage conditions] for [system accounts].\n\nSpecifying and enforcing usage conditions helps to enforce the principle of least privilege, increase user accountability, and enable effective account monitoring. Account monitoring includes alerts generated if the account is used in violation of organizational parameters. Organizations can describe specific conditions or circumstances under which system accounts can be used, such as by restricting usage to certain days of the week, time of day, or specific durations of time.",
+    "chunk_content_hash": "d18d390d50232cd1755ce933b090613cbb91ebbcff91b5c6255dbf98a603e09c",
+    "metadata": {
+      "control_id": "AC-2.11",
+      "title": "Usage Conditions",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_12",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(12): Account Monitoring for Atypical Usage",
+    "text": "Monitor system accounts for [atypical usage] ; and\nReport atypical usage of system accounts to [personnel or roles].\n\nAtypical usage includes accessing systems at certain times of the day or from locations that are not consistent with the normal usage patterns of individuals. Monitoring for atypical usage may reveal rogue behavior by individuals or an attack in progress. Account monitoring may inadvertently create privacy risks since data collected to identify atypical usage may reveal previously unknown information about the behavior of individuals. Organizations assess and document privacy risks from monitoring accounts for atypical usage in their privacy impact assessment and make determinations that are in alignment with their privacy program plan.",
+    "chunk_content_hash": "ab4ac360d999e88e115aa49daa56bc4cddd1a6d2b5fdd961dc00e57f1695a0cf",
+    "metadata": {
+      "control_id": "AC-2.12",
+      "title": "Account Monitoring for Atypical Usage",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_13",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(13): Disable Accounts for High-risk Individuals",
+    "text": "Disable accounts of individuals within [time period] of discovery of [significant risks].\n\nUsers who pose a significant security and/or privacy risk include individuals for whom reliable evidence indicates either the intention to use authorized access to systems to cause harm or through whom adversaries will cause harm. Such harm includes adverse impacts to organizational operations, organizational assets, individuals, other organizations, or the Nation. Close coordination among system administrators, legal staff, human resource managers, and authorizing officials is essential when disabling system accounts for high-risk individuals.",
+    "chunk_content_hash": "23ab34a5ed3a6fd951dff7719be968a73ad07b7e0521d8ec6f35c89cab546a11",
+    "metadata": {
+      "control_id": "AC-2.13",
+      "title": "Disable Accounts for High-risk Individuals",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_2",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(2): Automated Temporary and Emergency Account Management",
+    "text": "Automatically [ac-02.02_odp.01] temporary and emergency accounts after [time period].\n\nManagement of temporary and emergency accounts includes the removal or disabling of such accounts automatically after a predefined time period rather than at the convenience of the system administrator. Automatic removal or disabling of accounts provides a more consistent implementation.",
+    "chunk_content_hash": "cc86cff862129c26877beed7fa8d469bebde1f9a1f28b7323cbfee7c50acb6e0",
+    "metadata": {
+      "control_id": "AC-2.2",
+      "title": "Automated Temporary and Emergency Account Management",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_3",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(3): Disable Accounts",
+    "text": "Disable accounts within [time period] when the accounts:\nHave expired;\nAre no longer associated with a user or individual;\nAre in violation of organizational policy; or\nHave been inactive for [time period].\n\nDisabling expired, inactive, or otherwise anomalous accounts supports the concepts of least privilege and least functionality which reduce the attack surface of the system.",
+    "chunk_content_hash": "0a73f73fb69cb4a287d258fbc39572775a596dbfb51a49955481d6d50d617c79",
+    "metadata": {
+      "control_id": "AC-2.3",
+      "title": "Disable Accounts",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_4",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(4): Automated Audit Actions",
+    "text": "Automatically audit account creation, modification, enabling, disabling, and removal actions.\n\nAccount management audit records are defined in accordance with [AU-02](#au-2) and reviewed, analyzed, and reported in accordance with [AU-06](#au-6).",
+    "chunk_content_hash": "4fbe24508a16e92ce24fcf4937ab1f40633ff6dee4ad290d9516efffb3fc411b",
+    "metadata": {
+      "control_id": "AC-2.4",
+      "title": "Automated Audit Actions",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_5",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(5): Inactivity Logout",
+    "text": "Require that users log out when [time period of expected inactivity or description of when to log out].\n\nInactivity logout is behavior- or policy-based and requires users to take physical action to log out when they are expecting inactivity longer than the defined period. Automatic enforcement of inactivity logout is addressed by [AC-11](#ac-11).",
+    "chunk_content_hash": "7fe0f638e8172231c2e6bbb5fe6411197ca111b1c1b49877e34b56f883dc0df4",
+    "metadata": {
+      "control_id": "AC-2.5",
+      "title": "Inactivity Logout",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_6",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(6): Dynamic Privilege Management",
+    "text": "Implement [dynamic privilege management capabilities].\n\nIn contrast to access control approaches that employ static accounts and predefined user privileges, dynamic access control approaches rely on runtime access control decisions facilitated by dynamic privilege management, such as attribute-based access control. While user identities remain relatively constant over time, user privileges typically change more frequently based on ongoing mission or business requirements and the operational needs of organizations. An example of dynamic privilege management is the immediate revocation of privileges from users as opposed to requiring that users terminate and restart their sessions to reflect changes in privileges. Dynamic privilege management can also include mechanisms that change user privileges based on dynamic rules as opposed to editing specific user profiles. Examples include automatic adjustments of user privileges if they are operating out of their normal work times, if their job function or assignment changes, or if systems are under duress or in emergency situations. Dynamic privilege management includes the effects of privilege changes, for example, when there are changes to encryption keys used for communications.",
+    "chunk_content_hash": "d2520ab1e69e82611433fad4c07deae82ffe26b31562a8d6deca329081d479dd",
+    "metadata": {
+      "control_id": "AC-2.6",
+      "title": "Dynamic Privilege Management",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_7",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(7): Privileged User Accounts",
+    "text": "Establish and administer privileged user accounts in accordance with [ac-02.07_odp];\nMonitor privileged role or attribute assignments;\nMonitor changes to roles or attributes; and\nRevoke access when privileged role or attribute assignments are no longer appropriate.\n\nPrivileged roles are organization-defined roles assigned to individuals that allow those individuals to perform certain security-relevant functions that ordinary users are not authorized to perform. Privileged roles include key management, account management, database administration, system and network administration, and web administration. A role-based access scheme organizes permitted system access and privileges into roles. In contrast, an attribute-based access scheme specifies allowed system access and privileges based on attributes.",
+    "chunk_content_hash": "429a83ca15cdd00f8a36cc0e6e84acd8865be38459043418d03d1e399ba718d7",
+    "metadata": {
+      "control_id": "AC-2.7",
+      "title": "Privileged User Accounts",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_8",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(8): Dynamic Account Management",
+    "text": "Create, activate, manage, and deactivate [system accounts] dynamically.\n\nApproaches for dynamically creating, activating, managing, and deactivating system accounts rely on automatically provisioning the accounts at runtime for entities that were previously unknown. Organizations plan for the dynamic management, creation, activation, and deactivation of system accounts by establishing trust relationships, business rules, and mechanisms with appropriate authorities to validate related authorizations and privileges.",
+    "chunk_content_hash": "0e551a74d0ecb05c5cf2e2d4f14f3d4c1b26a713c8658703ed43e36472c04a15",
+    "metadata": {
+      "control_id": "AC-2.8",
+      "title": "Dynamic Account Management",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac2_9",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-2: Account Management > AC-2(9): Restrictions on Use of Shared and Group Accounts",
+    "text": "Only permit the use of shared and group accounts that meet [conditions].\n\nBefore permitting the use of shared or group accounts, organizations consider the increased risk due to the lack of accountability with such accounts.",
+    "chunk_content_hash": "4b683ba5c46a58d2f13b07d9263fba834033389d3c91c16e3a0739a0683b3bea",
+    "metadata": {
+      "control_id": "AC-2.9",
+      "title": "Restrictions on Use of Shared and Group Accounts",
+      "family": "Access Control",
+      "parent_control_id": "AC-2"
+    }
+  },
+  {
+    "id": "nist_ac6",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege",
+    "text": "Employ the principle of least privilege, allowing only authorized accesses for users (or processes acting on behalf of users) that are necessary to accomplish assigned organizational tasks.\n\nOrganizations employ least privilege for specific duties and systems. The principle of least privilege is also applied to system processes, ensuring that the processes have access to systems and operate at privilege levels no higher than necessary to accomplish organizational missions or business functions. Organizations consider the creation of additional processes, roles, and accounts as necessary to achieve least privilege. Organizations apply least privilege to the development, implementation, and operation of organizational systems.",
+    "chunk_content_hash": "036be30fcc4d90f58d90a181b71af7812d0a04d1561114fbb881ebfbd06ffc00",
+    "metadata": {
+      "control_id": "AC-6",
+      "title": "Least Privilege",
+      "family": "Access Control"
+    }
+  },
+  {
+    "id": "nist_ac6_1",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(1): Authorize Access to Security Functions",
+    "text": "Authorize access for [individuals and roles] to:\n[organization-defined security functions (deployed in hardware, software, and firmware)] ; and\n[security-relevant information].\n\nSecurity functions include establishing system accounts, configuring access authorizations (i.e., permissions, privileges), configuring settings for events to be audited, and establishing intrusion detection parameters. Security-relevant information includes filtering rules for routers or firewalls, configuration parameters for security services, cryptographic key management information, and access control lists. Authorized personnel include security administrators, system administrators, system security officers, system programmers, and other privileged users.",
+    "chunk_content_hash": "8924363d6a544156c95d4dcfe5148469fc7b72607625d3ae40b56dca4439d8ce",
+    "metadata": {
+      "control_id": "AC-6.1",
+      "title": "Authorize Access to Security Functions",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_10",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(10): Prohibit Non-privileged Users from Executing Privileged Functions",
+    "text": "Prevent non-privileged users from executing privileged functions.\n\nPrivileged functions include disabling, circumventing, or altering implemented security or privacy controls, establishing system accounts, performing system integrity checks, and administering cryptographic key management activities. Non-privileged users are individuals who do not possess appropriate authorizations. Privileged functions that require protection from non-privileged users include circumventing intrusion detection and prevention mechanisms or malicious code protection mechanisms. Preventing non-privileged users from executing privileged functions is enforced by [AC-3](#ac-3).",
+    "chunk_content_hash": "772682c7e76f65c92823b2734bd37d286cdc180d38b816bbbc049c33d8d08184",
+    "metadata": {
+      "control_id": "AC-6.10",
+      "title": "Prohibit Non-privileged Users from Executing Privileged Functions",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_2",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(2): Non-privileged Access for Nonsecurity Functions",
+    "text": "Require that users of system accounts (or roles) with access to [security functions or security-relevant information] use non-privileged accounts or roles, when accessing nonsecurity functions.\n\nRequiring the use of non-privileged accounts when accessing nonsecurity functions limits exposure when operating from within privileged accounts or roles. The inclusion of roles addresses situations where organizations implement access control policies, such as role-based access control, and where a change of role provides the same degree of assurance in the change of access authorizations for the user and the processes acting on behalf of the user as would be provided by a change between a privileged and non-privileged account.",
+    "chunk_content_hash": "fc662e2ba02fcb17b0e4e1b02c0549936971ff5ff5855971e966b51af69184a7",
+    "metadata": {
+      "control_id": "AC-6.2",
+      "title": "Non-privileged Access for Nonsecurity Functions",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_3",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(3): Network Access to Privileged Commands",
+    "text": "Authorize network access to [privileged commands] only for [compelling operational needs] and document the rationale for such access in the security plan for the system.\n\nNetwork access is any access across a network connection in lieu of local access (i.e., user being physically present at the device).",
+    "chunk_content_hash": "a6e9e1fb203b87039d78c893021bdda266e184d570764f0a158b38eef87f27ce",
+    "metadata": {
+      "control_id": "AC-6.3",
+      "title": "Network Access to Privileged Commands",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_4",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(4): Separate Processing Domains",
+    "text": "Provide separate processing domains to enable finer-grained allocation of user privileges.\n\nProviding separate processing domains for finer-grained allocation of user privileges includes using virtualization techniques to permit additional user privileges within a virtual machine while restricting privileges to other virtual machines or to the underlying physical machine, implementing separate physical domains, and employing hardware or software domain separation mechanisms.",
+    "chunk_content_hash": "aee14e95da645d1fc810e0572c2681be6691c9de7bb32f9f218969708f326823",
+    "metadata": {
+      "control_id": "AC-6.4",
+      "title": "Separate Processing Domains",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_5",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(5): Privileged Accounts",
+    "text": "Restrict privileged accounts on the system to [personnel or roles].\n\nPrivileged accounts, including super user accounts, are typically described as system administrator for various types of commercial off-the-shelf operating systems. Restricting privileged accounts to specific personnel or roles prevents day-to-day users from accessing privileged information or privileged functions. Organizations may differentiate in the application of restricting privileged accounts between allowed privileges for local accounts and for domain accounts provided that they retain the ability to control system configurations for key parameters and as otherwise necessary to sufficiently mitigate risk.",
+    "chunk_content_hash": "8fd5b5f7b0c396b4ff3bef99835eb068b00d2199b31b5ff7e0c1fc4264476f4c",
+    "metadata": {
+      "control_id": "AC-6.5",
+      "title": "Privileged Accounts",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_6",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(6): Privileged Access by Non-organizational Users",
+    "text": "Prohibit privileged access to the system by non-organizational users.\n\nAn organizational user is an employee or an individual considered by the organization to have the equivalent status of an employee. Organizational users include contractors, guest researchers, or individuals detailed from other organizations. A non-organizational user is a user who is not an organizational user. Policies and procedures for granting equivalent status of employees to individuals include a need-to-know, citizenship, and the relationship to the organization.",
+    "chunk_content_hash": "cbd9c8b37e0a4934b094b311baf178a8330e1496ca416b8e418eb0351a569dfd",
+    "metadata": {
+      "control_id": "AC-6.6",
+      "title": "Privileged Access by Non-organizational Users",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_7",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(7): Review of User Privileges",
+    "text": "Review [frequency] the privileges assigned to [roles and classes] to validate the need for such privileges; and\nReassign or remove privileges, if necessary, to correctly reflect organizational mission and business needs.\n\nThe need for certain assigned user privileges may change over time to reflect changes in organizational mission and business functions, environments of operation, technologies, or threats. A periodic review of assigned user privileges is necessary to determine if the rationale for assigning such privileges remains valid. If the need cannot be revalidated, organizations take appropriate corrective actions.",
+    "chunk_content_hash": "9e8f695be0fa40e8acc6c53671d4fb17ac085dc9c4419ffd55e6dd87e582f2d1",
+    "metadata": {
+      "control_id": "AC-6.7",
+      "title": "Review of User Privileges",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_8",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(8): Privilege Levels for Code Execution",
+    "text": "Prevent the following software from executing at higher privilege levels than users executing the software: [software].\n\nIn certain situations, software applications or programs need to execute with elevated privileges to perform required functions. However, depending on the software functionality and configuration, if the privileges required for execution are at a higher level than the privileges assigned to organizational users invoking such applications or programs, those users may indirectly be provided with greater privileges than assigned.",
+    "chunk_content_hash": "b2418be087572d5dc3a0956bb50ea73dcccb23896a3133d76cc584fdbc2c867d",
+    "metadata": {
+      "control_id": "AC-6.8",
+      "title": "Privilege Levels for Code Execution",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  },
+  {
+    "id": "nist_ac6_9",
+    "source": "nist_sp800_53",
+    "heading_path": "Access Control > AC-6: Least Privilege > AC-6(9): Log Use of Privileged Functions",
+    "text": "Log the execution of privileged functions.\n\nThe misuse of privileged functions, either intentionally or unintentionally by authorized users or by unauthorized external entities that have compromised system accounts, is a serious and ongoing concern and can have significant adverse impacts on organizations. Logging and analyzing the use of privileged functions is one way to detect such misuse and, in doing so, help mitigate the risk from insider threats and the advanced persistent threat.",
+    "chunk_content_hash": "a7b2e8f404014cfd213583aacfe8a0b9e3dfc8096ffdc504adcd47ecaa69b2cb",
+    "metadata": {
+      "control_id": "AC-6.9",
+      "title": "Log Use of Privileged Functions",
+      "family": "Access Control",
+      "parent_control_id": "AC-6"
+    }
+  }
+]

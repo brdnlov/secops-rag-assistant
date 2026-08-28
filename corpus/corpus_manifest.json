@@ -1,10 +1,10 @@
 {
-  "corpus_version": "0.1.0",
-  "corpus_content_hash": "c7d85b8b489194319d1331d168fc56a54ce076be7d8849ba43a4df45d5ed43f2",
-  "generated_by": "corpus/scripts/build_corpus.py",
-  "num_chunks": 376,
+  "corpus_version": "0.2.0",
+  "corpus_content_hash": "707d11040f90282baac482d9170c39edac6804eca2991e9884ae4b8f640129f5",
+  "generated_by": "chunking/chunker.py",
+  "num_chunks": 382,
   "chunks_by_source": {
-    "gdpr": 99,
+    "gdpr": 105,
     "nist_sp800_53": 24,
     "owasp_asvs": 253
   },
@@ -13,6 +13,24 @@
     "nist_sp800_53_chunks.json": "38220ca3a4459caececbc56249c9b78911ebece3fc89e5c52e6e28c9c8340eda",
     "owasp_asvs_chunks.json": "e4569d3343fda50d712755578c720d6670e8e3a2d2d72e91fecbafa7d842491e"
   },
-  "chunking_config_hash": null,
+  "chunked_file_hashes": {
+    "gdpr_chunks.json": "79766bcc7dd5802225d389bedb1025185ee76fca80675122a27880e5677f41fc",
+    "nist_sp800_53_chunks.json": "0578f39530cad7125942901fc98405e8705b3bf794e5e1c8a91b3038ff60cc5d",
+    "owasp_asvs_chunks.json": "c9f478e03c2a3f02e1dece4f414543595b5dcaef5baebb49c8984e8b17e8e84a"
+  },
+  "chunking_config": {
+    "chunk_size": 512,
+    "chunk_overlap": 0,
+    "max_chunk_size": 1024,
+    "min_chunk_size": 128,
+    "separators": [
+      "\n\n",
+      "\n",
+      ". "
+    ],
+    "tokenizer": "cl100k_base",
+    "id_suffix_format": "{:02d}"
+  },
+  "chunking_config_hash": "75a0b45a41def8d8d64dcda16bbc12fb1e783747d6d5b094dfef766b046d1502",
   "embedding_model_version": null
 }

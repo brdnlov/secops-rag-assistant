@@ -58,7 +58,7 @@ layer that actually measures whether the answers are grounded.
 
 ```
 corpus/       raw + processed source documents, merged chunks, manifest
-chunking/     heading-aware chunker (planned)
+chunking/     heading-aware chunker (done — recursive 512/0-overlap splitter, config-hashed)
 embeddings/   Voyage AI voyage-4, content-hash checkpointing (planned)
 retrieval/    Qdrant hybrid search + RRF + cross-encoder rerank (planned)
 eval/         golden dataset + hand-rolled harness (dataset done, harness planned)
@@ -71,7 +71,7 @@ logs/         structured JSON traces per query (planned)
 | Phase | Status |
 |---|---|
 | 1. Corpus acquisition & cleaning | **Done** — 376 chunks validated |
-| 2. Chunking | Next |
+| 2. Chunking | **Done** — 382 chunks, config-hashed (512 tok, 0 overlap) |
 | 3. Embedding + Qdrant | Planned |
 | 4. Hybrid retrieval + reranking | Planned |
 | 5. Generation with citations + minimal eval | Planned |
@@ -87,7 +87,7 @@ chunk_content_hash, metadata}`:
 |---|---|---|
 | NIST SP 800-53 Rev 5 | AC-2 (Account Management), AC-6 (Least Privilege), incl. enhancements | 24 |
 | OWASP ASVS v5.0.0 | Levels 1-2 (345-source footprint, kept 253 requirements) | 253 |
-| GDPR (Reg. 2016/679) | All 99 articles (recitals excluded) | 99 |
+| GDPR (Reg. 2016/679) | All 99 articles (recitals excluded) | 105 (99 whole + Art. 4/70/83 split) |
 
 The NIST subset (AC-2/AC-6) is deliberate: it connects directly to account
 management and least-privilege failures found in real assessments.
@@ -107,8 +107,12 @@ re-embedding.
 
 - **Chunk size 512 tokens, zero overlap** — supported by 2025-2026 benchmarks;
   zero-overlap re-test with 50 tokens if evaluation shows boundary failures.
-- **Source-aware splitting** — NIST controls split at numbered-requirement
-  boundaries; GDPR articles stay whole where under the hard 1024-token ceiling.
+- **Source-aware splitting** — natural units (NIST control/enhancement, ASVS
+  requirement, GDPR article) stay whole under the 1024-token hard ceiling; only
+  the 3 oversized GDPR articles (Art. 4/70/83) split, via a recursive separator
+  hierarchy (`\n\n` → `\n` → `. `) targeting 512 tokens with sub-128 fragments
+  merged into the previous chunk. Config is SHA-256 hashed in the manifest for
+  idempotent re-chunking.
 - **RRF fusion (k=60)** over BM25 + dense, then a local cross-encoder
   (`ms-marco-MiniLM-L-6-v2`) reranks to top-5.
 
@@ -121,12 +125,11 @@ metric is reported until the eval layer actually produces it.
 
 ## Next steps
 
-1. Phase 2: heading-aware chunking + manifest config hash
-2. Phase 3: Voyage AI voyage-4 embedding + self-hosted Qdrant
-3. Phase 4: hybrid retrieval + reranking
-4. Phase 5: generation with citations + the 10-item eval wired in
-5. Phase 6: full eval (50-100 golden items, faithful ≥ 0.8, context precision ≥ 0.7)
-6. Phase 7: deploy (FastAPI + Docker) and finalized README
+1. Phase 3: Voyage AI voyage-4 embedding + self-hosted Qdrant
+2. Phase 4: hybrid retrieval + reranking
+3. Phase 5: generation with citations + the 10-item eval wired in
+4. Phase 6: full eval (50-100 golden items, faithful ≥ 0.8, context precision ≥ 0.7)
+5. Phase 7: deploy (FastAPI + Docker) and finalized README
 
 ## Roadmap context
 
