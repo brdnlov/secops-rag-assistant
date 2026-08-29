@@ -18,3 +18,7 @@ Thumbs.db
 # Local agent/session working files (not part of the project)
 AGENTS.md
 session-summaries/
+
+# Runtime run logs (indexer/embedder job artifacts, regenerated on each run)
+embeddings/*.log
+embeddings/*.err

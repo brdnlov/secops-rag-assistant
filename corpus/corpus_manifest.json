@@ -32,5 +32,10 @@
     "id_suffix_format": "{:02d}"
   },
   "chunking_config_hash": "75a0b45a41def8d8d64dcda16bbc12fb1e783747d6d5b094dfef766b046d1502",
-  "embedding_model_version": null
+  "embedding_model_version": "voyage-4-2026-08",
+  "embedding_progress": {
+    "model": "voyage-4",
+    "total_tokens": 38006,
+    "collection": "secops_corpus"
+  }
 }

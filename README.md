@@ -59,8 +59,8 @@ layer that actually measures whether the answers are grounded.
 ```
 corpus/       raw + processed source documents, merged chunks, manifest
 chunking/     heading-aware chunker (done — recursive 512/0-overlap splitter, config-hashed)
-embeddings/   Voyage AI voyage-4, content-hash checkpointing (planned)
-retrieval/    Qdrant hybrid search + RRF + cross-encoder rerank (planned)
+embeddings/   Voyage AI voyage-4 embedder (validated) + Qdrant indexer (scaffolded)
+docker/       docker-compose for self-hosted Qdrant (done)
 eval/         golden dataset + hand-rolled harness (dataset done, harness planned)
 api/          FastAPI RAG endpoint (planned)
 logs/         structured JSON traces per query (planned)
@@ -72,7 +72,7 @@ logs/         structured JSON traces per query (planned)
 |---|---|
 | 1. Corpus acquisition & cleaning | **Done** — 376 chunks validated |
 | 2. Chunking | **Done** — 382 chunks, config-hashed (512 tok, 0 overlap) |
-| 3. Embedding + Qdrant | Planned |
+| 3. Embedding + Qdrant | **In progress** — embedder validated (voyage-4, $0.06/1M, $5 guard); Qdrant compose + indexer scaffolded; index not yet populated |
 | 4. Hybrid retrieval + reranking | Planned |
 | 5. Generation with citations + minimal eval | Planned |
 | 6. Full eval layer | Planned |
