@@ -2,6 +2,14 @@ tiktoken>=0.14.0
 python-dotenv>=1.0.0
 voyageai>=0.5.0
 qdrant-client>=1.19.0
+sentence-transformers>=3.0.0
+
+# generation + eval
+anthropic>=0.40.0
+
+# api (Phase 5/7)
+fastapi>=0.110
+uvicorn[standard]>=0.29
 
 # dev / testing
 pytest>=8.0.0

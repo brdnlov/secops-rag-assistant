@@ -59,11 +59,13 @@ layer that actually measures whether the answers are grounded.
 ```
 corpus/       raw + processed source documents, merged chunks, manifest
 chunking/     heading-aware chunker (done — recursive 512/0-overlap splitter, config-hashed)
-embeddings/   Voyage AI voyage-4 embedder (validated) + Qdrant indexer (scaffolded)
+embeddings/   Voyage AI voyage-4 embedder + Qdrant indexer (done — 382/382 indexed, ~$0.003)
+retrieval/    hybrid retrieval + cross-encoder reranker (done — RRF k=60, top-20 → top-5)
+generation/   grounded answer + citations via Claude Haiku (done — pipeline ties retrieval→generation)
+api/          FastAPI RAG endpoint (done — GET /health, POST /query)
+eval/         golden dataset + hand-rolled harness (dataset done, harness done — see Evaluation)
 docker/       docker-compose for self-hosted Qdrant (done)
-eval/         golden dataset + hand-rolled harness (dataset done, harness planned)
-api/          FastAPI RAG endpoint (planned)
-logs/         structured JSON traces per query (planned)
+logs/         structured JSON traces per query (done — traces.jsonl)
 ```
 
 ## Current status (phases, in order)
@@ -72,11 +74,11 @@ logs/         structured JSON traces per query (planned)
 |---|---|
 | 1. Corpus acquisition & cleaning | **Done** — 376 chunks validated |
 | 2. Chunking | **Done** — 382 chunks, config-hashed (512 tok, 0 overlap) |
-| 3. Embedding + Qdrant | **In progress** — embedder validated (voyage-4, $0.06/1M, $5 guard); Qdrant compose + indexer scaffolded; index not yet populated |
-| 4. Hybrid retrieval + reranking | Planned |
-| 5. Generation with citations + minimal eval | Planned |
-| 6. Full eval layer | Planned |
-| 7. Deploy + README finalized | Planned |
+| 3. Embedding + Qdrant | **Done** — voyage-4, $0.06/1M, $5 spend guard; index fully populated (382/382 points, ~$0.003 real spend) |
+| 4. Hybrid retrieval + reranking | **Done** — RRF k=60 (top-20), cross-encoder rerank → top-5; structured JSON traces per query |
+| 5. Generation with citations + minimal eval | **Done** — grounded generation (Claude Haiku) + 10-item eval harness wired in (see Evaluation) |
+| 6. Full eval layer | **Partial** — deterministic proxies pass; retrieval recall + citation specificity are the open gaps (see Evaluation) |
+| 7. Deploy + README finalized | **Partial** — FastAPI endpoint built; not yet containerized/public |
 
 ## Corpus
 
@@ -118,18 +120,56 @@ re-embedding.
 
 ## Evaluation
 
-A 10-item golden dataset is drafted and validated (`eval/golden_dataset.json`, 3
-exact-retrieval / 3 synthesis / 2 cross-document / 2 negative, every citation
-checked against the corpus). Harness and published numbers are **pending** — no
-metric is reported until the eval layer actually produces it.
+A 10-item golden dataset is validated (`eval/golden_dataset.json`: 3 exact-retrieval /
+3 synthesis / 2 cross-document / 2 negative, every citation checked against the
+corpus). The hand-rolled harness (`eval/run_eval.py`) runs each item through the
+full pipeline (retrieval → grounded generation) and writes results to
+`eval/results/{timestamp}.json`.
+
+Published numbers (Phase 5 minimal pass, 10 items, deterministic proxies —
+no RAGAS yet):
+
+| Metric | Value | Target | Status |
+|---|---|---|---|
+| Grounded generation (faithfulness proxy) | 1.0 | ≥ 0.8 | **PASS** — every generated citation is backed by a retrieved chunk |
+| Negative "not covered" behavior | 2/2 | all | **PASS** |
+| Retrieval precision@3 | 0.625 | high | **below** — expected chunk missing from top-3 on ~4 items |
+| Citation accuracy | 0.229 | ≥ 0.9 | **below** — see gap analysis |
+
+**Gap analysis (honest):** citation accuracy is low for two distinct reasons —
+(1) **retrieval recall**: for cross-document / specific queries (e.g. GDPR
+Art. 32, ASVS V10.1.x, NIST AC-2(3)) the expected chunk isn't retrieved at all,
+so the generator can't cite it; (2) **citation specificity**: even when the
+right sub-control chunk is retrieved, Claude tends to cite the parent control
+(`AC-2`, `AC-6`) rather than the specific enhancement (`AC-2(3)`, `AC-6(10)`)
+the golden dataset expects. Both are retrieval/grounding-tuning work for Phase 6 —
+generation itself is grounded at 1.0.
+
+Phase 6 will scale to 50-100 items, add RAGAS side-by-side comparison
+(faithfulness ≥ 0.8, context_precision ≥ 0.7), and address the retrieval-recall
+and citation-specificity gaps above.
+
+## API
+
+FastAPI service (`api/app.py`); run with `uvicorn api.app:app` (needs Qdrant up
+and `VOYAGE_API_KEY` + `ANTHROPIC_API_KEY` in `.env`):
+
+```
+GET  /health   -> service + Qdrant health
+POST /query    -> {"query": "...", "top_n": 5, "rerank": true}
+               -> {answer, citations, retrieved, generation, collection}
+```
+
+Every query writes a structured JSON trace to `logs/traces.jsonl` (`QueryTracer`)
+covering retrieval scores, reranked chunk ids, and citations — no external
+observability platform.
 
 ## Next steps
 
-1. Phase 3: Voyage AI voyage-4 embedding + self-hosted Qdrant
-2. Phase 4: hybrid retrieval + reranking
-3. Phase 5: generation with citations + the 10-item eval wired in
-4. Phase 6: full eval (50-100 golden items, faithful ≥ 0.8, context precision ≥ 0.7)
-5. Phase 7: deploy (FastAPI + Docker) and finalized README
+1. Phase 6: full eval (50-100 golden items) + RAGAS side-by-side; fix the two
+   gaps the Phase 5 eval surfaced — retrieval recall (missing V10.1.x / Art. 32 /
+   AC-2(3)) and citation specificity (parent vs sub-control)
+2. Phase 7: deploy (FastAPI + Docker, public URL) and finalized README
 
 ## Roadmap context
 

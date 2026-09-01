@@ -22,3 +22,7 @@ session-summaries/
 # Runtime run logs (indexer/embedder job artifacts, regenerated on each run)
 embeddings/*.log
 embeddings/*.err
+
+# Runtime query traces (regenerated on each query; keep the dir, ignore the data)
+logs/traces.jsonl
+logs/_layer3_traces.jsonl
