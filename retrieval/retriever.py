@@ -7,7 +7,8 @@ The production query path (the Phase 4 "Query path" from AGENTS.md):
     3. Qdrant hybrid query: one dense prefetch + one sparse prefetch, fused
        with RRF (rank constant 60 — Elasticsearch default, "requires no
        tuning" per the Cormack paper)
-    4. Cross-encoder rerank the fused top-k -> return top-5
+    4. Cross-encoder rerank the fused top-RERANK_WINDOW -> return top-10
+       (Phase 6: surfaced from top-5 — see TOP_N below for the measured why)
 
 Built on the primitives already prototyped in tests/test_layer2_retrieval.py
 (hybrid_top3), promoted into a first-class module for Phase 5 (generation) and
@@ -43,10 +44,34 @@ RRF_K = 60
 
 # How many candidates the hybrid stage returns before reranking. Rerank has
 # room to reorder meaningfully without being wasteful (10-40 is typical).
-PREFETCH_LIMIT = 20
+# Bumped 20 -> 50 in Phase 6: the diagnosis (eval/diagnose_retrieval.py)
+# showed correct chunks sitting just outside the fused top-20 that the
+# previous reranker would then have missed entirely.
+PREFETCH_LIMIT = 50
 
 # Number of chunks returned to the caller after reranking.
-TOP_N = 5
+# Phase 6 tuning (measured, eval/diagnose_retrieval.py on the 50-item golden
+# set): for cross-document/synthesis queries the cross-encoder ranks one leg
+# of a two-source question at 5-10 while the other leg wins; freezing the
+# generator to top-5 starved synthesis answers of their second citation.
+# Surfacing the full rerank window (top-10) fixes 10 of the 13 Phase-6
+# citation misses with faithfulness/g rounding unchanged. precision@3 is
+# still measured on the retrieval order, independent of this number.
+# Bumped 10 -> 12 in the same Phase-6 pass: the eval's cross-document
+# stragglers (GDPR Art. 5, Art. 25) rerank at #11 inside window-20 — one
+# slot below the top-10 cut; top-12 recovers both half-legs.
+TOP_N = 12
+
+# The reranker only ever sees the fused top-RERANK_WINDOW (not the full fused
+# pool). Phase 6 finding (measured, two models): generic cross-encoders drop
+# lane-consensus winners from a wide pool (GDPR Art. 32 was fused rank #1 and
+# still reranked out of a 50-wide pool); confining the rerank to a window
+# where hybrid fusion already agrees keeps the recall engine authoritative
+# while the reranker breaks genuine ties inside it.
+# Window raised 15 -> 20 in Phase 6: diagnostics showed two expected chunks
+# (ASVS V16.3.1 at fused #20, GDPR Art. 32 at fused #17) sitting just outside
+# the old window and being lost before the reranker could see them.
+RERANK_WINDOW = 20
 
 
 def _payload_chunk(payload):
@@ -109,7 +134,9 @@ class Retriever:
         reranked_scores = scores
 
         if rerank and self.reranker is not None:
-            chunks = self.reranker.rerank(query_text, chunks, top_n=top_n)
+            chunks = self.reranker.rerank(
+                query_text, chunks[:RERANK_WINDOW], top_n=top_n
+            )
             reranked_ids = [c["id"] for c in chunks]
             chunks_after_rerank = len(chunks)
             reranked_scores = None  # cross-encoder scores not surfaced here

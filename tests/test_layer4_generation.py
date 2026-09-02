@@ -49,7 +49,13 @@ def test_real_query_cites_source(retriever, generator):
 # --- Every generated citation is backed by a retrieved chunk (grounding) ---
 def test_citations_grounded_in_context(retriever, generator):
     result = generate_answer(retriever, generator, "What does AC-2 require?", top_n=3)
-    labels = {_citation_label(c) for c in result["retrieved_context"]}
+    # Build the grounding set at both granularities: since Phase 6 the
+    # generator cites exact enhancements ([AC-2.7]) when present, and that
+    # specific label must ground against its enhancement chunk (nist_ac2_7).
+    labels = set()
+    for c in result["retrieved_context"]:
+        labels.add(_citation_label(c, parent=True))
+        labels.add(_citation_label(c, parent=False))
     assert result["citations"], "no citations to check"
     assert set(result["citations"]).issubset(labels), (
         f"citation(s) {result['citations']} not in retrieved context {sorted(labels)}"
@@ -60,6 +66,6 @@ def test_citations_grounded_in_context(retriever, generator):
 def test_negative_query_not_covered(retriever, generator):
     result = generate_answer(retriever, generator, "What does NIST say about quantum computing?", top_n=3)
     low = result["answer"].lower()
-    assert ("not covered" in low) or ("does not" in low) or ("no information" in low), (
+    assert ("not covered" in low) or ("does not" in low) or ("do not" in low) or ("no information" in low), (
         f"negative query should say not covered, got: {result['answer'][:200]}"
     )

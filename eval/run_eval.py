@@ -51,6 +51,17 @@ def _as_set(citations):
     return set(citations or [])
 
 
+def _norm_set(labels):
+    """Canonical citation set for label-vs-label comparison.
+
+    The catalog writes 'AC-2(3)' but a model's answer may write 'AC-2.3';
+    both must compare equal, so expected and generated citations are both
+    pushed through generation.llm._normalize before intersection.
+    """
+    from generation.llm import _normalize
+    return {_normalize(l) for l in labels if l}
+
+
 def _citation_family_match(retrieved_ids, chunk_ids):
     """True if any retrieved chunk id resolves to one of the expected chunk ids."""
     for rid in retrieved_ids:
@@ -66,8 +77,14 @@ def _negative_signal(answer):
     return any(p in low for p in NEGATIVE_PHRASES)
 
 
-def evaluate_item(item, generator, retriever, top_n=3):
-    """Run one golden item through the pipeline and score it."""
+def evaluate_item(item, generator, retriever, top_n=12):
+    """Run one golden item through the pipeline and score it.
+
+    top_n matches the tuned served default (retriever.TOP_N = 12): the rerank
+    window surface needed for synthesis queries to cite both halves of a
+    cross-document answer (see retriever.py TOP_N note). precision_at_3 is
+    measured on the retrieval order regardless of this context size.
+    """
     query = item["query"]
     expected_citations = item.get("expected_citations") or []
     # Map each expected citation to its base chunk-id family (nist_ac2_3 etc.).
@@ -79,21 +96,28 @@ def evaluate_item(item, generator, retriever, top_n=3):
     expected_ids = [e for e in expected_ids if e]
 
     result = pipeline_generate(generator, retriever, query, top_n=top_n)
-    retrieved = result["retrieved_chunks"]           # ids
+    retrieved = result["retrieved_chunks"]           # ids, best-first
     retrieved_context = result["retrieved_context"]  # full chunk dicts
     generated_citations = _as_set(result["citations"])
 
-    # Map retrieved chunk ids to their citation labels (AC-2, Article 17, ...)
-    # so the grounding check compares labels to labels, not label to chunk id.
+    # Build the grounding label set at BOTH granularities: a generated 'AC-2.3'
+    # must ground against the enhancement chunk nist_ac2_3, not only collapse
+    # to its parent 'AC-2' (Phase 6 harness fix — see generation/llm.py).
     from generation.llm import _citation_label
-    retrieved_labels = {_citation_label(c) for c in retrieved_context}
+    retrieved_labels = set()
+    for c in retrieved_context:
+        retrieved_labels.add(_citation_label(c, parent=True))
+        retrieved_labels.add(_citation_label(c, parent=False))
 
-    # retrieval precision@3: any top-3 retrieved chunk matches an expected citation family
+    # retrieval precision@3: any of the TOP-3 retrieved chunks matches an
+    # expected citation family (measured on the retrieval order, independent
+    # of how many chunks were handed to the generator).
     precision_at_3 = _citation_family_match(retrieved[:3], expected_ids) if expected_ids else None
 
     # citation accuracy: recall of expected citations in the generated answer.
-    # Negative items (no expected citations) are tracked separately via
-    # not_covered_ok and EXCLUDED from this aggregate.
+    # Both sides normalized so 'AC-2(3)' == 'AC-2.3'. Negative items (no
+    # expected citations) are tracked separately via not_covered_ok and
+    # EXCLUDED from this aggregate.
     expected_set = _as_set(expected_citations)
     is_negative = not expected_set
     if is_negative:
@@ -101,9 +125,9 @@ def evaluate_item(item, generator, retriever, top_n=3):
         faithfulness = None
         grounded = None
     else:
-        found = generated_citations & expected_set
-        citation_accuracy = len(found) / len(expected_set)
-        grounded = generated_citations.issubset(retrieved_labels) if generated_citations else True
+        found_norm = _norm_set(generated_citations) & _norm_set(expected_set)
+        citation_accuracy = len(found_norm) / len(expected_set)
+        grounded = _norm_set(generated_citations).issubset(_norm_set(retrieved_labels)) if generated_citations else True
         faithfulness = 1.0 if grounded else 0.0
 
     # negative handling

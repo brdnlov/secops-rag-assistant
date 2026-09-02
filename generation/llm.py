@@ -104,18 +104,27 @@ def extract_citations(answer, chunks):
 
     Walks the provided chunks' known labels and returns those whose normalized
     form also appears in the answer. Normalization tolerates notation drift
-    ('AC-2(5)' vs 'AC-2.5', 'Article 5' vs 'art 5'), and NIST sub-control
-    chunks report their parent ('AC-2.5' -> 'AC-2') so a human-style "[AC-2]"
-    in the answer maps back to an enhancement chunk. Used to verify the answer
-    is grounded in the context (faithfulness) and to surface citations.
+    ('AC-2(5)' vs 'AC-2.5', 'Article 5' vs 'art 5').
+
+    A NIST enhancement chunk records its SPECIFIC label ('AC-2.3') when the
+    answer cites the enhancement *and only falls back to the parent* ('AC-2')
+    when the enhancement label itself is absent. Phase 6 fix: previously the
+    parent was always reported, so a correct '[AC-2.3]' citation scored as
+    'AC-2' and never matched the golden dataset's 'AC-2(3)' expectation.
+
+    Used to verify the answer is grounded in the context (faithfulness) and
+    to surface citations.
     """
-    labels = [_citation_label(c) for c in chunks]
-    normalized_answer = _normalize(answer)
+    normalized_answer = _normalize(answer or "")
     found = []
-    for label in labels:
-        if label and label.strip() and _normalize(label) in normalized_answer:
-            if label not in found:
+    for c in chunks:
+        specific = _citation_label(c, parent=False)
+        parent = _citation_label(c, parent=True)
+        for label in (specific, parent):
+            norm = _normalize(label)
+            if label and label not in found and norm and norm in normalized_answer:
                 found.append(label)
+                break
     return found
 
 
@@ -141,6 +150,9 @@ class Generator:
             "exact bracketed identifier shown in the CONTEXT's SOURCE line, e.g. "
             "[AC-2], [Article 5], [V13.3.2]. Use ONLY those exact identifiers, never "
             "a different format, never a bare [1] or a URL. "
+            "When a NIST enhancement (sub-control) passage is present, cite the "
+            "exact enhancement identifier (e.g. [AC-2(3)], [AC-6(10)]) rather than "
+            "only the parent control ([AC-2]). "
             "Only cite a source that is actually present in the context. "
             "If the context does not cover the question, say the topic is not "
             "covered by the available sources. Do not use outside knowledge."

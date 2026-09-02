@@ -2,9 +2,10 @@
 
 Checks:
   - required fields present on every item
+  - every item declares a recognised category
+  - dataset size (50 items) with minimum composition per category
   - every expected_citation is a recognised idiom and resolves to an
     existing chunk in corpus/corpus.json
-  - dataset size (10 items: 3 exact, 3 synthesis, 2 cross-document, 2 negative)
 
 Usage: python eval/check_golden.py
 """
@@ -15,7 +16,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-REQUIRED = {"query", "expected_answer", "expected_citations", "retrieved_chunks", "generated_answer", "generated_citations"}
+REQUIRED = {"category", "query", "expected_answer", "expected_citations", "retrieved_chunks", "generated_answer", "generated_citations"}
+TOTAL_EXPECTED = 50
+MIN_PER_CATEGORY = {"exact": 20, "synthesis": 8, "cross_document": 6, "negative": 4}
 
 NIST_ENH = re.compile(r"AC-(\d+)\((\d+)\)$")
 NIST_BASE = re.compile(r"AC-(\d+)$")
@@ -54,9 +57,10 @@ def main():
     chunks = json.loads((ROOT / "corpus" / "corpus.json").read_text(encoding="utf-8"))
     ids = {c["id"] for c in chunks}
     errors = []
+    counts = {}
 
-    if len(data) != 10:
-        errors.append(f"expected 10 items, got {len(data)}")
+    if len(data) != TOTAL_EXPECTED:
+        errors.append(f"expected {TOTAL_EXPECTED} items, got {len(data)}")
 
     for i, item in enumerate(data):
         label = f"[item {i+1}]"
@@ -64,6 +68,10 @@ def main():
         if missing:
             errors.append(f"{label} missing fields {sorted(missing)}")
             continue
+        cat = item["category"]
+        if cat not in MIN_PER_CATEGORY:
+            errors.append(f"{label} unrecognised category {cat!r}")
+        counts[cat] = counts.get(cat, 0) + 1
         for cit in item["expected_citations"]:
             mapped = citation_to_chunk_ids(cit)
             if not mapped:
@@ -73,13 +81,18 @@ def main():
             if not resolved:
                 errors.append(f"{label} citation {cit!r} -> no chunk for {mapped}")
 
+    for cat, minimum in MIN_PER_CATEGORY.items():
+        if counts.get(cat, 0) < minimum:
+            errors.append(f"category {cat!r}: expected >= {minimum}, got {counts.get(cat, 0)}")
+
     if errors:
         print(f"FALSE ({len(errors)} errors):")
         for e in errors:
             print("  -", e)
         raise SystemExit(1)
 
-    print("PASS: 10 items, all citations resolve to corpus chunks")
+    print(f"PASS: {TOTAL_EXPECTED} items, all citations resolve to corpus chunks")
+    print("Composition:", json.dumps(counts, indent=2))
     print(json.dumps(
         {str(i+1): item["expected_citations"] for i, item in enumerate(data)}, indent=2))
 

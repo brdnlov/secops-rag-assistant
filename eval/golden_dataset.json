@@ -1,5 +1,6 @@
 [
   {
+    "category": "exact",
     "query": "What does NIST AC-2 require for account management?",
     "expected_answer": "NIST SP 800-53 AC-2 (Account Management) requires organizations to define and document the types of accounts allowed and prohibited, assign account managers, create/enable/modify/disable/remove accounts per approval, monitor account use, review accounts for compliance, and align account management with personnel termination and transfer processes.",
     "expected_citations": ["AC-2"],
@@ -8,6 +9,7 @@
     "generated_citations": []
   },
   {
+    "category": "synthesis",
     "query": "How does GDPR data minimization (Article 5(1)(c)) relate to NIST AC-6 Least Privilege?",
     "expected_answer": "Both express the same principle in different domains: GDPR Article 5(1)(c) requires personal data to be adequate, relevant, and limited to what is necessary for the processing purpose, while NIST AC-6 requires allowing only the accesses needed to accomplish assigned tasks. Together they mandate minimizing both data and privileges to the minimum necessary.",
     "expected_citations": ["Article 5", "AC-6"],
@@ -16,6 +18,7 @@
     "generated_citations": []
   },
   {
+    "category": "cross_document",
     "query": "What GDPR article addresses the right to erasure, and how does it interact with NIST account management requirements?",
     "expected_answer": "GDPR Article 17 establishes the right to erasure (right to be forgotten), requiring controllers to erase personal data without undue delay where grounds such as the data no longer being necessary apply. It relates to NIST AC-2 account management in that removing accounts and associated personal data supports both security hygiene and GDPR compliance, and AC-2(3) (Disable Accounts) covers removing access for accounts no longer associated with a user.",
     "expected_citations": ["Article 17", "AC-2(3)", "AC-2"],
@@ -24,6 +27,7 @@
     "generated_citations": []
   },
   {
+    "category": "negative",
     "query": "What does NIST SP 800-53 say about quantum computing?",
     "expected_answer": "This is outside the covered corpus. The NIST subset in this corpus covers only AC-2 (Account Management) and AC-6 (Least Privilege); quantum computing is not addressed.",
     "expected_citations": [],
@@ -32,14 +36,16 @@
     "generated_citations": []
   },
   {
+    "category": "exact",
     "query": "What does ASVS require for how OAuth access tokens should be handled?",
-    "expected_answer": "ASVS requires that access and refresh tokens be sent only to components that strictly need them, such as a backend in a backend-for-frontend pattern (V10.1.1). It also requires that the client only accept values from the authorization server (e.g., the authorization code or ID token) when they result from an authorization flow initiated by the same user-agent session — using non-guessable, transaction-specific secrets such as the PKCE code_verifier, the state parameter, or the OIDC nonce, securely bound to both client and session (V10.1.2).",
-    "expected_citations": ["V10.1.1", "V10.1.2"],
+    "expected_answer": "ASVS requires that access and refresh tokens be sent only to components that strictly need them, such as a backend in a backend-for-frontend pattern (V10.1.1), and that the client only accept values from the authorization server (e.g., the authorization code or ID token) when they result from an authorization flow initiated by the same user-agent session, using non-guessable, transaction-specific secrets such as the PKCE code_verifier, the state parameter, or the OIDC nonce, securely bound to both client and session (V10.1.2). The resource server must also verify that the presented access token satisfies any required authentication strength, methods, or recentness (V10.3.4); refresh tokens and reference access tokens must be revocable by an authorized user through the authorization server (V10.4.9); and any service receiving a token must validate that it is the correct type and is meant for the intended purpose before accepting its contents (V9.2.2).",
+    "expected_citations": ["V10.1.1", "V10.1.2", "V10.3.4", "V10.4.9", "V9.2.2"],
     "retrieved_chunks": [],
     "generated_answer": "",
     "generated_citations": []
   },
   {
+    "category": "exact",
     "query": "What does NIST require for handling accounts that have expired or gone inactive?",
     "expected_answer": "NIST control AC-2(3) (Disable Accounts) requires disabling accounts within a defined time period when the accounts have expired, are no longer associated with a user or individual, are in violation of organizational policy, or have been inactive for a defined period. Disabling these accounts supports least privilege and least functionality, which reduce the system's attack surface.",
     "expected_citations": ["AC-2(3)"],
@@ -48,6 +54,7 @@
     "generated_citations": []
   },
   {
+    "category": "synthesis",
     "query": "How do GDPR security-of-processing obligations translate into engineering requirements for an application?",
     "expected_answer": "GDPR Article 32 (Security of processing) requires controllers and processors to implement appropriate technical and organizational measures scaled to risk — including pseudonymisation and encryption, ongoing confidentiality/integrity/availability and resilience, timely restoration after incidents, and regular testing and assessment of the measures. ASVS operationalizes this at the engineering level: for example, V11.1.1 requires a documented cryptographic key-management policy and lifecycle following a recognized standard such as NIST SP 800-57, including ensuring that keys are not overshared.",
     "expected_citations": ["Article 32", "V11.1.1"],
@@ -56,6 +63,7 @@
     "generated_citations": []
   },
   {
+    "category": "synthesis",
     "query": "How should an application keep non-privileged users from reaching privileged capabilities or secrets?",
     "expected_answer": "Two complementary requirements apply. NIST AC-6(10) (Prohibit Non-privileged Users from Executing Privileged Functions) requires preventing users without appropriate authorizations from executing privileged functions — such as disabling or circumventing security or privacy controls, establishing system accounts, or administering cryptographic key-management activities. ASVS V13.3.2 extends the same principle to data, requiring that access to secret assets adhere to the principle of least privilege.",
     "expected_citations": ["AC-6(10)", "V13.3.2"],
@@ -64,16 +72,378 @@
     "generated_citations": []
   },
   {
+    "category": "cross_document",
     "query": "What do NIST and GDPR require about keeping accounts and personal data that are no longer needed?",
-    "expected_answer": "Both sources require retiring what is no longer needed. NIST AC-2(3) requires disabling accounts that have expired, are no longer associated with a user, or have gone inactive within a defined period. GDPR Article 5(1)(e) (storage limitation) requires personal data to be kept in a form that permits identification of data subjects for no longer than is necessary for the purposes of processing. Together: when a purpose ends or an account is abandoned, either the account privilege produced data that must not outlive its purpose.",
+    "expected_answer": "Both sources require retiring what is no longer needed. NIST AC-2(3) requires disabling accounts that have expired, are no longer associated with a user, or have gone inactive within a defined period. GDPR Article 5(1)(e) (storage limitation) requires personal data to be kept in a form that permits identification of data subjects for no longer than is necessary for the purposes of processing. Together: when a purpose ends or an account is abandoned, the account privilege and the personal data it touches must not outlive their purpose.",
     "expected_citations": ["AC-2(3)", "Article 5"],
     "retrieved_chunks": [],
     "generated_answer": "",
     "generated_citations": []
   },
   {
+    "category": "negative",
     "query": "What does this corpus require for security awareness and social engineering training?",
     "expected_answer": "Not covered. The corpus covers a NIST SP 800-53 access-control subset (AC-2 Account Management, AC-6 Least Privilege), OWASP ASVS application-security requirements, and GDPR data-protection obligations — none of which address awareness or social-engineering training programs.",
+    "expected_citations": [],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does NIST AC-6 (Least Privilege) require?",
+    "expected_answer": "NIST SP 800-53 AC-6 (Least Privilege) requires employing the principle of least privilege, allowing only authorized accesses for users (or processes acting on behalf of users) and security-relevant information necessary to accomplish assigned tasks, restricting the accesses and privileges to the minimum required based on organization-defined mission and business requirements.",
+    "expected_citations": ["AC-6"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What must a controller do when it becomes aware of a personal data breach?",
+    "expected_answer": "GDPR Article 33 requires that in the case of a personal data breach, the controller shall without undue delay and, where feasible, not later than 72 hours after having become aware of it, notify the breach to the supervisory authority competent under Article 55, unless the breach is unlikely to result in a risk to the rights and freedoms of natural persons. Where the notification is not made within 72 hours, the controller must accompany it with reasons for the delay.",
+    "expected_citations": ["Article 33"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "When must a controller communicate a personal data breach to the affected data subjects?",
+    "expected_answer": "GDPR Article 34 requires that when a personal data breach is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall communicate the breach to the data subject without undue delay, in clear and plain language, describing the nature of the breach, the measures taken or proposed, and any measures the data subject can take to mitigate potential adverse effects.",
+    "expected_citations": ["Article 34"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does GDPR Article 16 provide regarding inaccurate personal data?",
+    "expected_answer": "GDPR Article 16 gives the data subject the right to obtain from the controller without undue delay the rectification of inaccurate personal data concerning him or her, and the right to have incomplete personal data completed, including by means of a supplementary statement, having regard to the purposes of the processing.",
+    "expected_citations": ["Article 16"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does NIST AC-2(12) require for monitoring system accounts?",
+    "expected_answer": "NIST AC-2(12) (Atypical Usage) requires monitoring system accounts for atypical usage and reporting atypical usage to designated personnel or roles. Atypical usage includes accessing systems at unusual times or from unusual locations, and other behavior that deviates from the account's normal usage pattern.",
+    "expected_citations": ["AC-2(12)"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does NIST AC-6(7) require regarding periodic review of privileges?",
+    "expected_answer": "NIST AC-6(7) (Review of User Privileges) requires reviewing, at a defined frequency, the privileges assigned to roles and classes to validate the need for such privileges, and reassigning or removing privileges when necessary to reflect changes in job duties or organizational needs.",
+    "expected_citations": ["AC-6(7)"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does ASVS V11.2.2 require regarding crypto agility?",
+    "expected_answer": "ASVS V11.2.2 requires that the application be designed with crypto agility, such that random number generation, authenticated encryption, MAC, or hashing algorithms, key lengths, rounds, or other cryptographic parameters can be changed in the future without functional changes to the application.",
+    "expected_citations": ["V11.2.2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does ASVS require regarding TLS protocol versions?",
+    "expected_answer": "ASVS V12.1.1 requires that only the latest recommended versions of the TLS protocol be enabled, such as TLS 1.2 and TLS 1.3, with the latest version of the TLS protocol as the default option and old versions disabled.",
+    "expected_citations": ["V12.1.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does ASVS V13.4.2 require about debug modes in production?",
+    "expected_answer": "ASVS V13.4.2 requires that debug modes be disabled for all components in production environments, to prevent exposure of debugging features and information leakage.",
+    "expected_citations": ["V13.4.2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "How does ASVS V11.4.2 say passwords should be stored?",
+    "expected_answer": "ASVS V11.4.2 requires that passwords be stored using an approved, computationally intensive key derivation function (also known as a password hashing function), with parameters set to be computationally expensive (e.g., appropriate memory, iterations, and parallelism).",
+    "expected_citations": ["V11.4.2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does ASVS V7.2.4 require for session tokens after authentication?",
+    "expected_answer": "ASVS V7.2.4 requires that the application generate a new session token on user authentication, including re-authentication, and terminate the current session token at that point.",
+    "expected_citations": ["V7.2.4"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does NIST AC-2(5) require regarding user logout?",
+    "expected_answer": "NIST AC-2(5) (Inactivity Logout) requires that users log out after the defined period of expected inactivity or when a defined description of when to log out applies. Inactivity logout is behavior- or policy-based and requires that users do not remain logged in indefinitely.",
+    "expected_citations": ["AC-2(5)"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does GDPR Article 28 require regarding processors?",
+    "expected_answer": "GDPR Article 28 requires that where processing is to be carried out on behalf of a controller, the controller uses only processors providing sufficient guarantees to implement appropriate technical and organizational measures so that processing meets the Regulation's requirements. Such processing must be governed by a contract or other legal act binding the processor to the controller, setting out the subject matter and duration, the nature and purpose of the processing, the type of personal data and categories of data subjects, and the controller's obligations and rights.",
+    "expected_citations": ["Article 28"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does GDPR Article 35 require regarding data protection impact assessments?",
+    "expected_answer": "GDPR Article 35 requires a data protection impact assessment (DPIA) where a type of processing, in particular using new technologies and taking into account the nature, scope, context and purposes of the processing, is likely to result in a high risk to the rights and freedoms of natural persons. The assessment must include a description of the processing, an assessment of the necessity and proportionality of the processing in relation to the purposes, an assessment of the risks to the rights and freedoms of data subjects, and the measures envisaged to address those risks.",
+    "expected_citations": ["Article 35"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does ASVS V1.2.4 require to protect against database injection?",
+    "expected_answer": "ASVS V1.2.4 requires that data selection or database queries (e.g., SQL, HQL, NoSQL, Cypher) use parameterized queries, ORMs, entity frameworks, or are otherwise protected from database injection attacks.",
+    "expected_citations": ["V1.2.4"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does ASVS V4.4.1 require for WebSocket connections?",
+    "expected_answer": "ASVS V4.4.1 requires that WebSocket over TLS (WSS) be used for all WebSocket connections.",
+    "expected_citations": ["V4.4.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does NIST AC-6(9) require regarding logging of privileged functions?",
+    "expected_answer": "NIST AC-6(9) (Log Use of Privileged Functions) requires logging the execution of privileged functions, because the misuse of privileged functions — either intentionally or unintentionally, by authorized or unauthorized users — is a frequent element of adversary activity.",
+    "expected_citations": ["AC-6(9)"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does ASVS V6.2.1 require for user-set password length?",
+    "expected_answer": "ASVS V6.2.1 requires that user-set passwords be at least 8 characters in length, although a minimum of 15 characters is strongly recommended.",
+    "expected_citations": ["V6.2.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does GDPR Article 9 prohibit?",
+    "expected_answer": "GDPR Article 9 prohibits processing of personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, and the processing of genetic data, biometric data for the purpose of uniquely identifying a natural person, data concerning health, or data concerning a natural person's sex life or sexual orientation — unless one of the enumerated derogations applies, such as explicit consent or processing necessary for employment and social security purposes.",
+    "expected_citations": ["Article 9"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "exact",
+    "query": "What does ASVS V7.4.1 require when session termination is triggered?",
+    "expected_answer": "ASVS V7.4.1 requires that when session termination is triggered (such as logout or expiration), the application disallows any further use of the session. For reference tokens, this means ensuring they are no longer validated by the session service.",
+    "expected_citations": ["V7.4.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "synthesis",
+    "query": "How do ASVS session timeout controls support NIST requirements for inactive sessions?",
+    "expected_answer": "Both NIST and ASVS require time-based control over inactive sessions. NIST AC-2(5) (Inactivity Logout) requires users to log out after a defined period of expected inactivity, in a behavior- or policy-based manner. ASVS V7.3.1 requires a documented inactivity timeout such that re-authentication is enforced according to risk analysis and documented security decisions. Together they ensure abandoned sessions do not remain usable: the ASVS timeout forces re-authentication of idle sessions while AC-2(5) provides the policy basis for logging out inactive users.",
+    "expected_citations": ["V7.3.1", "AC-2(5)"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "synthesis",
+    "query": "How do GDPR breach notification and ASVS logging requirements work together for incident response?",
+    "expected_answer": "GDPR Article 33 requires the controller to notify a personal data breach to the supervisory authority without undue delay and no later than 72 hours after becoming aware of it. ASVS V16.3.1 requires logging all authentication operations, including successful and unsuccessful attempts. Together they form the evidence chain for incident response: ASVS logging produces the records needed to detect a breach and assess the risk, timeline, and whether notification under Article 33 is required.",
+    "expected_citations": ["Article 33", "V16.3.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "synthesis",
+    "query": "How does ASVS V8.3.1 instantiate the NIST AC-6 least privilege principle?",
+    "expected_answer": "ASVS V8.3.1 requires that authorization rules be enforced at a trusted service layer and not rely on controls that an untrusted consumer could manipulate. This operationalizes NIST AC-6 least privilege: access decisions are made in a place the user cannot bypass, so a user only ever obtains the accesses necessary for the task and cannot elevate privileges by manipulating client-side controls.",
+    "expected_citations": ["V8.3.1", "AC-6"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "synthesis",
+    "query": "How do ASVS cryptographic requirements and GDPR Article 32 express the state-of-the-art requirement?",
+    "expected_answer": "GDPR Article 32(1)(a) requires security measures to take into account the state of the art, the costs of implementation, and the risks to the rights and freedoms of natural persons — with encryption and pseudonymisation named as example measures. ASVS V11.2.1 requires the use of industry-validated implementations (including libraries and hardware-accelerated implementations) for cryptographic operations. Both express the same requirement from different directions: GDPR sets the legal expectation of state-of-the-art protection, and ASVS specifies using proven, industry-validated crypto rather than custom or obsolete implementations.",
+    "expected_citations": ["Article 32", "V11.2.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "synthesis",
+    "query": "How does ASVS V13.3.1 extend NIST AC-6 least privilege to secrets management?",
+    "expected_answer": "ASVS V13.3.1 requires that a secrets management solution, such as a key vault, be used to securely create, store, control access to, and destroy backend secrets (including API keys, database passwords, and other credentials). This extends NIST AC-6 least privilege to the data plane: access to secret material is restricted to only those principals that need it, secrets are stored and managed centrally rather than in code or config, and can be destroyed when no longer needed.",
+    "expected_citations": ["V13.3.1", "AC-6"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "synthesis",
+    "query": "How do GDPR data protection by design and ASVS minimal-data-response requirements relate?",
+    "expected_answer": "GDPR Article 25 requires data protection by design and by default, meaning the controller implements measures to give effect to data-protection principles (such as data minimization) and, by default, only processes personal data that are necessary for each purpose. ASVS V15.3.1 operationalizes this at the API level by requiring the application to return only the required subset of fields from a data object, rather than returning whole objects that include unrelated or excess data.",
+    "expected_citations": ["Article 25", "V15.3.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "synthesis",
+    "query": "How do NIST account auditing and GDPR records of processing both serve accountability?",
+    "expected_answer": "NIST AC-2(4) (Automated Account Management) requires automated audit of account creation, modification, enabling, disabling, and removal actions. GDPR Article 30 requires each controller to maintain a record of processing activities under its responsibility. Both serve accountability at different granularities: AC-2(4) produces operational audit trails of the account lifecycle, while Article 30 documents organizationally what processing occurs, for what purposes, and with which categories of data and recipients.",
+    "expected_citations": ["AC-2(4)", "Article 30"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "synthesis",
+    "query": "What is the relationship between NIST AC-2(7) privileged account administration and AC-6(5) restriction of privileged accounts?",
+    "expected_answer": "NIST AC-2(7) (Privileged User Accounts) requires establishing and administering privileged user accounts in accordance with defined criteria, monitoring privileged role or attribute assignments, and monitoring changes to roles. AC-6(5) (Restrict Privileged Accounts) requires restricting privileged accounts on the system to designated personnel or roles. Together they define who may hold privileged accounts (restricted to defined people or roles) and how those accounts are governed and monitored over time.",
+    "expected_citations": ["AC-2(7)", "AC-6(5)"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "cross_document",
+    "query": "How do GDPR Article 29 and NIST AC-6 jointly govern who may access personal data?",
+    "expected_answer": "GDPR Article 29 requires that the processor and any person acting under the authority of the controller or processor who has access to personal data shall not process those data except on instructions from the controller. NIST AC-6 requires limiting each user (or process acting on behalf of a user) to only the accesses necessary to accomplish assigned tasks. Together they bound access to personal data both legally (processing only under controller instructions, with confidentiality commitments) and technically (least privilege at the access-control level).",
+    "expected_citations": ["Article 29", "AC-6"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "cross_document",
+    "query": "What do NIST AC-2(3) and ASVS V7.4.2 require when a user leaves the organization?",
+    "expected_answer": "When a user leaves the organization, NIST AC-2(3) (Disable Accounts) requires disabling the account within a defined time period once it is no longer associated with a user or individual. ASVS V7.4.2 requires the application to terminate all active sessions when a user account is disabled or deleted (such as when an employee leaves the company). The two controls close the loop: the account is disabled and any live sessions are invalidated at the same time, preventing continued access through an already-invalidated identity.",
+    "expected_citations": ["AC-2(3)", "V7.4.2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "cross_document",
+    "query": "How do GDPR storage limitation and ASVS data retention controls interact?",
+    "expected_answer": "GDPR Article 5(1)(e) (storage limitation) requires that personal data be kept in a form that permits identification of data subjects for no longer than is necessary for the purposes of the processing. ASVS V14.2.4 requires that controls around sensitive data include encryption, integrity verification, retention, how data is logged, and access controls. Together they require defining and enforcing retention rules for sensitive data: GDPR provides the legal ceiling (data must not outlive its purpose) and ASVS provides the engineering control to implement and enforce that retention policy.",
+    "expected_citations": ["Article 5", "V14.2.4"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "cross_document",
+    "query": "How do NIST privileged-function logging and ASVS authorization-failure logging support abuse detection?",
+    "expected_answer": "NIST AC-6(9) (Log Use of Privileged Functions) requires logging the execution of privileged functions, since misuse of privileged functions — intentionally or unintentionally, by authorized or unauthorized users — is a frequent element of adversary activity. ASVS V16.3.2 requires logging failed authorization attempts, and for L3 applications, logging all authorization decisions including when sensitive data is accessed. Together the two produce the evidence needed to detect both attempted unauthorized access (failed authorization attempts) and actual abuse of privileged access (privileged-function execution).",
+    "expected_citations": ["AC-6(9)", "V16.3.2"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "cross_document",
+    "query": "How does GDPR's definition of personal data relate to ASVS sensitive-data classification?",
+    "expected_answer": "GDPR Article 4(1) defines personal data as any information relating to an identified or identifiable natural person (a data subject). ASVS V14.1.1 requires that all sensitive data created and processed by the application be identified and classified into protection levels, including data that is at rest, in transit, and in memory. The two work together: GDPR defines which data is in scope for protection (data relating to identifiable individuals), while ASVS requires that data to be classified into concrete protection levels with documented protection requirements so controls can be applied consistently.",
+    "expected_citations": ["Article 4", "V14.1.1"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "cross_document",
+    "query": "How do GDPR confidentiality obligations and NIST least privilege both restrict access to data and privileged functions?",
+    "expected_answer": "GDPR Article 32 requires the controller and processor to ensure that persons authorized to process personal data have committed themselves to confidentiality (or are under an appropriate statutory obligation). NIST AC-6 requires restricting users to only the accesses necessary to accomplish their assigned tasks. Both limit access to sensitive data and privileged functions to authorized individuals — Article 32 imposes the confidentiality commitment on those who are authorized, while AC-6 provides the technical least-privilege mechanism that keeps that population as small as possible.",
+    "expected_citations": ["Article 32", "AC-6"],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "negative",
+    "query": "What guidance does this corpus provide on blockchain-based systems?",
+    "expected_answer": "Not covered. The corpus covers a NIST SP 800-53 access-control subset (AC-2 Account Management, AC-6 Least Privilege), OWASP ASVS application-security requirements, and GDPR data-protection obligations — none of which address blockchain or distributed-ledger technologies.",
+    "expected_citations": [],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "negative",
+    "query": "Does this corpus cover NIST contingency planning or incident response?",
+    "expected_answer": "Not covered. The NIST portion of this corpus is limited to the AC-2 (Account Management) and AC-6 (Least Privilege) controls; the Contingency Planning (CP) and Incident Response (IR) families are not included in the corpus.",
+    "expected_citations": [],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "negative",
+    "query": "What does this corpus say about compliance with the EU AI Act?",
+    "expected_answer": "Not covered. The corpus covers NIST SP 800-53 access-control requirements, OWASP ASVS application-security requirements, and the GDPR (Regulation (EU) 2016/679). The EU AI Act is not part of the corpus.",
+    "expected_citations": [],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "negative",
+    "query": "What requirements does the corpus place on physical security of facilities?",
+    "expected_answer": "Not covered. The corpus addresses logical and technical access controls (NIST AC-2, AC-6), application-security requirements (OWASP ASVS), and data-protection obligations (GDPR). It does not contain physical-security requirements such as badge access, server-room controls, or facility protection.",
+    "expected_citations": [],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "negative",
+    "query": "What does this corpus require regarding cyber insurance coverage?",
+    "expected_answer": "Not covered. None of the corpus documents — the NIST SP 800-53 AC-2/AC-6 subset, OWASP ASVS, or GDPR — impose cyber-insurance coverage or purchase requirements.",
+    "expected_citations": [],
+    "retrieved_chunks": [],
+    "generated_answer": "",
+    "generated_citations": []
+  },
+  {
+    "category": "negative",
+    "query": "What CVSS severity thresholds does this corpus define for prioritizing vulnerability remediation?",
+    "expected_answer": "Not covered at the specific-threshold level. The corpus does not define CVSS base-score severity thresholds for prioritizing remediation. ASVS V15.1.1 requires risk-based remediation timeframes for vulnerable third-party components, but it is qualitative and no CVSS score thresholds appear in the corpus.",
     "expected_citations": [],
     "retrieved_chunks": [],
     "generated_answer": "",
