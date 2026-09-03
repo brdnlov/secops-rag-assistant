@@ -7,7 +7,7 @@ The production query path (the Phase 4 "Query path" from AGENTS.md):
     3. Qdrant hybrid query: one dense prefetch + one sparse prefetch, fused
        with RRF (rank constant 60 — Elasticsearch default, "requires no
        tuning" per the Cormack paper)
-    4. Cross-encoder rerank the fused top-RERANK_WINDOW -> return top-10
+    4. Cross-encoder rerank the fused top-RERANK_WINDOW -> return top-TOP_N
        (Phase 6: surfaced from top-5 — see TOP_N below for the measured why)
 
 Built on the primitives already prototyped in tests/test_layer2_retrieval.py

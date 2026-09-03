@@ -29,7 +29,9 @@ app = FastAPI(title="Security/Compliance RAG Assistant")
 
 class QueryRequest(BaseModel):
     query: str
-    top_n: int = 5
+    # Matches the measured context size (retriever.TOP_N = 12) that the eval
+    # gate passes on; the retriever applies TOP_N as its own fallback.
+    top_n: int = 12
     rerank: bool = True
 
 

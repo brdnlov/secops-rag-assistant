@@ -29,6 +29,13 @@ from generation.pipeline import generate_answer, _build_retriever
 def retriever():
     if not os.environ.get("VOYAGE_API_KEY"):
         pytest.skip("VOYAGE_API_KEY not set — query embedding requires Voyage")
+    from qdrant_client import QdrantClient
+    from embeddings.indexer import COLLECTION
+    from retrieval.retriever import QDRANT_URL
+    try:
+        QdrantClient(url=QDRANT_URL).get_collection(COLLECTION)
+    except Exception:
+        pytest.skip("Qdrant not reachable or collection missing (docker compose up + indexer first)")
     return _build_retriever()
 
 

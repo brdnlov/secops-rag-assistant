@@ -1,9 +1,9 @@
 """Phase 4 — hybrid retrieval + reranking.
 
 retrieval/retriever.py  voyage query-embed -> dense + sparse prefetch -> RRF
-                        fusion -> cross-encoder rerank -> top-5
+                        fusion -> cross-encoder rerank -> top-TOP_N
 retrieval/reranker.py   local cross-encoder wrapper
-                        (cross-encoder/ms-marco-MiniLM-L-6-v2)
+                        (BAAI/bge-reranker-v2-m3 since Phase 6)
 retrieval/tracer.py     structured JSON traces to logs/traces.jsonl
 """
 

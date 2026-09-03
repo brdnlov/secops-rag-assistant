@@ -23,8 +23,20 @@ cost" strategy. Phase 6 wires RAGAS (with Claude Haiku as LLM judge) as the
 side-by-side comparison on the same golden dataset.
 
 Usage:
-    python eval/run_eval.py
+    python eval/run_eval.py                       # full 50-item run
+    python eval/run_eval.py --queries q1,q2       # only the given queries (tuning)
+    python eval/run_eval.py --budget-usd 2.0      # session credit ceiling guard
+
+--queries runs only the named golden items (matched by exact query text or any
+substring), so retrieval/generation tuning iterations spend only on the failing
+items instead of re-running all 50. The full run is reserved for gate
+confirmation.
+
+Every run records its generation spend in eval/results/credit_budget.json
+(gitignored); --budget-usd halts the run if its projected spend would exceed
+the remaining session budget.
 """
+import argparse
 import json
 import re
 import sys
@@ -37,10 +49,17 @@ GOLDEN_JSON = ROOT / "eval" / "golden_dataset.json"
 RESULTS_DIR = ROOT / "eval" / "results"
 
 CITATION_ACCURACY_TARGET = 0.9
+# Conservative CEILING (not an average) for one generation query, so the
+# before-run gate never under-projects and lets an unexpectedly-expensive run
+# start. Real per-query spend is typically ~$0.0065; this bounds worst case.
+COST_PER_QUERY_USD = 0.01
 
 # Negation phrases that indicate an honest "not covered" answer.
-NEGATIVE_PHRASES = ["not covered", "does not", "isn't covered", "outside",
-                    "not addressed", "no information", "do not"]
+# "is not" was added in Phase 6: the hardened generator prompt now phrases an
+# out-of-scope answer as "<X> is not present in the provided context"; the old
+# list only had "does not", so a correct answer was falsely flagged unhandled.
+NEGATIVE_PHRASES = ["not covered", "is not", "does not", "isn't covered", "outside",
+                    "not addressed", "no information", "do not", "not included"]
 
 # Reuse the golden-dataset citation idiom -> chunk-id mapping.
 sys.path.insert(0, str(ROOT))
@@ -177,7 +196,33 @@ def summarize(items):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--queries", default=None,
+                        help="comma-separated query substrings to run (default: all)")
+    parser.add_argument("--budget-usd", type=float, default=None,
+                        help="session credit ceiling (default: credit_budget.DEFAULT_BUDGET_USD)")
+    parser.add_argument("--no-ledger", action="store_true",
+                        help="skip recording spend in credit_budget.json")
+    args = parser.parse_args()
+
     data = json.loads(GOLDEN_JSON.read_text(encoding="utf-8"))
+
+    if args.queries:
+        substrings = [q.strip() for q in args.queries.split(",") if q.strip()]
+        data = [it for it in data if any(s.lower() in it["query"].lower() for s in substrings)]
+        if not data:
+            print(f"no golden items matched --queries {args.queries!r}")
+            return 1
+        print(f"[run_eval] subset mode: {len(data)} items match "
+              f"{[s for s in substrings]}")
+
+    # Budget guard: project spend on the items to be run, halt before any LLM call.
+    from eval import credit_budget
+    budget = args.budget_usd if args.budget_usd is not None else credit_budget.DEFAULT_BUDGET_USD
+    credit_budget.print_status(budget)
+    projected = COST_PER_QUERY_USD * len(data)
+    credit_budget.assert_budget(projected, budget, f"generation run ({len(data)} items)")
+
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
     from generation.llm import Generator
@@ -187,27 +232,47 @@ def main():
     retriever = _build_retriever()
 
     evaluated = []
-    for item in data:
-        print(f"[eval] {item['query'][:60]}...")
-        evaluated.append(evaluate_item(item, generator, retriever))
+    summary = None
+    fname = None
+    try:
+        for item in data:
+            print(f"[eval] {item['query'][:60]}...")
+            evaluated.append(evaluate_item(item, generator, retriever))
 
-    summary = summarize(evaluated)
-    report = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "summary": summary,
-        "generator": generator.cost_summary(),
-        "items": evaluated,
-    }
+        summary = summarize(evaluated)
+        report = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "summary": summary,
+            "generator": generator.cost_summary(),
+            "items": evaluated,
+        }
 
-    fname = RESULTS_DIR / f"{int(time.time())}.json"
-    fname.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
-    print("\n" + "=" * 60)
-    print("SUMMARY")
-    print("=" * 60)
-    for k, v in summary.items():
-        print(f"  {k:22s} {v}")
-    print(f"  generator spend: {generator.cost_summary()['approx_spend_usd']}")
-    acc = summary["citation_accuracy"]
+        fname = RESULTS_DIR / f"{int(time.time())}.json"
+        fname.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+        print("\n" + "=" * 60)
+        print("SUMMARY")
+        print("=" * 60)
+        for k, v in summary.items():
+            print(f"  {k:22s} {v}")
+        print(f"  generator spend: {generator.cost_summary()['approx_spend_usd']}")
+    finally:
+        # Record spend even if the loop dies mid-run, so the ledger never
+        # under-counts prior Anthropic spend (a lost entry would overstate the
+        # remaining budget the next time the gate runs).
+        if not args.no_ledger:
+            real_spend = generator.cost_summary()["approx_spend_usd"]
+            credit_budget.record(
+                f"run_eval[{Path(fname).name if fname else 'interrupted'}]",
+                real_spend,
+                details={
+                    "model": generator.cost_summary()["model"],
+                    "n_items": len(data),
+                    "completed_items": len(evaluated) or None,
+                },
+            )
+            credit_budget.print_status(budget)
+
+    acc = summary["citation_accuracy"] if summary else None
     ok = acc is not None and acc >= CITATION_ACCURACY_TARGET
     print(f"\nLayer 5 gate: citation_accuracy >= {CITATION_ACCURACY_TARGET}: "
           f"{'PASS' if ok else 'FAIL'} ({acc})")

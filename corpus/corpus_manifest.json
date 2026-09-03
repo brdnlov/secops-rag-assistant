@@ -35,7 +35,7 @@
   "embedding_model_version": "voyage-4-2026-08",
   "embedding_progress": {
     "model": "voyage-4",
-    "total_tokens": 38006,
+    "total_tokens": 0,
     "collection": "secops_corpus"
   }
 }
